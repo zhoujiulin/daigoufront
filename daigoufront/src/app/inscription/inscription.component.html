@@ -1,0 +1,123 @@
+<div class="container">
+  <div class="margin-top-40">
+  <div class="row">
+    <div class="col">
+      <form #userForm="ngForm">
+        <div class="row margin-bottom-30">
+          <div class="col text-right">
+            <span class="font-size-24">{{'common.inscription' | translate}}</span>
+          </div>
+          <div class="col-8 text-right">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col text-right">
+                {{'user.nom' | translate}}
+            </div>
+            <div class="col-8">
+              <div class="col-7">
+                <input type="text" class="form-control" id="firstName" [(ngModel)]=user.firstName name="user.firstName"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col text-right">
+                {{'user.prenom' | translate}}
+            </div>
+            <div class="col-8">
+              <div class="col-7">
+                <input type="text" class="form-control" id="lastName" [(ngModel)]=user.lastName name="user.lastName"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col text-right">
+                {{'user.username' | translate}}
+            </div>
+            <div class="col-8">
+              <div class="col-7">
+                <input type="text" class="form-control" id="username" [(ngModel)]=user.username name="user.username"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col text-right">
+                {{'user.password' | translate}}
+            </div>
+            <div class="col-8">
+              <div class="col-7">
+                <input type="password" class="form-control" id="password" [(ngModel)]=user.password name="user.password"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col text-right">
+              {{'user.confirmPassword' | translate}}
+            </div>
+            <div class="col-8">
+              <div class="col-7">
+                <input type="password" class="form-control" id="confirmPassword" [(ngModel)]=user.confirmPassword name="user.password"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="user.password !== user.confirmPassword" class="alert alert-danger box-msg">
+          <strong>{{'message.confirmPasswordInegal' | translate}}</strong>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col text-right">
+                {{'user.telephone' | translate}}
+            </div>
+            <div class="col-8">
+              <div class="col-7">
+                <input type="text" class="form-control" id="phoneNumber" [(ngModel)]=user.phoneNumber name="user.phoneNumber" intOnly/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--<div class="form-group">
+          <label for="role">
+            Role
+          </label>
+          <select class="form-control" id="role" [(ngModel)]="user.role" name="role">
+            <option value="">Select</option>
+            <option value="ADMIN">ADMIN</option>
+            <option value="USER">USER</option>
+          </select>
+        </div>-->
+
+        <div class="form-group">
+          <div class="col"> 
+            <div class="row">
+              <div class="col">
+              </div>
+              <div class="col-8">
+                <div class="col-7">
+                  <button type="button" class="btn btn-primary float-right" (click)="inscription(user,userForm)">{{'common.sinscrire' | translate}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

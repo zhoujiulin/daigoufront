@@ -1,0 +1,200 @@
+<div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6 col-md-4">
+        <a class="nav-link float-right" href="" [routerLink]="['/creationcommande']" routerLinkActive="router-link-active">{{'commande.createCommande' | translate}}</a>
+      </div>
+      <div class="col-xs-6 col-md-4">
+        <select class="form-control" (change)="getCommandesByStatus($event.target.value)">
+            <option value="{{statusGroup.key}}" *ngFor="let statusGroup of statusGroupList | keyvalue:desc" style="font-weight: bold">{{statusGroup.value}}</option>
+            <option value="{{status.key}}" *ngFor="let status of statusList | keyvalue:desc">{{status.value}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div *ngFor="let commande of commandes">
+    <div class="card">
+      <div class="card-header" data-toggle="collapse" [attr.data-target]="'#commande' + commande.id">
+        <div class="row">
+          <div class="col">
+            <strong class="font-size-24">{{commande.client.nameWechat}}</strong>
+          </div>
+          <div class="col text-right">
+            <div *ngFor="let status of statusList | keyvalue:desc">
+              <strong class="font-size-18" *ngIf="status.key == commande.status">{{status.value}}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="{{'commande' + commande.id}}" class="collapse">
+        <div class="card-body">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-2">
+                <div class="row">
+                  <div class="col-4 text-right">{{'user.nomWechat' | translate}}: </div>
+                  <div class="col">
+                    <!--<input class="form-control" [(ngModel)]="commande.client.nameWechat" value="{{commande.client.nameWechat}}"/>-->
+                    <strong class="font-size-24">{{commande.client.nameWechat}}</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="row">
+                  <div class="col-4 text-right">{{'user.nomLivraison' | translate}}</div>
+                  <div class="col">
+                    <input class="form-control" [(ngModel)]="commande.client.nameLivraison" value="{{commande.client.nameLivraison}}"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row">
+                  <div class="col-3 text-right">{{'user.telephone' | translate}}</div>
+                  <div class="col">
+                    <input class="form-control" [(ngModel)]="commande.client.telephone" value="{{commande.client.telephone}}" intOnly/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-5">
+                <div class="row">
+                  <div class="col-2 text-right">{{'user.adresse' | translate}}</div>
+                  <div class="col">
+                    <input class="form-control" [(ngModel)]="commande.client.adresse" value="{{commande.client.adresse}}"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="margin-bottom-15" *ngFor="let article of commande.articles">
+              <div class="border border-primary">
+                <div class="margin-10">
+                  <!--ligne-->
+                  <div class="row margin-bottom-10">
+                    <div class="col-6">
+                      <div class="row">
+                        <div class="col">
+                          <!--<strong class="font-size-18"><span>{{article.nameArticle}}</span></strong>-->
+                          <div class="row">
+                            <div class="col-3 text-right">
+                                {{'article.nomArticle' | translate}}
+                            </div>
+                            <div class="col">
+                              <input class="form-control" [(ngModel)]="article.nameArticle" value="{{article.nameArticle}}"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <div class="row">
+                        <div class="col-6 text-right">
+                            {{'article.prixAchat' | translate}}
+                        </div>
+                        <div class="col">
+                          <input class="form-control" [(ngModel)]="article.priceAchat" value="{{article.priceAchat}}"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <div class="row">
+                        <div class="col-6 text-right">
+                            {{'article.prixVente' | translate}}
+                        </div>
+                        <div class="col">
+                          <input class="form-control" [(ngModel)]="article.priceVente" value="{{article.priceVente}}"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <div class="row">
+                        <div class="col-6 text-right">
+                            {{'article.count' | translate}}
+                        </div>
+                        <div class="col">
+                          <input class="form-control" [(ngModel)]="article.count" value="{{article.count}}"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--ligne-->
+                  <div class="row">
+                    <div class="col text-right">
+                      <div class="row">
+                        <div class="col text-right">
+                            {{'article.countAchete' | translate}}
+                        </div>
+                        <div class="col">
+                          <input class="form-control" [(ngModel)]="article.countArticleAchete" value="{{article.countArticleAchete}}"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col text-right">
+                      <div class="row">
+                        <div class="col text-right">
+                            {{'article.countStockageFrance' | translate}}
+                        </div>
+                        <div class="col">
+                          <input class="form-control" [(ngModel)]="article.countArticleFromStockageFrance" value="{{article.countArticleFromStockageFrance}}"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col text-right">
+                      <div class="row">
+                        <div class="col text-right">
+                            {{'article.countStockageChine' | translate}}
+                        </div>
+                        <div class="col">
+                            <input class="form-control" [(ngModel)]="article.countArticleFromStockageChine" value="{{article.countArticleFromStockageChine}}"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col text-right margin-bottom-10">
+                      <div class="row">
+                        <div class="col text-right">
+                          {{'article.countStockageRoute' | translate}}
+                        </div>
+                        <div class="col">
+                            <input class="form-control" [(ngModel)]="article.countArticleFromStockageEnRoute" value="{{article.countArticleFromStockageEnRoute}}"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--ligne-->
+                  <div class="row">
+                    <div class="col">
+                      <span>{{'article.statusArticle' | translate}} : </span>
+                      <span *ngFor="let articleStatus of articleStatusList | keyvalue:desc">
+                        <strong class="font-size-18 margin-left-10" *ngIf="articleStatus.key == article.statusArticle">{{articleStatus.value}}</strong>
+                      </span>
+                    </div>
+                    <div class="col">
+                      <button type="button" class="btn btn-sm float-right" (click)="supprimerArticleConfirm(article, commande)">{{'article.deleteArticle' | translate}}</button>
+                    </div>
+                  </div>
+                </div>
+              </div> 
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <button type="button" class="btn btn-primary" (click)="addArticle(commande)">{{'article.addArticle' | translate}}</button>
+                  </div>
+                  <div class="col">
+                    <button type="button" class="btn btn-outline-primary float-right margin-left-10" (click)="supprimerCommandeConfirm(commande)">{{'common.delete' | translate}}</button>
+                    <button type="button" class="btn btn-primary float-right" data-toggle="collapse" [attr.data-target]="'#commande' + commande.id" [disabled]="validatorBtnSave(commande)" (click)="updateCommande(commande)">
+                      {{'common.save' | translate}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div> 
+      </div>
+    </div>
+  </div>
+
+</div>

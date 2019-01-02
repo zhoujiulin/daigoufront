@@ -1,0 +1,24 @@
+<div>
+    <nav class="navbar navbar-dark bg-dark mb-5">
+    <a class="navbar-brand" href="/">Daigou</a>
+        <div class="navbar-expand mr-auto" *ngIf="currentstatus.status"> 
+            <div class="navbar-nav">
+            <a class="nav-item nav-link" [routerLink]="['/commandes']">{{'commande.commandes' | translate}}</a>
+            <a class="nav-item nav-link" [routerLink]="['/articlemodele']">{{'articlemodele.articlemodele' | translate}}</a>
+            <a class="nav-item nav-link" [routerLink]="['/stockage']">{{'stockage.stockage' | translate}}</a>
+            </div>
+        </div>
+        <div class="navbar-expand ml-auto navbar-nav">
+            <div class="navbar-nav">
+                <span>
+                    <a class="nav-item nav-link" style="cursor: pointer" (click)="changeLanguage(language)">{{languageBtn}}</a>
+                </span>
+            </div>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="" (click)="logout()" *ngIf="currentstatus.status">{{'common.deconnecter' | translate}}</a>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="col-sm-12">
+    <div class="col-sm-12">
+      <h2>{{'commande.creationCommande' | translate}}</h2>
+    </div>
+    <div class="col-12">
+      <form [formGroup]="creationCommandeFrom" (submit)="creationCommande(creationCommandeFrom.value)">
+        <div formGroupName="client">
+          <div class="row">
+            <div class="form-group col">
+              <label for="nameWechat">
+                {{'user.nomWechat' | translate}}
+              </label>
+              <input type="text" class="form-control" id="nameWechat" formControlName="nameWechat" />
+            </div>
+
+            <div class="form-group col">
+              <label for="nameLivraison">
+                {{'user.nomLivraison' | translate}}
+              </label>
+              <input type="text" class="form-control" id="nameLivraison" formControlName="nameLivraison"/>
+            </div>
+
+            <div class="form-group col">
+                <label for="telephone">
+                  {{'user.telephone' | translate}}
+                </label>
+                <input type="text" class="form-control" id="telephone" formControlName="telephone" intOnly/>
+              </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col">
+              <label for="adresse">
+                {{'user.adresse' | translate}}
+              </label>
+              <input type="text" class="form-control" id="adresse" formControlName="adresse"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-5">{{'article.nomArticle' | translate}}</div>
+          <div class="col-2">{{'article.prixAchat' | translate}}</div>
+          <div class="col-2">{{'article.prixVente' | translate}}</div>
+          <div class="col-1">{{'article.count' | translate}}</div> 
+          <div class="col-1"></div> 
+        </div>
+
+        <div formArrayName="articles">
+          <div *ngFor="let article of creationCommandeFrom.get('articles').controls; let i = index;">
+              <div class="margin-bottom-15"> 
+                <div class="form-group" [formGroupName]="i">
+                  <div class="row">
+                    <div class="col-1">
+                        <span color="light">{{'article.article' | translate}} #{{ i + 1 }}</span>
+                    </div>
+                    <div class="col-5">
+                      <input type="text" class="form-control" formControlName="nameArticle"/>
+                    </div>
+                    <div class="col-2">
+                      <input type="text" class="form-control" formControlName="priceAchat" numberOnly/>
+                    </div>
+                    <div class="col-2">
+                      <input type="text" class="form-control" formControlName="priceVente" numberOnly/>
+                    </div>
+                    <div class="col-1">
+                      <input type="text" class="form-control" formControlName="count" intOnly/>
+                    </div>
+                    <div class="col-1">
+                      <a class="btn" (click)="removeArticle(i)"><i style="font-size:24px" class="fa">&#xf00d;</i></a>
+                    </div>
+                    <input type="hidden" class="form-control" formControlName="statusArticle"/>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <div class="margin-bottom-15">
+            <a class="btn btn-link" (click)="addArticle()"><i class="fa fa-plus"></i>{{'article.addArticle' | translate}}</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col">
+              <button type="submit" class="btn btn-primary" [disabled]="!creationCommandeFrom.valid">{{'common.create' | translate}}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

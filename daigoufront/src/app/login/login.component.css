@@ -1,0 +1,27 @@
+.container{
+    display:table;
+    height:100%;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    text-align:left;
+    margin-right:-4px;
+}
+
+.row{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.row-centered {
+    text-align:center;
+}
+
+.float-right {
+    float: right;
+}
+
+.row.cols-bottom > {
+    vertical-align: bottom;
+}

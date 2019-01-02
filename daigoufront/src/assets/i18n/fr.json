@@ -1,0 +1,51 @@
+{
+    "user": {
+        "username": "Nom d'utilisateur",
+        "password": "Mot de passe",
+        "confirmPassword": "Confirmation de mot de passe",
+        "nom": "Nom",
+        "prenom": "Prenom",
+        "email": "Email",
+        "telephone": "Numéro de téléphone",
+        "nomWechat": "Nom Wechat",
+        "nomLivraison": "Nom de livraison",
+        "adresse": "Adresse"
+    },
+    "commande": {
+        "commandes": "commandes",
+        "createCommande": "Créer une nouvelle commande",
+        "creationCommande": "Création d'une nouvelle commande"
+    },
+    "article": {
+        "nomArticle": "Nom d'article",
+        "prixAchat": "Prix d'achat",
+        "prixVente": "Prix de vente",
+        "count": "Qté",
+        "article": "Article",
+        "addArticle": "Ajouter un article",
+        "countAchete": "Qté acheté",
+        "countStockageFrance": "Qté de stockage en France",
+        "countStockageChine": "Qté de stockage en Chine",
+        "countStockageRoute": "Qté de stockage en route",
+        "statusArticle": "Status d'article",
+        "deleteArticle": "Supprimer l'article"
+    },
+    "articlemodele": {
+        "articlemodele": "Modèle d'article"
+    },
+    "stockage": {
+        "stockage": "Stockage"
+    },
+    "message": {
+      "confirmPasswordInegal": "La confirmation de mot de passe n'est pas pareil que mot de passe"
+    },
+    "common": {
+        "inscription": "Inscription",
+        "seconnecter": "Se connecter",
+        "deconnecter": "Déconnecter",
+        "sinscrire": "S'inscrire",
+        "create": "Créer",
+        "save": "Sauvegarder",
+        "delete": "Supprimer"
+    }
+}

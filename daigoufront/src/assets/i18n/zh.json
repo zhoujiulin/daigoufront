@@ -1,0 +1,51 @@
+{
+    "user": {
+        "username": "用户名",
+        "password": "密码",
+        "confirmPassword": "确认密码",
+        "nom": "姓",
+        "prenom": "名",
+        "email": "邮箱",
+        "telephone": "电话",
+        "nomWechat": "微信名",
+        "nomLivraison": "收件人",
+        "adresse": "地址"
+    },
+    "commande": {
+        "commandes": "订单列表",
+        "createCommande": "创建新订单",
+        "creationCommande": "创建新订单"
+    },
+    "article": {
+        "nomArticle": "货物名称",
+        "prixAchat": "进价",
+        "prixVente": "卖价",
+        "count": "数量",
+        "article": "货物",
+        "addArticle": "增加货物",
+        "countAchete": "已购数量",
+        "countStockageFrance": "法国库存数量",
+        "countStockageChine": "中国库存数量",
+        "countStockageRoute": "路上库存数量",
+        "statusArticle": "备货状态",
+        "deleteArticle": "删除货品"
+    },
+    "articlemodele": {
+        "articlemodele": "价格表"
+    },
+    "stockage": {
+        "stockage": "库存"
+    },
+    "message": {
+      "confirmPasswordInegal": "密码不一致"
+    },
+    "common": {
+        "inscription": "注册",
+        "seconnecter": "登录",
+        "deconnecter": "退出",
+        "sinscrire": "注册",
+        "create": "创建",
+        "save": "保存",
+        "delete": "删除"
+    }
+  }

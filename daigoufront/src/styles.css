@@ -1,0 +1,59 @@
+/* You can add global styles to this file, and also import other style files */
+.col-center-block {
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+
+.margin-bottom-15 {
+    margin-bottom: 15px;
+}
+
+.margin-bottom-30 {
+    margin-bottom: 30px;
+}
+
+.font-size-10 {
+    font-size: 10px;
+}
+
+.padding-0 div{
+    padding: 0;
+}
+
+.margin-10{
+    margin: 10px;
+}
+
+.padding-10{
+    margin: 10px;
+}
+
+.btn-group>:not(:last-child) {
+    margin-right: 5px;
+}
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+
+.font-size-24 {
+    font-size: 24px;
+}
+
+.font-size-18 {
+    font-size: 18px;
+}
+
+.font-size-15 {
+    font-size: 15px;
+}
+
+.margin-top-40 {
+    margin-top: 40px;
+}
