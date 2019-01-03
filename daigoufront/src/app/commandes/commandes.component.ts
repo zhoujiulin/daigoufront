@@ -50,9 +50,12 @@ export class CommandesComponent implements OnInit {
   }
 
   updateCommande(commande: Commande) {
-    this.commandeService.updateCommande(this.loginuser.token, commande).subscribe(commande =>{
-      
+    this.commandeService.updateCommande(this.loginuser.token, commande).subscribe(res =>{
+      let itemIndex = this.commandes.findIndex(c => c.id == res['id']);
+      this.commandes[itemIndex] = res;
     })
+
+    console.log(this.commandes);
   }
 
   supprimerCommandeConfirm(commande: Commande) {

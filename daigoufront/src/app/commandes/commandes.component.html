@@ -6,8 +6,12 @@
       </div>
       <div class="col-xs-6 col-md-4">
         <select class="form-control" (change)="getCommandesByStatus($event.target.value)">
-            <option value="{{statusGroup.key}}" *ngFor="let statusGroup of statusGroupList | keyvalue:desc" style="font-weight: bold">{{statusGroup.value}}</option>
-            <option value="{{status.key}}" *ngFor="let status of statusList | keyvalue:desc">{{status.value}}</option>
+            <option value="{{statusGroup.key}}" *ngFor="let statusGroup of statusGroupList | keyvalue:desc" style="font-weight: bold">
+              {{statusGroup.value}}
+            </option>
+            <option value="{{status.key}}" *ngFor="let status of statusList | keyvalue:desc">
+              {{status.value}}
+            </option>
         </select>
       </div>
     </div>
@@ -22,7 +26,11 @@
           </div>
           <div class="col text-right">
             <div *ngFor="let status of statusList | keyvalue:desc">
-              <strong class="font-size-18" *ngIf="status.key == commande.status">{{status.value}}</strong>
+              <span class="font-size-18" *ngIf="status.key == commande.status">
+                <strong [ngStyle]="{'color': s.value}" *ngFor="let s of status.value | keyvalue:desc">
+                  {{s.key}}
+                </strong>
+              </span>
             </div>
           </div>
         </div>
@@ -30,7 +38,7 @@
       <div id="{{'commande' + commande.id}}" class="collapse">
         <div class="card-body">
           <div class="form-group">
-            <div class="row">
+            <div class="row margin-bottom-15">
               <div class="col-2">
                 <div class="row">
                   <div class="col-4 text-right">{{'user.nomWechat' | translate}}: </div>
@@ -165,7 +173,9 @@
                     <div class="col">
                       <span>{{'article.statusArticle' | translate}} : </span>
                       <span *ngFor="let articleStatus of articleStatusList | keyvalue:desc">
-                        <strong class="font-size-18 margin-left-10" *ngIf="articleStatus.key == article.statusArticle">{{articleStatus.value}}</strong>
+                        <span class="font-size-18 margin-left-10" *ngIf="articleStatus.key == article.statusArticle">
+                          <strong *ngFor="let a of articleStatus.value | keyvalue:desc" [ngStyle]="{'color': a.value}">{{a.key}}</strong>
+                        </span>
                       </span>
                     </div>
                     <div class="col">
