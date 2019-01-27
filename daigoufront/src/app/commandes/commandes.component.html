@@ -10,7 +10,9 @@
               {{statusGroup.value}}
             </option>
             <option value="{{status.key}}" *ngFor="let status of statusList | keyvalue">
-              {{status.value}}
+              <span *ngFor="let s of status.value | keyvalue">
+                {{s.key}}
+              </span>
             </option>
         </select>
       </div>

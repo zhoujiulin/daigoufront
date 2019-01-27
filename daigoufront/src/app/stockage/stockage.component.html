@@ -1,3 +1,74 @@
-<p>
-  stockage works!
-</p>
+<div class="col-sm-12">
+  <div class="col-sm-12">
+    <h2>{{'stockage.createStockage' | translate}}</h2>
+  </div>
+  <div class="col-12">
+      <div class="row">
+        <div class="form-group col-4">
+          <label>
+              {{'article.nomArticle' | translate}}
+          </label>
+          <input type="text" class="form-control" [(ngModel)]="createArticleStockage.nameArticleStockage" />
+        </div>
+        <div class="form-group col-1">
+          <label>
+              {{'article.prixAchat' | translate}}
+          </label>
+          <input type="text" class="form-control" [(ngModel)]="createArticleStockage.priceAchatStockage" />
+        </div>
+        <div class="form-group col-2">
+          <label>
+              {{'article.countStockageFrance' | translate}}
+          </label>
+          <input type="text" class="form-control" [(ngModel)]="createArticleStockage.countStockageFrance" intOnly/>
+        </div>
+        <div class="form-group col-2">
+          <label>
+              {{'article.countStockageChine' | translate}}
+          </label>
+          <input type="text" class="form-control" [(ngModel)]="createArticleStockage.countStockageChine" intOnly/>
+        </div>
+        <div class="form-group col-2">
+          <label>
+              {{'article.countStockageRoute' | translate}}
+          </label>
+          <input type="text" class="form-control" [(ngModel)]="createArticleStockage.countStockageEnRoute" intOnly/>
+        </div>
+        <div class="form-group col-1">
+          <div class="col">
+            <button type="submit" class="btn btn-primary" [disabled]="!validatorBtnCreate(createArticleStockage)" (click)="creationArticleStockage(createArticleStockage)">{{'common.create' | translate}}</button>
+          </div>
+        </div>
+      </div>
+
+  </div>
+  <div class="col-sm-12">
+    <h2>{{'stockage.listStockage' | translate}}</h2>
+  </div>
+  <div class="col-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>{{'article.nomArticle' | translate}}</th>
+          <th>{{'article.prixAchat' | translate}}</th>
+          <th>{{'article.countStockageFrance' | translate}}</th>
+          <th>{{'article.countStockageChine' | translate}}</th>
+          <th>{{'article.countStockageRoute' | translate}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stockage of stockages">
+          <td>{{stockage.nameArticleStockage}}</td>
+          <td>{{stockage.priceAchatStockage}}</td>
+          <td>{{stockage.countStockageFrance}}</td>
+          <td>{{stockage.countStockageChine}}</td>
+          <td>{{stockage.countStockageEnRoute}}</td>
+          <td>
+              <button class="btn btn-primary">{{'common.save' | translate}}</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

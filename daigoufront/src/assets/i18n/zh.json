@@ -34,7 +34,9 @@
         "articlemodele": "价格表"
     },
     "stockage": {
-        "stockage": "库存"
+        "stockage": "库存",
+        "createStockage": "创建库存",
+        "listStockage": "库存列表"
     },
     "message": {
       "confirmPasswordInegal": "密码不一致"

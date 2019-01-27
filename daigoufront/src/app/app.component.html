@@ -1,6 +1,6 @@
 <div>
     <nav class="navbar navbar-dark bg-dark mb-5">
-    <a class="navbar-brand" href="/">Daigou</a>
+    <a class="navbar-brand" [routerLink]="['/commandes']">Daigou</a>
         <div class="navbar-expand mr-auto" *ngIf="currentstatus.status"> 
             <div class="navbar-nav">
             <a class="nav-item nav-link" [routerLink]="['/commandes']">{{'commande.commandes' | translate}}</a>
