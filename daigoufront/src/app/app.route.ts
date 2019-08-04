@@ -9,6 +9,7 @@ import {AuthGuard} from './auth.guard';
 import {CommandesComponent} from './commandes/commandes.component';
 import { ArticlemodeleComponent } from './articlemodele/articlemodele.component';
 import { StockageComponent } from './stockage/stockage.component';
+import { ColisComponent } from './colis/colis.component';
 
 export const ROUTES: Routes = [
     { path: 'home', component: HomeComponent},
@@ -20,5 +21,6 @@ export const ROUTES: Routes = [
     { path: 'commandes', component: CommandesComponent, canActivate: [AuthGuard]},
     { path: 'articlemodele', component: ArticlemodeleComponent, canActivate: [AuthGuard]},
     { path: 'stockage', component: StockageComponent, canActivate: [AuthGuard]},
+    { path: 'colis', component: ColisComponent, canActivate: [AuthGuard]},
     { path: '*', pathMatch: 'full', redirectTo: 'home'}
 ];

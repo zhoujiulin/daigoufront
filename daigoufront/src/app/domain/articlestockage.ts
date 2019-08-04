@@ -5,4 +5,6 @@ export class ArticleStockage {
     countStockageChine : number;
     countStockageFrance : number;
     countStockageEnRoute : number;
+    isOnEdit : boolean;
+    isNotToEdit : boolean;
   }

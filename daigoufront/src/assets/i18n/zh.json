@@ -38,6 +38,10 @@
         "createStockage": "创建库存",
         "listStockage": "库存列表"
     },
+    "colis": {
+        "colis": "包裹",
+        "nomColis": "包裹名"
+    },
     "message": {
       "confirmPasswordInegal": "密码不一致"
     },
@@ -48,6 +52,12 @@
         "sinscrire": "注册",
         "create": "创建",
         "save": "保存",
-        "delete": "删除"
+        "delete": "删除",
+        "edit": "修改",
+        "cancel": "取消",
+        "dateEnvoyer": "发货日期",
+        "commentaire": "备注",
+        "envoyer": "发送",
+        "arriver": "到达"
     }
   }

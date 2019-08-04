@@ -1,3 +1,6 @@
+import { Colis } from './colis';
+import { Commande } from './commande';
+
 export class Article {
     idArticle : number;
     nameArticle : String;
@@ -7,5 +10,10 @@ export class Article {
     countArticleAchete : number;
     countArticleFromStockage : number;
     statusArticle : number;
-    idCommande : number;
+    colis : Colis;
+    commande : Commande;
+
+    constructor() {
+
+    }
   }

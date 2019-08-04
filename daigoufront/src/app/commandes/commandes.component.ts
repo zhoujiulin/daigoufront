@@ -5,6 +5,7 @@ import { Commande } from '../domain/commande';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../common/modal/modal/modal.component';
 import { Article } from '../domain/article';
+import { ColisService } from '../services/colis.service';
 
 @Component({
   selector: 'app-commandes',
@@ -15,13 +16,14 @@ import { Article } from '../domain/article';
 export class CommandesComponent implements OnInit {
 
   public loginuser: any = {};
+  public colisList: any;
   public statusList = new Map<number, string>();
   public statusGroupList = new Map<number[], string>();
   public articleStatusList: any;
   public commandes: any;
   public modal: any;
 
-  constructor(private authService: LoginAuthService, private commandeService: CommandeService, private modalService: NgbModal, private modalComponent: ModalComponent) {
+  constructor(private authService: LoginAuthService, private commandeService: CommandeService, private colisService: ColisService, private modalService: NgbModal, private modalComponent: ModalComponent) {
     this.authService.isLoggedIn();
     this.loginuser = JSON.parse(localStorage.getItem('currentUser'));
     this.modal = modalComponent;
@@ -41,10 +43,15 @@ export class CommandesComponent implements OnInit {
     this.commandeService.getArticleStatus(this.loginuser.token).subscribe(articleStatusList =>{
       this.articleStatusList = articleStatusList;
     })
+
+    this.colisService.getColisByStatus(1, this.loginuser.token).subscribe(colisList =>{
+      this.colisList = colisList;
+    })
   }
 
   getCommandesByStatus(status: any) {
     this.commandeService.getCommandesByStatus(this.loginuser.token, status).subscribe(commandes =>{
+      console.log(commandes);
       this.commandes = commandes;
     })
   }
@@ -54,8 +61,6 @@ export class CommandesComponent implements OnInit {
       let itemIndex = this.commandes.findIndex(c => c.id == res['id']);
       this.commandes[itemIndex] = res;
     })
-
-    console.log(this.commandes);
   }
 
   supprimerCommandeConfirm(commande: Commande) {
@@ -110,5 +115,17 @@ export class CommandesComponent implements OnInit {
       }
     }
     return isDisabled;
+  }
+
+  disabledSelectColis(article: Article) {
+    let isDisabled = false;
+    if(article.statusArticle == 2 || article.statusArticle == 3){
+      isDisabled = true;
+    }
+    return isDisabled;
+  }
+
+  compareColis(o1: Object, o2: Object): boolean {
+      return o1 && o2 ? o1['idColis'] === o2['idColis'] : o1 === o2;
   }
 }

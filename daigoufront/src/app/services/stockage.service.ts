@@ -22,4 +22,14 @@ export class StockageService {
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
     return this.http.post(environment.baseUrl + "/stockage/create", articleStockage, {headers: headers});
   }
+
+  saveArticleStockage(articleStockage: ArticleStockage, token: any){
+    const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
+    return this.http.post(environment.baseUrl + "/stockage/save", articleStockage, {headers: headers});
+  }
+
+  getArticleStockageById(id: any, token: any) {
+    const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
+    return this.http.get(environment.baseUrl + "/stockage/getarticlestockage/" + id, {headers: headers});
+  }
 }

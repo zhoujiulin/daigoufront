@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginAuthService } from '../login-auth.service';
 import { Router } from '@angular/router';
 import { CommandeService } from '../services/commande.service';
-import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Commande } from '../domain/commande';
 
 @Component({
@@ -15,6 +15,8 @@ export class CreationCommandeComponent implements OnInit {
   public creationCommandeFrom: FormGroup;
   public loginuser: any = {};
   public commande: Commande;
+  public typeCommandeList = new Map<number, string>();
+  public isCommandePourClient = true;
 
   constructor(private router: Router, private commandeService: CommandeService, private authService: LoginAuthService, private _FB: FormBuilder) { 
     this.authService.isLoggedIn();
@@ -22,10 +24,10 @@ export class CreationCommandeComponent implements OnInit {
 
     this.creationCommandeFrom = this._FB.group({
       client: this._FB.group({ 
-        nameWechat: ['', Validators.required],
-        nameLivraison: "",
-        telephone: "",
-        adresse: ""
+        nameWechat: [null, Validators.required],
+        nameLivraison: null,
+        telephone: null,
+        adresse: null
       }),
       articles: this._FB.array([
         this.initArticleFields()
@@ -34,6 +36,7 @@ export class CreationCommandeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getTypeCommande();
   }
 
   initArticleFields() : FormGroup
@@ -63,5 +66,23 @@ export class CreationCommandeComponent implements OnInit {
         this.router.navigate(['/commandes']);
       }
     })
+  }
+
+  getTypeCommande(){
+    this.commandeService.getTypeCommande(this.loginuser.token).subscribe(typeCommandeList =>{
+      this.typeCommandeList = typeCommandeList;
+    })
+  }
+
+  changeTypeCommande(isCommandePourClient){
+    this.isCommandePourClient = !isCommandePourClient;
+    let nameWechatControl = this.creationCommandeFrom.get('client').get('nameWechat');
+    if(!this.isCommandePourClient){
+      nameWechatControl.clearValidators();
+      nameWechatControl.updateValueAndValidity();
+    }else{
+      nameWechatControl.setValidators([Validators.required]);
+      nameWechatControl.updateValueAndValidity();
+    }
   }
 }

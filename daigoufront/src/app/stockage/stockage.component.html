@@ -35,9 +35,7 @@
           <input type="text" class="form-control" [(ngModel)]="createArticleStockage.countStockageEnRoute" intOnly/>
         </div>
         <div class="form-group col-1">
-          <div class="col">
             <button type="submit" class="btn btn-primary" [disabled]="!validatorBtnCreate(createArticleStockage)" (click)="creationArticleStockage(createArticleStockage)">{{'common.create' | translate}}</button>
-          </div>
         </div>
       </div>
 
@@ -48,24 +46,43 @@
   <div class="col-12">
     <table class="table">
       <thead>
-        <tr>
-          <th>{{'article.nomArticle' | translate}}</th>
-          <th>{{'article.prixAchat' | translate}}</th>
-          <th>{{'article.countStockageFrance' | translate}}</th>
-          <th>{{'article.countStockageChine' | translate}}</th>
-          <th>{{'article.countStockageRoute' | translate}}</th>
-          <th></th>
+        <tr class="row"> 
+          <th class="col-3">{{'article.nomArticle' | translate}}</th>
+          <th class="col-1">{{'article.prixAchat' | translate}}</th>
+          <th class="col-2">{{'article.countStockageFrance' | translate}}</th>
+          <th class="col-2">{{'article.countStockageChine' | translate}}</th>
+          <th class="col-2">{{'article.countStockageRoute' | translate}}</th>
+          <th class="col-2"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let stockage of stockages">
-          <td>{{stockage.nameArticleStockage}}</td>
-          <td>{{stockage.priceAchatStockage}}</td>
-          <td>{{stockage.countStockageFrance}}</td>
-          <td>{{stockage.countStockageChine}}</td>
-          <td>{{stockage.countStockageEnRoute}}</td>
-          <td>
-              <button class="btn btn-primary">{{'common.save' | translate}}</button>
+        <tr class="row" *ngFor="let stockage of stockages">
+          <td class="col-3" [hidden]="stockage.isOnEdit">{{stockage.nameArticleStockage}}</td>
+          <td class="col-1" [hidden]="stockage.isOnEdit">{{stockage.priceAchatStockage}}</td>
+          <td class="col-2" [hidden]="stockage.isOnEdit">{{stockage.countStockageFrance}}</td>
+          <td class="col-2" [hidden]="stockage.isOnEdit">{{stockage.countStockageChine}}</td>
+          <td class="col-2" [hidden]="stockage.isOnEdit">{{stockage.countStockageEnRoute}}</td>
+
+         <td class="col-3" [hidden]="!stockage.isOnEdit">
+            <input class="form-control" [hidden]="true" [(ngModel)]="stockage.idArticleStockage" value="{{stockage.idArticleStockage}}"/>
+            <input class="form-control" [(ngModel)]="stockage.nameArticleStockage" value="{{stockage.nameArticleStockage}}"/>
+          </td>
+          <td class="col-1" [hidden]="!stockage.isOnEdit">
+            <input class="form-control" [(ngModel)]="stockage.priceAchatStockage" value="{{stockage.priceAchatStockage}}"/>
+          </td>
+          <td class="col-2" [hidden]="!stockage.isOnEdit">
+            <input class="form-control" [(ngModel)]="stockage.countStockageEnFrance" value="{{stockage.countStockageEnFrance}}"/>
+          </td>
+          <td class="col-2" [hidden]="!stockage.isOnEdit">
+            <input class="form-control" [(ngModel)]="stockage.countStockageChine" value="{{stockage.countStockageChine}}"/>
+          </td>
+          <td class="col-2" [hidden]="!stockage.isOnEdit">
+            <input class="form-control" [(ngModel)]="stockage.countStockageEnRoute" value="{{stockage.countStockageEnRoute}}"/>
+          </td>
+          <td class="col-2">
+              <button class="btn btn-primary" [hidden]="stockage.isNotToEdit" (click)="editArticleStockage(stockage)">{{'common.edit' | translate}}</button>
+              <button class="btn btn-primary margin-right-10" [hidden]="!stockage.isOnEdit" (click)="saveArticleStockage(stockage)">{{'common.save' | translate}}</button>
+              <button class="btn btn-primary" [hidden]="!stockage.isOnEdit" (click)="cancelEditArticleStockage(stockage)">{{'common.cancel' | translate}}</button>
           </td>
         </tr>
       </tbody>

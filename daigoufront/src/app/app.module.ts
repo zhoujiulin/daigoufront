@@ -29,7 +29,8 @@ import { ArticlemodeleComponent } from './articlemodele/articlemodele.component'
 import { StockageComponent } from './stockage/stockage.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, CommonModule } from '@angular/common';
+import { ColisComponent } from './colis/colis.component';
 
 export function createTranslateHttpLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -50,7 +51,8 @@ export function createTranslateHttpLoader(http: HttpClient) {
     ModalComponent,
     NgbdModalContent,
     ArticlemodeleComponent,
-    StockageComponent
+    StockageComponent,
+    ColisComponent
   ],
   imports: [
     BrowserModule,

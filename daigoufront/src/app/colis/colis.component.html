@@ -1,0 +1,79 @@
+<div class="col-sm-12">
+  <div class="container">
+    <div class="col-12">
+      <div class="row">
+          <div class="form-group col-3">
+            <label>
+                {{'colis.nomColis' | translate}}
+            </label>
+            <input class="form-control" [(ngModel)]="newColis.nameColis"/>
+          </div>
+          <div class="form-group col-7">
+            <label>
+                {{'common.commentaire' | translate}}
+            </label>
+            <input class="form-control" [(ngModel)]="newColis.commentaireColis"/>
+          </div>
+          <div class="form-group col-1">
+              <button type="submit" class="btn btn-primary" [disabled]="" (click)="creationColis(newColis)">{{'common.create' | translate}}</button>
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
+        <select class="form-control width-c40 col-center-block" (change)="getColisByStatus($event.target.value)" [(ngModel)]="statusColisSelect">
+            <option value="{{status.key}}" *ngFor="let status of statusList | keyvalue" style="font-weight: bold">
+              {{status.value}}
+            </option>
+        </select>
+    </div>
+  </div>
+
+  <div *ngFor="let colis of colisList">
+    <div class="col-12 margin-top-20">
+      <div class="card">
+        <div class="card-header" data-toggle="collapse" [attr.data-target]="'#colis' + colis.idColis">
+          <div class="row">
+            <div class="col-3">
+              <strong class="font-size-24">{{colis.nameColis}}</strong>
+            </div>
+            <div class="col-6">
+              {{colis.commentaireColis}}
+            </div>
+            <div class="col-3 text-right">
+              <span *ngFor="let status of statusList | keyvalue:desc">
+                <span class="font-size-18 margin-left-10" *ngIf="status.key == colis.statusColis">
+                  <strong>{{status.value}}</strong>
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div id="{{'colis' + colis.idColis}}" class="collapse">
+          <div class="card-body">
+            <div class="col">
+              <div class="row">
+                <button type="button" *ngIf="colis.statusColis==1" class="btn btn-danger" (click)="envoyerColis(colis)">{{'common.envoyer' | translate}}</button>
+              </div>
+              <div class="row">
+                <button type="button" *ngIf="colis.statusColis==2" class="btn btn-danger" (click)="envoyerColis(colis)">{{'common.arriver' | translate}}</button>
+              </div>
+            </div>
+            <div class="col" *ngFor="let article of colis.articles">
+              <div class="row">
+                <span>
+                  <span>{{article.nameArticle}}</span>
+                  <span>{{article.countArticleAchete}}</span>
+                  <span>{{article.commande.client.nameWechat}}</span>               
+                  <span>{{article.commande.client.nameLivraison}}</span>
+                  <span>{{article.commande.client.telephone}}</span>
+                  <span>{{article.commande.client.adresse}}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

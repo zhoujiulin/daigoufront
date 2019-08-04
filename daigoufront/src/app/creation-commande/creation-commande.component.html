@@ -1,40 +1,53 @@
 <div class="container">
   <div class="col-sm-12">
-    <div class="col-sm-12">
-      <h2>{{'commande.creationCommande' | translate}}</h2>
+    <div class="row margin-bottom-45">
+      <div class="col-xs-6 col-md-4">
+          <div class="col-12">
+            <h2>{{'commande.creationCommande' | translate}}</h2>
+          </div>
+      </div>
+      <div class="col-xs-6 col-md-4">
+        <select class="form-control" (change)="changeTypeCommande(isCommandePourClient)">
+            <option value="{{typeCommande.key}}" *ngFor="let typeCommande of typeCommandeList | keyvalue" style="font-weight: bold">
+                {{typeCommande.value}}
+            </option>
+        </select>
+      </div>
     </div>
     <div class="col-12">
       <form [formGroup]="creationCommandeFrom" (submit)="creationCommande(creationCommandeFrom.value)">
-        <div formGroupName="client">
-          <div class="row">
-            <div class="form-group col">
-              <label for="nameWechat">
-                {{'user.nomWechat' | translate}}
-              </label>
-              <input type="text" class="form-control" id="nameWechat" formControlName="nameWechat" />
-            </div>
-
-            <div class="form-group col">
-              <label for="nameLivraison">
-                {{'user.nomLivraison' | translate}}
-              </label>
-              <input type="text" class="form-control" id="nameLivraison" formControlName="nameLivraison"/>
-            </div>
-
-            <div class="form-group col">
-                <label for="telephone">
-                  {{'user.telephone' | translate}}
+        <div *ngIf='isCommandePourClient'>
+          <div formGroupName="client">
+            <div class="row">
+              <div class="form-group col">
+                <label for="nameWechat">
+                  {{'user.nomWechat' | translate}}
                 </label>
-                <input type="text" class="form-control" id="telephone" formControlName="telephone" intOnly/>
+                <input type="text" class="form-control" id="nameWechat" formControlName="nameWechat" />
               </div>
-          </div>
 
-          <div class="row">
-            <div class="form-group col">
-              <label for="adresse">
-                {{'user.adresse' | translate}}
-              </label>
-              <input type="text" class="form-control" id="adresse" formControlName="adresse"/>
+              <div class="form-group col">
+                <label for="nameLivraison">
+                  {{'user.nomLivraison' | translate}}
+                </label>
+                <input type="text" class="form-control" id="nameLivraison" formControlName="nameLivraison"/>
+              </div>
+
+              <div class="form-group col">
+                  <label for="telephone">
+                    {{'user.telephone' | translate}}
+                  </label>
+                  <input type="text" class="form-control" id="telephone" formControlName="telephone" intOnly/>
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col">
+                <label for="adresse">
+                  {{'user.adresse' | translate}}
+                </label>
+                <input type="text" class="form-control" id="adresse" formControlName="adresse"/>
+              </div>
             </div>
           </div>
         </div>

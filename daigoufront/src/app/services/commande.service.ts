@@ -16,6 +16,11 @@ export class CommandeService {
     return this.http.get(environment.baseUrl + "/commandes/commandestatus", {headers: headers});
   }
 
+  getTypeCommande(token: any): Observable<any>{
+    const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
+    return this.http.get(environment.baseUrl + "/commandes/gettypecommande", {headers: headers});
+  }
+
   getCommandeStatusGroup(token: any): Observable<any>{
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
     return this.http.get(environment.baseUrl + "/commandes/commandestatusgroup", {headers: headers});
@@ -29,6 +34,7 @@ export class CommandeService {
   getCommandesByStatus(token: any, statusList: any){
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
     let params = new HttpParams().set("status", statusList);
+    console.log(statusList);
     return this.http.get(environment.baseUrl + "/commandes/status", {headers: headers, params: params});
   }
 

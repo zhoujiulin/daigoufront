@@ -84,7 +84,6 @@
                     <div class="col-6">
                       <div class="row">
                         <div class="col">
-                          <!--<strong class="font-size-18"><span>{{article.nameArticle}}</span></strong>-->
                           <div class="row">
                             <div class="col-3 text-right">
                                 {{'article.nomArticle' | translate}}
@@ -179,6 +178,22 @@
                           <strong *ngFor="let a of articleStatus.value | keyvalue:desc" [ngStyle]="{'color': a.value}">{{a.key}}</strong>
                         </span>
                       </span>
+                    </div>
+
+                    <div *ngIf="disabledSelectColis(article)">
+                      <div class="col">
+                        <div class="col-xs-12">
+                          <label class="form-inline">{{'colis.colis' | translate}}
+                            <div class="width-15"></div>
+                            <select class="form-control width-auto" [(ngModel)]="article.colis" [compareWith]="compareColis"> 
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="colisList[i]" *ngFor="let colis of colisList | keyvalue; let i=index" style="font-weight: bold">
+                                    {{colisList[i]['nameColis']}}
+                                </option>
+                            </select>
+                          </label>
+                        </div>
+                      </div>
                     </div>
                     <div class="col">
                       <button type="button" class="btn btn-sm float-right" (click)="supprimerArticleConfirm(article, commande)">{{'article.deleteArticle' | translate}}</button>

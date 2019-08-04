@@ -6,6 +6,21 @@
     margin-right: auto;
 }
 
+.width-auto {
+    width:auto;
+}
+
+.width-c40 {
+    width: 40%;
+}
+.width-15 {
+    width: 15px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
 .margin-bottom-10 {
     margin-bottom: 10px;
 }
@@ -16,6 +31,18 @@
 
 .margin-bottom-30 {
     margin-bottom: 30px;
+}
+
+.margin-bottom-45 {
+    margin-bottom: 45px;
+}
+
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+.margin-left-10 {
+    margin-left: 10px;
 }
 
 .font-size-10 {
