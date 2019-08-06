@@ -38,12 +38,6 @@ export class CommandeService {
     return this.http.get(environment.baseUrl + "/commandes/status", {headers: headers, params: params});
   }
 
-  getArticleStatus(token: any){
-    const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
-    return this.http.get(environment.baseUrl + "/commandes/articlestatus", {headers: headers});
-  }
-
-
   updateCommande(token: any, commande: Commande){
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
     return this.http.post(environment.baseUrl + "/commandes/updatecommande", commande, {headers: headers});

@@ -19,7 +19,6 @@ export class CommandesComponent implements OnInit {
   public colisList: any;
   public statusList = new Map<number, string>();
   public statusGroupList = new Map<number[], string>();
-  public articleStatusList: any;
   public commandes: any;
   public modal: any;
 
@@ -40,13 +39,11 @@ export class CommandesComponent implements OnInit {
       this.statusList = statusList;
     })
 
-    this.commandeService.getArticleStatus(this.loginuser.token).subscribe(articleStatusList =>{
-      this.articleStatusList = articleStatusList;
-    })
-
     this.colisService.getColisByStatus(1, this.loginuser.token).subscribe(colisList =>{
       this.colisList = colisList;
     })
+
+    console.log(this.statusGroupList);                   
   }
 
   getCommandesByStatus(status: any) {
