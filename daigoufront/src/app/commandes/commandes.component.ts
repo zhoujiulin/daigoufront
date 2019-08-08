@@ -41,9 +41,8 @@ export class CommandesComponent implements OnInit {
 
     this.colisService.getColisByStatus(1, this.loginuser.token).subscribe(colisList =>{
       this.colisList = colisList;
-    })
-
-    console.log(this.statusGroupList);                   
+      console.log("colis : " + this.colisList);
+    })                
   }
 
   getCommandesByStatus(status: any) {
@@ -72,7 +71,6 @@ export class CommandesComponent implements OnInit {
     this.commandes = this.commandes.filter(c => c.id !== commande.id); 
 
     this.commandeService.supprimerCommande(this.loginuser.token, commande).subscribe(res =>{
-      
     })
   }
 
@@ -116,7 +114,7 @@ export class CommandesComponent implements OnInit {
 
   disabledSelectColis(article: Article) {
     let isDisabled = false;
-    if(article.statusArticle == 2 || article.statusArticle == 3){
+    if(article.statusArticle != null && (article.statusArticle['index']== 2 || article.statusArticle['index'] == 3)){
       isDisabled = true;
     }
     return isDisabled;

@@ -14,7 +14,7 @@ import { ModalComponent } from '../common/modal/modal/modal.component';
 export class ColisComponent implements OnInit {
   public loginuser: any = {};
   public newColis: Colis = new Colis();
-  public statusList = new Map<number, string>();
+  public statusList: any;
   public colisList: any;
   public statusColisSelect: any;
   public modal: any;
@@ -28,6 +28,7 @@ export class ColisComponent implements OnInit {
   ngOnInit() {
     this.colisService.getColisStatus(this.loginuser.token).subscribe(statusList =>{
       this.statusList = statusList;
+      console.log(statusList);
     })
 
     this.getColisByStatus(1);
@@ -45,7 +46,6 @@ export class ColisComponent implements OnInit {
 
   getColisByStatus(status: any){
     this.colisService.getColisByStatus(status, this.loginuser.token).subscribe(colisList =>{
-      console.log(this.loginuser.token);
       console.log(colisList);
       this.colisList = colisList;
     })

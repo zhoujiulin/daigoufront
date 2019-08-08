@@ -9,7 +9,7 @@ export class Article {
     count : number;
     countArticleAchete : number;
     countArticleFromStockage : number;
-    statusArticle : number;
+    statusArticle : any;
     colis : Colis;
     commande : Commande;
 

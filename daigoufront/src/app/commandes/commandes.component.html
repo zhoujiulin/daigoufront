@@ -27,13 +27,11 @@
             <strong class="font-size-24">{{commande.client.nameWechat}}</strong>
           </div>
           <div class="col text-right">
-            <div *ngFor="let status of statusList | keyvalue:desc">
-              <span class="font-size-18" *ngIf="status.key == commande.status">
-                <strong [ngStyle]="{'color': s.value}" *ngFor="let s of status.value | keyvalue:desc">
-                  {{s.key}}
-                </strong>
-              </span>
-            </div>
+            <span class="font-size-18">
+              <strong [ngStyle]="{'color': commande.status.color}">
+                {{commande.status.value}}
+              </strong>
+            </span>
           </div>
         </div>
       </div>
@@ -172,10 +170,12 @@
                   <!--ligne-->
                   <div class="row">
                     <div class="col">
-                      <span>{{'article.statusArticle' | translate}} : </span>
-                      <span class="font-size-18 margin-left-10">
-                        <strong [ngStyle]="{'color': article.statusArticle.color}">{{article.statusArticle.value}}</strong>
-                      </span>
+                      <div *ngIf="article.statusArticle != null">
+                        <span>{{'article.statusArticle' | translate}} : </span>
+                        <span class="font-size-18 margin-left-10">
+                          <strong [ngStyle]="{'color': article.statusArticle.color}">{{article.statusArticle.value}}</strong>
+                        </span>
+                      </div>
                     </div>
 
                     <div *ngIf="disabledSelectColis(article)">
@@ -183,7 +183,7 @@
                         <div class="col-xs-12">
                           <label class="form-inline">{{'colis.colis' | translate}} : 
                             <div class="width-15"></div>
-                            <div *ngIf="commande.status === 1 || commande.status === 2 || commande.status === 3 || commande.status === 4">
+                            <div *ngIf="commande.status['index'] === 1 || commande.status['index'] === 2 || commande.status['index'] === 3 || commande.status['index'] === 4">
                               <select class="form-control width-auto" [(ngModel)]="article.colis" [compareWith]="compareColis"> 
                                   <option [ngValue]="null"></option>
                                   <option [ngValue]="colisList[i]" *ngFor="let colis of colisList | keyvalue; let i=index" style="font-weight: bold">
@@ -191,8 +191,10 @@
                                   </option>
                               </select>
                             </div>
-                            <div *ngIf="commande.status === 5">
-                              <span>{{article.colis.nameColis}}</span>
+                            <div *ngIf="commande.status['index'] === 5">
+                              <strong>
+                                <span>{{article.colis.nameColis}}</span>
+                              </strong>
                             </div>
                           </label>
                         </div>
