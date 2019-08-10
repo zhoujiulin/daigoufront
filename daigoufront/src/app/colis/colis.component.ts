@@ -5,6 +5,9 @@ import { ColisService } from '../services/colis.service';
 import { NgSelectOption } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../common/modal/modal/modal.component';
+import { EnumStatusCommande } from '../enum/enumstatuscommande';
+import { EnumStatusColis } from '../enum/enumstatuscolis';
+import { Article } from '../domain/article';
 
 @Component({
   selector: 'app-colis',
@@ -54,12 +57,30 @@ export class ColisComponent implements OnInit {
   envoyerColis(colis: Colis){
     const modalRef  = this.modal.openModal("Avertissement", "", "Confirmer");
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
-      colis.statusColis = 2;
       this.colisService.envoyerColis(colis, this.loginuser.token).subscribe(colis =>{
         for(let c of this.colisList) {
           this.colisList = this.colisList.filter(c => c.idColis !== colis.idColis);
         }
       })
     })
+  }
+
+  arriverColis(colis: Colis){
+    const modalRef  = this.modal.openModal("Avertissement", "", "Confirmer");
+    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+      this.colisService.arriverColis(colis, this.loginuser.token).subscribe(colis =>{
+        for(let c of this.colisList) {
+          this.colisList = this.colisList.filter(c => c.idColis !== colis.idColis);
+        }
+      })
+    })
+  }
+
+  showBtnEnvoyer(colis: Colis){
+    let isShow: boolean = false;
+    if(colis.articles.length > 0 && colis.statusColis.index == EnumStatusColis.COLIS_NON_ENVOYE){
+      isShow = true;
+    }
+    return isShow;
   }
 }

@@ -84,10 +84,19 @@
                         <div class="col">
                           <div class="row">
                             <div class="col-3 text-right">
-                                {{'article.nomArticle' | translate}}
+                                {{'article.nomArticle' | translate}}: 
                             </div>
                             <div class="col">
-                              <input class="form-control" [(ngModel)]="article.nameArticle" value="{{article.nameArticle}}"/>
+                              <div *ngIf="onlyShowPourCommandeNonEnvoyee(commande.status.index)">
+                                <input class="form-control" [(ngModel)]="article.nameArticle" value="{{article.nameArticle}}"/>
+                              </div>
+                              <div *ngIf="!onlyShowPourCommandeNonEnvoyee(commande.status.index)">
+                                <strong>
+                                  <span>
+                                    {{article.nameArticle}}
+                                  </span>
+                                </strong>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -96,7 +105,7 @@
                     <div class="col-2">
                       <div class="row">
                         <div class="col-6 text-right">
-                            {{'article.prixAchat' | translate}}
+                            {{'article.prixAchat' | translate}}:
                         </div>
                         <div class="col">
                           <input class="form-control" [(ngModel)]="article.priceAchat" value="{{article.priceAchat}}"/>
@@ -106,7 +115,7 @@
                     <div class="col-2">
                       <div class="row">
                         <div class="col-6 text-right">
-                            {{'article.prixVente' | translate}}
+                            {{'article.prixVente' | translate}};
                         </div>
                         <div class="col">
                           <input class="form-control" [(ngModel)]="article.priceVente" value="{{article.priceVente}}"/>
@@ -116,53 +125,98 @@
                     <div class="col-2">
                       <div class="row">
                         <div class="col-6 text-right">
-                            {{'article.count' | translate}}
+                            {{'article.count' | translate}}:
                         </div>
                         <div class="col">
-                          <input class="form-control" [(ngModel)]="article.count" value="{{article.count}}"/>
+                          <div *ngIf="onlyShowPourCommandeNonEnvoyee(commande.status.index)">
+                            <input class="form-control" [(ngModel)]="article.count" value="{{article.count}}"/>
+                          </div>
+                          <div *ngIf="!onlyShowPourCommandeNonEnvoyee(commande.status.index)">
+                            <strong>
+                              <span>
+                                {{article.count}}
+                              </span>
+                            </strong>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                   <!--ligne-->
                   <div class="row">
-                    <div class="col text-right">
+                    <div class="col">
                       <div class="row">
                         <div class="col text-right">
-                            {{'article.countAchete' | translate}}
+                            {{'article.countAchete' | translate}}:
                         </div>
                         <div class="col">
-                          <input class="form-control" [(ngModel)]="article.countArticleAchete" value="{{article.countArticleAchete}}"/>
+                          <div *ngIf="onlyShowPourCommandeNonEnvoyee(commande.status.index)">
+                            <input class="form-control" [(ngModel)]="article.countArticleAchete" value="{{article.countArticleAchete}}"/>
+                          </div>
+                          <div *ngIf="!onlyShowPourCommandeNonEnvoyee(commande.status.index)">
+                            <strong>
+                              <span>
+                                {{article.countArticleAchete}}
+                              </span>
+                            </strong>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col text-right">
+                    <div class="col">
                       <div class="row">
                         <div class="col text-right">
-                            {{'article.countStockageFrance' | translate}}
+                            {{'article.countStockageFrance' | translate}}:
                         </div>
                         <div class="col">
-                          <input class="form-control" [(ngModel)]="article.countArticleFromStockageFrance" value="{{article.countArticleFromStockageFrance}}"/>
+                          <div *ngIf="onlyShowPourCommandeNonEnvoyee(commande.status.index)">
+                            <input class="form-control" [(ngModel)]="article.countArticleFromStockageFrance" value="{{article.countArticleFromStockageFrance}}"/>
+                          </div>
+                          <div *ngIf="!onlyShowPourCommandeNonEnvoyee(commande.status.index)">
+                            <strong>
+                              <span>
+                                {{article.countArticleFromStockageFrance}}
+                              </span>
+                            </strong>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col text-right">
+                    <div class="col">
                       <div class="row">
                         <div class="col text-right">
-                            {{'article.countStockageChine' | translate}}
+                            {{'article.countStockageChine' | translate}}:
                         </div>
                         <div class="col">
+                          <div *ngIf="onlyShowPourCommandeNonEnvoyee(commande.status.index)">
                             <input class="form-control" [(ngModel)]="article.countArticleFromStockageChine" value="{{article.countArticleFromStockageChine}}"/>
+                          </div>
+                          <div *ngIf="!onlyShowPourCommandeNonEnvoyee(commande.status.index)">
+                            <strong>
+                              <span>
+                                {{article.countArticleFromStockageChine}}
+                              </span>
+                            </strong>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col text-right margin-bottom-10">
+                    <div class="col margin-bottom-10">
                       <div class="row">
                         <div class="col text-right">
-                          {{'article.countStockageRoute' | translate}}
+                          {{'article.countStockageRoute' | translate}}:
                         </div>
                         <div class="col">
+                          <div *ngIf="onlyShowPourCommandeNonEnvoyee(commande.status.index)">
                             <input class="form-control" [(ngModel)]="article.countArticleFromStockageEnRoute" value="{{article.countArticleFromStockageEnRoute}}"/>
+                          </div>
+                          <div *ngIf="!onlyShowPourCommandeNonEnvoyee(commande.status.index)">
+                            <strong>
+                              <span>
+                                {{article.countArticleFromStockageEnRoute}}
+                              </span>
+                            </strong>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -171,7 +225,7 @@
                   <div class="row">
                     <div class="col">
                       <div *ngIf="article.statusArticle != null">
-                        <span>{{'article.statusArticle' | translate}} : </span>
+                        <span>{{'article.statusArticle' | translate}}: </span>
                         <span class="font-size-18 margin-left-10">
                           <strong [ngStyle]="{'color': article.statusArticle.color}">{{article.statusArticle.value}}</strong>
                         </span>
@@ -181,10 +235,10 @@
                     <div *ngIf="disabledSelectColis(article)">
                       <div class="col">
                         <div class="col-xs-12">
-                          <label class="form-inline">{{'colis.colis' | translate}} : 
+                          <label class="form-inline">{{'colis.colis' | translate}}: 
                             <div class="width-15"></div>
-                            <div *ngIf="commande.status['index'] === 1 || commande.status['index'] === 2 || commande.status['index'] === 3 || commande.status['index'] === 4">
-                              <select class="form-control width-auto" [(ngModel)]="article.colis" [compareWith]="compareColis"> 
+                            <div *ngIf="onlyShowPourCommandeNonEnvoyee(commande.status.index)">
+                              <select class="form-control width-auto" [(ngModel)]="article.colis" [compareWith]="compareColis" #ngModelSelectColis="ngModel" (ngModelChange)="changeColis(article, ngModelSelectColis)">   
                                   <option [ngValue]="null"></option>
                                   <option [ngValue]="colisList[i]" *ngFor="let colis of colisList | keyvalue; let i=index" style="font-weight: bold">
                                       {{colisList[i]['nameColis']}}
@@ -201,7 +255,7 @@
                       </div>
                     </div>
                     <div class="col">
-                      <button type="button" class="btn btn-sm float-right" (click)="supprimerArticleConfirm(article, commande)">{{'article.deleteArticle' | translate}}</button>
+                      <button type="button" *ngIf="onlyShowPourCommandeNonEnvoyee(commande.status.index)" class="btn btn-sm float-right" (click)="supprimerArticleConfirm(article, commande)">{{'article.deleteArticle' | translate}}</button>
                     </div>
                   </div>
                 </div>
@@ -211,10 +265,10 @@
               <div class="col">
                 <div class="row">
                   <div class="col">
-                    <button type="button" class="btn btn-primary" (click)="addArticle(commande)">{{'article.addArticle' | translate}}</button>
+                    <button type="button" *ngIf="onlyShowPourCommandeNonEnvoyee(commande.status.index)" class="btn btn-primary" (click)="addArticle(commande)">{{'article.addArticle' | translate}}</button>
                   </div>
                   <div class="col">
-                    <button type="button" class="btn btn-outline-primary float-right margin-left-10" (click)="supprimerCommandeConfirm(commande)">{{'common.delete' | translate}}</button>
+                    <button type="button" *ngIf="onlyShowPourCommandeNonEnvoyee(commande.status.index)" class="btn btn-outline-primary float-right margin-left-10" (click)="supprimerCommandeConfirm(commande)">{{'common.delete' | translate}}</button>
                     <button type="button" class="btn btn-primary float-right" data-toggle="collapse" [attr.data-target]="'#commande' + commande.id" [disabled]="validatorBtnSave(commande)" (click)="updateCommande(commande)">
                       {{'common.save' | translate}}
                     </button>

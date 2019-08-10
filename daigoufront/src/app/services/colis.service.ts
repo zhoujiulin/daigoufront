@@ -32,4 +32,9 @@ export class ColisService {
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
     return this.http.post(environment.baseUrl + "/colis/envoyercolis", colis, {headers: headers});
   }
+
+  arriverColis(colis: Colis, token: any): Observable<any>{
+    const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
+    return this.http.post(environment.baseUrl + "/colis/arrivercolis", colis, {headers: headers});
+  }
 }

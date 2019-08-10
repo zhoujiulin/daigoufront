@@ -6,6 +6,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../common/modal/modal/modal.component';
 import { Article } from '../domain/article';
 import { ColisService } from '../services/colis.service';
+import { EnumStatusCommande } from '../enum/enumstatuscommande';
+import { Colis } from '../domain/colis';
+import { EnumStatusArticle } from '../enum/enumstatusarticle';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-commandes',
@@ -32,7 +36,7 @@ export class CommandesComponent implements OnInit {
     this.commandeService.getCommandeStatusGroup(this.loginuser.token).subscribe(statusGroupList =>{
       this.statusGroupList = statusGroupList;
 
-      this.getCommandesByStatus("1,2,3,4");
+      this.initCommandesByStatus();
     })
 
     this.commandeService.getCommandeStatus(this.loginuser.token).subscribe(statusList =>{
@@ -41,8 +45,13 @@ export class CommandesComponent implements OnInit {
 
     this.colisService.getColisByStatus(1, this.loginuser.token).subscribe(colisList =>{
       this.colisList = colisList;
-      console.log("colis : " + this.colisList);
     })                
+  }
+
+  initCommandesByStatus(){
+    EnumStatusCommande.NEW_COMMANDE
+    let commandeNonEnvoyee: number[] = [EnumStatusCommande.NEW_COMMANDE, EnumStatusCommande.COMMANDE_PARTIE_PRET, EnumStatusCommande.COMMANDE_PARTIE_PRET_A_ENVOYER, EnumStatusCommande.COMMANDE_PRET_A_ENVOYER];
+    this.getCommandesByStatus(commandeNonEnvoyee);
   }
 
   getCommandesByStatus(status: any) {
@@ -122,5 +131,23 @@ export class CommandesComponent implements OnInit {
 
   compareColis(o1: Object, o2: Object): boolean {
       return o1 && o2 ? o1['idColis'] === o2['idColis'] : o1 === o2;
+  }
+
+  onlyShowPourCommandeNonEnvoyee(index: number){
+    if(index == EnumStatusCommande.NEW_COMMANDE 
+      || index == EnumStatusCommande.COMMANDE_PARTIE_PRET 
+      || index == EnumStatusCommande.COMMANDE_PARTIE_PRET_A_ENVOYER
+      || index == EnumStatusCommande.COMMANDE_PRET_A_ENVOYER){
+        return true;
+    }else{
+      return false;
+    }
+  }
+
+  changeColis(article: Article, ngModelSelectColis: NgModel){
+    ngModelSelectColis.control.markAsTouched();
+    if(article.colis != null && article.statusArticle != null && article.statusArticle.index == EnumStatusArticle.PREPARE_PARTIE){
+      const modalRef  = this.modal.openModal("Avertissement", "", "Confirmer");
+    }
   }
 }

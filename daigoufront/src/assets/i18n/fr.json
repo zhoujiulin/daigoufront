@@ -6,7 +6,7 @@
         "nom": "Nom",
         "prenom": "Prenom",
         "email": "Email",
-        "telephone": "Numéro de téléphone",
+        "telephone": "Téléphone",
         "nomWechat": "Nom Wechat",
         "nomLivraison": "Nom de livraison",
         "adresse": "Adresse"
@@ -41,7 +41,6 @@
     "colis": {
         "colis": "Colis",
         "nomColis": "Nom du colis"
-
     },
     "message": {
       "confirmPasswordInegal": "La confirmation de mot de passe n'est pas pareil que mot de passe"
@@ -57,6 +56,7 @@
         "edit": "Editer",
         "cancel": "Annuler",
         "dateEnvoyer": "Date d'envoie",
+        "dateArriver": "Date d'arrive",
         "commentaire": "Commentaire",
         "envoyer": "Envoyer",
         "arriver": "Arriver"

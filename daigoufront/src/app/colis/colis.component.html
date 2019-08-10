@@ -25,9 +25,6 @@
             <option value="{{status.index}}" *ngFor="let status of statusList" style="font-weight: bold">
               {{status.value}}
             </option>
-            <!--<option value="{{status.key}}" *ngFor="let status of statusList | keyvalue" style="font-weight: bold">
-              {{status.value}}
-            </option>-->
         </select>
     </div>
   </div>
@@ -39,6 +36,7 @@
           <div class="row">
             <div class="col-3">
               <strong class="font-size-24">{{colis.nameColis}}</strong>
+              <strong *ngIf="colis.articles.length > 0" class="margin-left-10 ">({{colis.articles.length}})</strong>
             </div>
             <div class="col-6">
               {{colis.commentaireColis}}
@@ -53,23 +51,65 @@
         <div id="{{'colis' + colis.idColis}}" class="collapse">
           <div class="card-body">
             <div class="col">
+                <div class="row">
+                  <span *ngIf="colis.dateEnvoyer != null">
+                    {{'common.dateEnvoyer' | translate}}: 
+                    <strong>
+                      {{colis.dateEnvoyer.toLocaleString() | date:'dd/MM/yyyy HH:mm'}}
+                    </strong>
+                  </span>
+                  <span *ngIf="colis.dateArriver != null" class="margin-left-30">
+                    {{'common.dateArriver' | translate}}: 
+                    <strong>
+                      {{colis.dateArriver.toLocaleString() | date:'dd/MM/yyyy HH:mm'}}
+                    </strong>
+                  </span>
+                </div>
+            </div>
+            <div class="col">
               <div class="row">
-                <button type="button" *ngIf="colis.statusColis['index']==1" class="btn btn-danger" (click)="envoyerColis(colis)">{{'common.envoyer' | translate}}</button>
+                <button type="button" *ngIf="showBtnEnvoyer(colis)" class="btn btn-danger" (click)="envoyerColis(colis)">{{'common.envoyer' | translate}}</button>
               </div>
               <div class="row">
-                <button type="button" *ngIf="colis.statusColis['index']==2" class="btn btn-danger" (click)="envoyerColis(colis)">{{'common.arriver' | translate}}</button>
+                <button type="button" *ngIf="colis.statusColis['index']==2" class="btn btn-danger" (click)="arriverColis(colis)">{{'common.arriver' | translate}}</button>
               </div>
             </div>
-            <div class="col" *ngFor="let article of colis.articles">
+            <div class="col margin-top-20">
               <div class="row">
-                <span>
-                  <span>{{article.nameArticle}}</span>
-                  <span>{{article.countArticleAchete}}</span>
-                  <span>{{article.commande.client.nameWechat}}</span>               
-                  <span>{{article.commande.client.nameLivraison}}</span>
-                  <span>{{article.commande.client.telephone}}</span>
-                  <span>{{article.commande.client.adresse}}</span>
-                </span>
+                <table class="table">
+                  <thead>
+                    <tr class="row"> 
+                      <th class="col-3">{{'article.nomArticle' | translate}}</th>
+                      <th class="col-1">{{'article.count' | translate}}</th>
+                      <th class="col-2">{{'user.nomWechat' | translate}}</th>
+                      <th class="col-1">{{'user.nomLivraison' | translate}}</th>
+                      <th class="col-1">{{'user.telephone' | translate}}</th>
+                      <th class="col-4">{{'user.adresse' | translate}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="row" *ngFor="let article of colis.articles">
+                      <td class="col-3">
+                        <span>{{article.nameArticle}}</span>
+                      </td>
+                      <td class="col-1">
+                        <span>{{article.countArticleAchete}}</span>
+                      </td>
+                      <td class="col-2">
+                        <span>{{article.commande.client.nameWechat}}</span> 
+                      </td>
+                      <td class="col-1">
+                        <span>{{article.commande.client.nameLivraison}}</span>
+                      </td>
+                      <td class="col-1">
+                        <span>{{article.commande.client.telephone}}</span>
+                      </td>
+                      <td class="col-4">
+                        <span>{{article.commande.client.adresse}}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

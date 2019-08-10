@@ -1,0 +1,6 @@
+export enum EnumStatusColis {
+	COLIS_NON_ENVOYE = 1,
+    COLIS_ENVOYE_VERS_CHINE = 2,
+    COLIS_ARRIVE_EN_CHINE = 3,
+    COLIS_TERMINE = 4
+}
