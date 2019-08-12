@@ -43,7 +43,12 @@
         "nomColis": "Nom du colis"
     },
     "message": {
-      "confirmPasswordInegal": "La confirmation de mot de passe n'est pas pareil que mot de passe"
+      "confirmPasswordInegal": "La confirmation de mot de passe n'est pas pareil que mot de passe",
+      "confirmSendForArticlePreparePartie": "Vous êtes sûr que vous allez envoyer cet article?",
+      "confirmDelete": "Vous êtes sûr que vous allez supprimer?",
+      "confirmSend": "Vous êtes sûr que vous allez envoyer ce colis?",
+      "confirmArrive": "Vous êtes sûr que ce colis est arrivé?",
+      "nameArticleAlreadyExistes": "Nom d'article existé déjà"
     },
     "common": {
         "inscription": "Inscription",
@@ -59,6 +64,38 @@
         "dateArriver": "Date d'arrive",
         "commentaire": "Commentaire",
         "envoyer": "Envoyer",
-        "arriver": "Arriver"
+        "arriver": "Arriver",
+        "warning": "Avertissement",
+        "confirm": "Confirmer"
+    },
+    "enum": {
+        "article": {
+            "nonPrepare": "Non préparé",
+            "prepareUnePartie": "Préparé une partie",
+            "toutPrepare": "Tout préparé",
+            "nombreIncorrect": "Nombre incorrect"
+        },
+        "commande": {
+            "nouvelleCommande": "Nouvelle commande",
+            "partiePret": "Partie prêt",
+            "partiePretAEnvoyer": "Partie prêt à envoyer",
+            "commandePretAEnvoyer": "Commande prêt à envoyer",
+            "commandeSurLaRoute": "Commande sur la route",
+            "commandeManqueInfoClient": "Commande manque info client",
+            "commandePretADistribuer": "Commande prêt à distribuer",
+            "termine": "Terminé"
+        },
+        "commandeGroup": {
+            "commandeNonEnvoyee": "Commande non envoyée",
+            "commandeEnvoyeeSurLaRoute": "Commande envoyée sur la route",
+            "commandeArrivee": "Commande arrivée",
+            "commandeTerminee": "Commande terminée"
+        },
+        "colis": {
+            "colisNonEnvoye": "Colis non envoyé",
+            "colisEnvoyeVersChine": "Colis envoyé vers Chine",
+            "colisArriveEnChine": "Colis arrivé en Chine",
+            "colisTermine": "Colis terminé"
+        }
     }
 }

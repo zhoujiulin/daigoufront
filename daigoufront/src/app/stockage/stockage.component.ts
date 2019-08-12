@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { LoginAuthService } from '../login-auth.service';
 import { StockageService } from '../services/stockage.service';
 import { ArticleStockage } from '../domain/articlestockage';
-import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../common/modal/modal/modal.component';
 
@@ -81,7 +80,7 @@ export class StockageComponent implements OnInit {
         }
       })
     }else{
-      const modalRef  = this.modal.openModal("Avertissement", "Nom d'article existé déjà", "Ok");
+      const modalRef  = this.modal.openModal("common.warning", "message.nameArticleAlreadyExistes", "common.confirm");
       modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
         
       })

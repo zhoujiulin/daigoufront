@@ -7,11 +7,11 @@
       <div class="col-xs-6 col-md-4">
         <select class="form-control" (change)="getCommandesByStatus($event.target.value)">
             <option value="{{statusGroup.key}}" *ngFor="let statusGroup of statusGroupList | keyvalue" style="font-weight: bold">
-              {{statusGroup.value}}
+              {{statusGroup.value | translate}}
             </option>
             <option value="{{status.key}}" *ngFor="let status of statusList | keyvalue">
               <span *ngFor="let s of status.value | keyvalue">
-                {{s.key}}
+                {{s.key | translate}}
               </span>
             </option>
         </select>
@@ -24,12 +24,19 @@
       <div class="card-header" data-toggle="collapse" [attr.data-target]="'#commande' + commande.id">
         <div class="row">
           <div class="col">
-            <strong class="font-size-24">{{commande.client.nameWechat}}</strong>
+            <strong class="font-size-24">
+              <span *ngIf="commande.typeCommande.index == 1">
+                {{commande.client.nameWechat}}
+              </span>
+              <span *ngIf="commande.typeCommande.index == 2">
+                {{'stockage.stockage' | translate}}
+              </span>
+            </strong>  
           </div>
           <div class="col text-right">
             <span class="font-size-18">
               <strong [ngStyle]="{'color': commande.status.color}">
-                {{commande.status.value}}
+                {{commande.status.value | translate}}
               </strong>
             </span>
           </div>
@@ -38,37 +45,39 @@
       <div id="{{'commande' + commande.id}}" class="collapse">
         <div class="card-body">
           <div class="form-group">
-            <div class="row margin-bottom-15">
-              <div class="col-2">
-                <div class="row">
-                  <div class="col-4 text-right">{{'user.nomWechat' | translate}}: </div>
-                  <div class="col">
-                    <!--<input class="form-control" [(ngModel)]="commande.client.nameWechat" value="{{commande.client.nameWechat}}"/>-->
-                    <strong class="font-size-24">{{commande.client.nameWechat}}</strong>
+            <div *ngIf="commande.typeCommande.index == 1">
+              <div class="row margin-bottom-15">
+                <div class="col-2">
+                  <div class="row">
+                    <div class="col-4 text-right">{{'user.nomWechat' | translate}}: </div>
+                    <div class="col">
+                      <!--<input class="form-control" [(ngModel)]="commande.client.nameWechat" value="{{commande.client.nameWechat}}"/>-->
+                      <strong class="font-size-24">{{commande.client.nameWechat}}</strong>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-2">
-                <div class="row">
-                  <div class="col-4 text-right">{{'user.nomLivraison' | translate}}</div>
-                  <div class="col">
-                    <input class="form-control" [(ngModel)]="commande.client.nameLivraison" value="{{commande.client.nameLivraison}}"/>
+                <div class="col-2">
+                  <div class="row">
+                    <div class="col-4 text-right">{{'user.nomLivraison' | translate}}</div>
+                    <div class="col">
+                      <input class="form-control" [(ngModel)]="commande.client.nameLivraison" value="{{commande.client.nameLivraison}}"/>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-3">
-                <div class="row">
-                  <div class="col-3 text-right">{{'user.telephone' | translate}}</div>
-                  <div class="col">
-                    <input class="form-control" [(ngModel)]="commande.client.telephone" value="{{commande.client.telephone}}" intOnly/>
+                <div class="col-3">
+                  <div class="row">
+                    <div class="col-3 text-right">{{'user.telephone' | translate}}</div>
+                    <div class="col">
+                      <input class="form-control" [(ngModel)]="commande.client.telephone" value="{{commande.client.telephone}}" intOnly/>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-5">
-                <div class="row">
-                  <div class="col-2 text-right">{{'user.adresse' | translate}}</div>
-                  <div class="col">
-                    <input class="form-control" [(ngModel)]="commande.client.adresse" value="{{commande.client.adresse}}"/>
+                <div class="col-5">
+                  <div class="row">
+                    <div class="col-2 text-right">{{'user.adresse' | translate}}</div>
+                    <div class="col">
+                      <input class="form-control" [(ngModel)]="commande.client.adresse" value="{{commande.client.adresse}}"/>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -227,7 +236,7 @@
                       <div *ngIf="article.statusArticle != null">
                         <span>{{'article.statusArticle' | translate}}: </span>
                         <span class="font-size-18 margin-left-10">
-                          <strong [ngStyle]="{'color': article.statusArticle.color}">{{article.statusArticle.value}}</strong>
+                          <strong [ngStyle]="{'color': article.statusArticle.color}">{{article.statusArticle.value | translate}}</strong>
                         </span>
                       </div>
                     </div>
@@ -277,7 +286,6 @@
               </div>
             </div>
           </div>
-
         </div> 
       </div>
     </div>

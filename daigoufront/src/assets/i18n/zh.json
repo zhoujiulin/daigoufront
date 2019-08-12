@@ -43,7 +43,12 @@
         "nomColis": "包裹名"
     },
     "message": {
-      "confirmPasswordInegal": "密码不一致"
+      "confirmPasswordInegal": "密码不一致",
+      "confirmSendForArticlePreparePartie": "确定要邮寄这个货吗？",
+      "confirmDelete": "确定要删除吗？",
+      "confirmSend": "确定要发送这个包裹吗？",
+      "confirmArrive": "这个包裹确定到达了吗？",
+      "nameArticleAlreadyExistes": "包裹名已存在"
     },
     "common": {
         "inscription": "注册",
@@ -59,6 +64,38 @@
         "dateArriver": "国际包裹到达日期",
         "commentaire": "备注",
         "envoyer": "发送",
-        "arriver": "到达"
+        "arriver": "到达",
+        "warning": "警告",
+        "confirm": "确定"
+    },
+    "enum": {
+        "article": {
+            "nonPrepare": "还没买",
+            "prepareUnePartie": "已买一部分",
+            "toutPrepare": "货已备好",
+            "nombreIncorrect": "数量输入不对"
+        },
+        "commande": {
+            "nouvelleCommande": "新订单",
+            "partiePret": "已准备一部分",
+            "partiePretAEnvoyer": "已准备了待发的一部分",
+            "commandePretAEnvoyer": "订单待发",
+            "commandeSurLaRoute": "订单在路上",
+            "commandeManqueInfoClient": "缺少客户信息",
+            "commandePretADistribuer": "准备发送给客人",
+            "termine": "订单结束"
+        },
+        "commandeGroup": {
+            "commandeNonEnvoyee": "未发货订单",
+            "commandeEnvoyeeSurLaRoute": "在路上的订单",
+            "commandeArrivee": "已到达的订单",
+            "commandeTerminee": "已结束的订单"
+        },
+        "colis": {
+            "colisNonEnvoye": "未发货的包裹",
+            "colisEnvoyeVersChine": "正在发往中国的包裹",
+            "colisArriveEnChine": "已经到达中国的包裹",
+            "colisTermine": "已结束的包裹"
+        }
     }
   }

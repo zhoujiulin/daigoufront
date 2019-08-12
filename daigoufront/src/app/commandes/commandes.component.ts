@@ -6,10 +6,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../common/modal/modal/modal.component';
 import { Article } from '../domain/article';
 import { ColisService } from '../services/colis.service';
-import { EnumStatusCommande } from '../enum/enumstatuscommande';
-import { Colis } from '../domain/colis';
-import { EnumStatusArticle } from '../enum/enumstatusarticle';
+import { EnumStatusCommande } from '../common/enum/enumstatuscommande';
+import { EnumStatusArticle } from '../common/enum/enumstatusarticle';
 import { NgModel } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-commandes',
@@ -26,7 +26,7 @@ export class CommandesComponent implements OnInit {
   public commandes: any;
   public modal: any;
 
-  constructor(private authService: LoginAuthService, private commandeService: CommandeService, private colisService: ColisService, private modalService: NgbModal, private modalComponent: ModalComponent) {
+  constructor(private authService: LoginAuthService, private commandeService: CommandeService, private colisService: ColisService, private modalService: NgbModal, private modalComponent: ModalComponent, private translateService: TranslateService) {
     this.authService.isLoggedIn();
     this.loginuser = JSON.parse(localStorage.getItem('currentUser'));
     this.modal = modalComponent;
@@ -69,7 +69,7 @@ export class CommandesComponent implements OnInit {
   }
 
   supprimerCommandeConfirm(commande: Commande) {
-    const modalRef  = this.modal.openModal("Avertissement", "", "Supprimer");
+    const modalRef  = this.modal.openModal("common.warning", "message.confirmDelete", "common.delete");
 
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
       this.supprimerCommande(commande);
@@ -84,7 +84,7 @@ export class CommandesComponent implements OnInit {
   }
 
   supprimerArticleConfirm(article: Article, commande: Commande) {
-    const modalRef  = this.modal.openModal("Avertissement", "", "Supprimer");
+    const modalRef  = this.modal.openModal("common.warning", "message.confirmDelete", "common.delete");
 
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
       this.supprimerArticle(article, commande);
@@ -147,7 +147,7 @@ export class CommandesComponent implements OnInit {
   changeColis(article: Article, ngModelSelectColis: NgModel){
     ngModelSelectColis.control.markAsTouched();
     if(article.colis != null && article.statusArticle != null && article.statusArticle.index == EnumStatusArticle.PREPARE_PARTIE){
-      const modalRef  = this.modal.openModal("Avertissement", "", "Confirmer");
+      const modalRef  = this.modal.openModal("common.warning", "message.confirmSendForArticlePreparePartie", "common.confirm");
     }
   }
 }

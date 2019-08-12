@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Injectable, Output, EventEmitter } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ngbd-modal-content',
@@ -14,7 +15,7 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
       <p>{{message}}</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary" (click)="activeModal.close('Close click')">Annuler</button>
+      <button type="button" class="btn btn-outline-secondary" (click)="activeModal.close('Close click')">{{btnCancel}}</button>
       <button type="button" class="btn btn-danger" (click)="passBack()">{{btnText}}</button>
     </div>
   `
@@ -23,6 +24,7 @@ export class NgbdModalContent {
   @Input() title;
   @Input() message;
   @Input() btnText;
+  @Input() btnCancel;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   
   constructor(public activeModal: NgbActiveModal) {}
@@ -42,7 +44,7 @@ export class NgbdModalContent {
 @Injectable()
 export class ModalComponent implements OnInit {
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, public translateService: TranslateService) { }
 
   public content = NgbdModalContent;
 
@@ -52,9 +54,10 @@ export class ModalComponent implements OnInit {
 
   openModal(title: string, message: string, btnText: string) {
     const modalRef = this.modalService.open(NgbdModalContent);
-    modalRef.componentInstance.title = title;
-    modalRef.componentInstance.message = message;
-    modalRef.componentInstance.btnText = btnText;
+    modalRef.componentInstance.title = this.translateService.instant(title);
+    modalRef.componentInstance.message = this.translateService.instant(message);;
+    modalRef.componentInstance.btnText = this.translateService.instant(btnText);
+    modalRef.componentInstance.btnCancel = this.translateService.instant("common.cancel");
 
     return modalRef;
   }

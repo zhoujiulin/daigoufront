@@ -23,7 +23,7 @@
     <div class="row">
         <select class="form-control width-c40 col-center-block" (change)="getColisByStatus($event.target.value)" [(ngModel)]="statusColisSelect">
             <option value="{{status.index}}" *ngFor="let status of statusList" style="font-weight: bold">
-              {{status.value}}
+              {{status.value | translate}}
             </option>
         </select>
     </div>
@@ -43,7 +43,7 @@
             </div>
             <div class="col-3 text-right">
               <span class="font-size-18 margin-left-10">
-                <strong>{{colis.statusColis.value}}</strong>
+                <strong>{{colis.statusColis.value | translate}}</strong>
               </span>
             </div>
           </div>
