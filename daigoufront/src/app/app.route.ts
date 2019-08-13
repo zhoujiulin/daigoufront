@@ -1,15 +1,15 @@
 import {Routes} from '@angular/router';
-import {HomeComponent} from './home/home.component';
-import {InscriptionComponent} from './inscription/inscription.component';
-import {LoginComponent} from './login/login.component';
-import {UserdashboardComponent} from './userdashboard/userdashboard.component';
-import {AdmindashboardComponent} from './admindashboard/admindashboard.component';
-import {CreationCommandeComponent} from './creation-commande/creation-commande.component';
+import {HomeComponent} from './components/home/home.component';
+import {InscriptionComponent} from './components/inscription/inscription.component';
+import {LoginComponent} from './components/login/login.component';
+import {UserdashboardComponent} from './components/userdashboard/userdashboard.component';
+import {AdmindashboardComponent} from './components/admindashboard/admindashboard.component';
+import {CreationCommandeComponent} from './components/creation-commande/creation-commande.component';
 import {AuthGuard} from './auth.guard';
-import {CommandesComponent} from './commandes/commandes.component';
-import { ArticlemodeleComponent } from './articlemodele/articlemodele.component';
-import { StockageComponent } from './stockage/stockage.component';
-import { ColisComponent } from './colis/colis.component';
+import {CommandesComponent} from './components/commandes/commandes.component';
+import { ArticlemodeleComponent } from './components/articlemodele/articlemodele.component';
+import { StockageComponent } from './components/stockage/stockage.component';
+import { ColisComponent } from './components/colis/colis.component';
 
 export const ROUTES: Routes = [
     { path: 'home', component: HomeComponent},

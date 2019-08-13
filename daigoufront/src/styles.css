@@ -21,6 +21,10 @@
     margin-top: 20px;
 }
 
+.margin-top-40 {
+    margin-top: 40px;
+}
+
 .margin-bottom-10 {
     margin-bottom: 10px;
 }
@@ -85,6 +89,11 @@
     font-size: 15px;
 }
 
-.margin-top-40 {
-    margin-top: 40px;
+.roundedRectangle{
+    margin: 15px;
+    padding: 3px 5px 3px 15px;
+	background: #f7f5f5;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 10px;
 }

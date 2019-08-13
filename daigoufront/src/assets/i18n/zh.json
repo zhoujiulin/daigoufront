@@ -48,7 +48,8 @@
       "confirmDelete": "确定要删除吗？",
       "confirmSend": "确定要发送这个包裹吗？",
       "confirmArrive": "这个包裹确定到达了吗？",
-      "nameArticleAlreadyExistes": "包裹名已存在"
+      "nameArticleAlreadyExistes": "包裹名已存在",
+      "addFromStockage": "从囤货中添加货"
     },
     "common": {
         "inscription": "注册",
@@ -66,14 +67,22 @@
         "envoyer": "发送",
         "arriver": "到达",
         "warning": "警告",
-        "confirm": "确定"
+        "confirm": "确定",
+        "stockage": "囤货"
     },
     "enum": {
         "article": {
-            "nonPrepare": "还没买",
-            "prepareUnePartie": "已买一部分",
-            "toutPrepare": "货已备好",
-            "nombreIncorrect": "数量输入不对"
+            "status": {
+                "nonPrepare": "还没买",
+                "prepareUnePartie": "已买一部分",
+                "toutPrepare": "货已备好",
+                "stockage": "囤货",
+                "nombreIncorrect": "数量输入不对"
+            },
+            "type": {
+                "articleClient": "客人的货",
+                "articleStockage": "囤货"
+            } 
         },
         "commande": {
             "nouvelleCommande": "新订单",

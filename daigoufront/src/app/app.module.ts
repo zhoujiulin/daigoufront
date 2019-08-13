@@ -8,29 +8,29 @@ import { AuthGuard } from './auth.guard';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 
 import { HttpClient, HttpClientModule } from "@angular/common/http";
-import { InscriptionComponent } from './inscription/inscription.component';
-import { UserdashboardComponent } from './userdashboard/userdashboard.component';
-import { HomeComponent } from './home/home.component';
-import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
+import { InscriptionComponent } from './components/inscription/inscription.component';
+import { UserdashboardComponent } from './components/userdashboard/userdashboard.component';
+import { HomeComponent } from './components/home/home.component';
+import { AdmindashboardComponent } from './components/admindashboard/admindashboard.component';
 
 import { UserService } from './user.service';
 import { LoginAuthService } from './login-auth.service';
-import { CommandesComponent } from './commandes/commandes.component';
+import { CommandesComponent } from './components/commandes/commandes.component';
 import { CommandeService } from './services/commande.service';
-import { CreationCommandeComponent } from './creation-commande/creation-commande.component';
+import { CreationCommandeComponent } from './components/creation-commande/creation-commande.component';
 import { IntOnlyDirective } from './common/intonly-directive';
 import { NumberOnlyDirective } from './common/numberonly-directive';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent, NgbdModalContent } from './common/modal/modal/modal.component';
-import { ArticlemodeleComponent } from './articlemodele/articlemodele.component';
-import { StockageComponent } from './stockage/stockage.component';
+import { ArticlemodeleComponent } from './components/articlemodele/articlemodele.component';
+import { StockageComponent } from './components/stockage/stockage.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HashLocationStrategy, LocationStrategy, CommonModule } from '@angular/common';
-import { ColisComponent } from './colis/colis.component';
+import { ColisComponent } from './components/colis/colis.component';
 
 export function createTranslateHttpLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

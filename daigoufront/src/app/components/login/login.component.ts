@@ -1,7 +1,7 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { UserService } from '../user.service';
+import { UserService } from '../../user.service';
 import { Router } from '@angular/router';
-import { LoginAuthService } from '../login-auth.service';
+import { LoginAuthService } from '../../login-auth.service';
 
 @Component({
   selector: 'app-login',

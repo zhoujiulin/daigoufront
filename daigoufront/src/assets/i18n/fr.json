@@ -48,7 +48,8 @@
       "confirmDelete": "Vous êtes sûr que vous allez supprimer?",
       "confirmSend": "Vous êtes sûr que vous allez envoyer ce colis?",
       "confirmArrive": "Vous êtes sûr que ce colis est arrivé?",
-      "nameArticleAlreadyExistes": "Nom d'article existé déjà"
+      "nameArticleAlreadyExistes": "Nom d'article existé déjà",
+      "addFromStockage": "Ajouter un article à partir de stockage"
     },
     "common": {
         "inscription": "Inscription",
@@ -66,14 +67,22 @@
         "envoyer": "Envoyer",
         "arriver": "Arriver",
         "warning": "Avertissement",
-        "confirm": "Confirmer"
+        "confirm": "Confirmer",
+        "stockage": "Stockage"
     },
     "enum": {
         "article": {
-            "nonPrepare": "Non préparé",
-            "prepareUnePartie": "Préparé une partie",
-            "toutPrepare": "Tout préparé",
-            "nombreIncorrect": "Nombre incorrect"
+            "status": {
+                "nonPrepare": "Non préparé",
+                "prepareUnePartie": "Préparé une partie",
+                "toutPrepare": "Tout préparé",
+                "stockage": "Stockage",
+                "nombreIncorrect": "Nombre incorrect"
+            },
+            "type": {
+                "articleClient": "Article pour client",
+                "articleStockage": "Article pour stockage"
+            } 
         },
         "commande": {
             "nouvelleCommande": "Nouvelle commande",

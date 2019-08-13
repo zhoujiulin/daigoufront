@@ -1,13 +1,13 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { LoginAuthService } from '../login-auth.service';
-import { CommandeService } from '../services/commande.service';
-import { Commande } from '../domain/commande';
+import { LoginAuthService } from '../../login-auth.service';
+import { CommandeService } from '../../services/commande.service';
+import { Commande } from '../../domain/commande';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent } from '../common/modal/modal/modal.component';
-import { Article } from '../domain/article';
-import { ColisService } from '../services/colis.service';
-import { EnumStatusCommande } from '../common/enum/enumstatuscommande';
-import { EnumStatusArticle } from '../common/enum/enumstatusarticle';
+import { ModalComponent } from '../../common/modal/modal/modal.component';
+import { Article } from '../../domain/article';
+import { ColisService } from '../../services/colis.service';
+import { EnumStatusCommande } from '../../common/enum/enumstatuscommande';
+import { EnumStatusArticle } from '../../common/enum/enumstatusarticle';
 import { NgModel } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 

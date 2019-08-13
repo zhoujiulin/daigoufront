@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginAuthService } from '../login-auth.service';
-import { StockageService } from '../services/stockage.service';
-import { ArticleStockage } from '../domain/articlestockage';
+import { LoginAuthService } from '../../login-auth.service';
+import { StockageService } from '../../services/stockage.service';
+import { ArticleStockage } from '../../domain/articlestockage';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent } from '../common/modal/modal/modal.component';
+import { ModalComponent } from '../../common/modal/modal/modal.component';
 
 @Component({
   selector: 'app-stockage',

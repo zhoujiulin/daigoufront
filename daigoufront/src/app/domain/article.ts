@@ -8,10 +8,13 @@ export class Article {
     priceVente : number;
     count : number;
     countArticleAchete : number;
-    countArticleFromStockage : number;
+    countArticleFromStockageFrance : number;
+    countArticleFromStockageChine : number;
+    countArticleFromStockageEnRoute : number;
     statusArticle : any;
     colis : Colis;
     commande : Commande;
+    typeArticle : any;
 
     constructor() {
 

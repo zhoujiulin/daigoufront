@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginAuthService } from '../login-auth.service';
+import { LoginAuthService } from '../../login-auth.service';
 import { Router } from '@angular/router';
-import { CommandeService } from '../services/commande.service';
+import { CommandeService } from '../../services/commande.service';
 import { FormBuilder, FormArray, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { Commande } from '../domain/commande';
+import { Commande } from '../../domain/commande';
 
 @Component({
   selector: 'app-creation-commande',
@@ -46,7 +46,8 @@ export class CreationCommandeComponent implements OnInit {
       priceAchat :[''],
       priceVente :[''],
       count :['', Validators.required],
-      statusArticle :['1']
+      statusArticle :['1'],
+      typeArticle :['1']
     });
   } 
 
