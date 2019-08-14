@@ -4,7 +4,7 @@
   </div>
   <div class="col-12">
       <div class="row">
-        <div class="form-group col-4">
+        <div class="form-group col-6">
           <label>
               {{'article.nomArticle' | translate}}
           </label>
@@ -18,23 +18,14 @@
         </div>
         <div class="form-group col-2">
           <label>
-              {{'article.countStockageFrance' | translate}}
+              {{'article.countStockageFranceAvailable' | translate}}
           </label>
-          <input type="text" class="form-control" [(ngModel)]="createArticleStockage.countStockageFrance" intOnly/>
+          <input type="text" class="form-control" [(ngModel)]="createArticleStockage.countStockageFranceAvailable" intOnly/>
         </div>
-        <div class="form-group col-2">
-          <label>
-              {{'article.countStockageChine' | translate}}
-          </label>
-          <input type="text" class="form-control" [(ngModel)]="createArticleStockage.countStockageChine" intOnly/>
-        </div>
-        <div class="form-group col-2">
-          <label>
-              {{'article.countStockageRoute' | translate}}
-          </label>
-          <input type="text" class="form-control" [(ngModel)]="createArticleStockage.countStockageEnRoute" intOnly/>
-        </div>
-        <div class="form-group col-1">
+        <input type="hidden" class="form-control" [(ngModel)]="createArticleStockage.countStockageFranceColis"/>
+        <input type="hidden" class="form-control" [(ngModel)]="createArticleStockage.countStockageEnRoute"/>
+        <input type="hidden" class="form-control" [(ngModel)]="createArticleStockage.countStockageChine"/>
+        <div class="form-group col">
             <button type="submit" class="btn btn-primary" [disabled]="!validatorBtnCreate(createArticleStockage)" (click)="creationArticleStockage(createArticleStockage)">{{'common.create' | translate}}</button>
         </div>
       </div>
@@ -49,9 +40,10 @@
         <tr class="row"> 
           <th class="col-3">{{'article.nomArticle' | translate}}</th>
           <th class="col-1">{{'article.prixAchat' | translate}}</th>
-          <th class="col-2">{{'article.countStockageFrance' | translate}}</th>
-          <th class="col-2">{{'article.countStockageChine' | translate}}</th>
-          <th class="col-2">{{'article.countStockageRoute' | translate}}</th>
+          <th class="col-2">{{'article.countStockageFranceAvailable' | translate}}</th>
+          <th class="col-2">{{'article.countStockageFranceColis' | translate}}</th>
+          <th class="col-1">{{'article.countStockageRoute' | translate}}</th>
+          <th class="col-1">{{'article.countStockageChine' | translate}}</th>
           <th class="col-2"></th>
         </tr>
       </thead>
@@ -59,24 +51,29 @@
         <tr class="row" *ngFor="let stockage of stockages">
           <td class="col-3" [hidden]="stockage.isOnEdit">{{stockage.nameArticleStockage}}</td>
           <td class="col-1" [hidden]="stockage.isOnEdit">{{stockage.priceAchatStockage}}</td>
-          <td class="col-2" [hidden]="stockage.isOnEdit">{{stockage.countStockageFrance}}</td>
-          <td class="col-2" [hidden]="stockage.isOnEdit">{{stockage.countStockageChine}}</td>
-          <td class="col-2" [hidden]="stockage.isOnEdit">{{stockage.countStockageEnRoute}}</td>
+          <td class="col-2" [hidden]="stockage.isOnEdit">{{stockage.countStockageFranceAvailable}}</td>
+          <td class="col-2" [hidden]="stockage.isOnEdit">{{stockage.countStockageFranceColis}}</td>
+          <td class="col-1" [hidden]="stockage.isOnEdit">{{stockage.countStockageEnRoute}}</td>
+          <td class="col-1" [hidden]="stockage.isOnEdit">{{stockage.countStockageChine}}</td>
 
          <td class="col-3" [hidden]="!stockage.isOnEdit">
             <input class="form-control" [hidden]="true" [(ngModel)]="stockage.idArticleStockage" value="{{stockage.idArticleStockage}}"/>
-            <input class="form-control" [(ngModel)]="stockage.nameArticleStockage" value="{{stockage.nameArticleStockage}}"/>
+            <!--<input class="form-control" [(ngModel)]="stockage.nameArticleStockage" value="{{stockage.nameArticleStockage}}"/>-->
+            {{stockage.nameArticleStockage}}
           </td>
           <td class="col-1" [hidden]="!stockage.isOnEdit">
             <input class="form-control" [(ngModel)]="stockage.priceAchatStockage" value="{{stockage.priceAchatStockage}}"/>
           </td>
           <td class="col-2" [hidden]="!stockage.isOnEdit">
-            <input class="form-control" [(ngModel)]="stockage.countStockageEnFrance" value="{{stockage.countStockageEnFrance}}"/>
+            <input class="form-control" [(ngModel)]="stockage.countStockageFranceAvailable" value="{{stockage.countStockageFranceAvailable}}"/>
           </td>
           <td class="col-2" [hidden]="!stockage.isOnEdit">
+            <input class="form-control" [(ngModel)]="stockage.countStockageFranceColis" value="{{stockage.countStockageFranceColis}}"/>
+          </td>
+          <td class="col-1" [hidden]="!stockage.isOnEdit">
             <input class="form-control" [(ngModel)]="stockage.countStockageChine" value="{{stockage.countStockageChine}}"/>
           </td>
-          <td class="col-2" [hidden]="!stockage.isOnEdit">
+          <td class="col-1" [hidden]="!stockage.isOnEdit">
             <input class="form-control" [(ngModel)]="stockage.countStockageEnRoute" value="{{stockage.countStockageEnRoute}}"/>
           </td>
           <td class="col-2">

@@ -3,7 +3,8 @@ export class ArticleStockage {
     nameArticleStockage : String;
     priceAchatStockage : number;
     countStockageChine : number;
-    countStockageFrance : number;
+    countStockageFranceColis : number;
+    countStockageFranceAvailable: number;
     countStockageEnRoute : number;
     count : number;
     isOnEdit : boolean;

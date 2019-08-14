@@ -31,10 +31,11 @@ export class StockageComponent implements OnInit {
 
   creationArticleStockage(articleStockage: ArticleStockage) {
     this.stockageService.createArticleStockage(articleStockage, this.loginuser.token).subscribe(stockage =>{
-      //this.stockages.push(stockage);
       this.stockageService.getAllStockage(this.loginuser.token).subscribe(stockages =>{
         this.stockages = stockages;
       });
+
+      this.createArticleStockage = new ArticleStockage();
     })
   }
 
@@ -53,7 +54,8 @@ export class StockageComponent implements OnInit {
     this.stockageService.getArticleStockageById(articleStockage.idArticleStockage, this.loginuser.token).subscribe(stockage =>{
       articleStockage.countStockageChine = stockage['countStockageChine'];
       articleStockage.countStockageEnRoute = stockage['countStockageEnRoute'];
-      articleStockage.countStockageFrance = stockage['countStockageFrance'];
+      articleStockage.countStockageFranceAvailable = stockage['countStockageFranceAvailable'];
+      articleStockage.countStockageFranceColis = stockage['countStockageFranceColis'];
       articleStockage.nameArticleStockage = stockage['nameArticleStockage'];
       articleStockage.priceAchatStockage = stockage['priceAchatStockage'];
     });
@@ -92,7 +94,7 @@ export class StockageComponent implements OnInit {
     if(articlestockage.nameArticleStockage == null || articlestockage.nameArticleStockage == ""){
       isEnabled = false;
     }
-    if(articlestockage.countStockageChine == 0 && articlestockage.countStockageEnRoute == 0 && articlestockage.countStockageFrance == 0){
+    if(articlestockage.countStockageFranceAvailable == null || articlestockage.countStockageFranceAvailable == 0){
       isEnabled = false;
     }
     return isEnabled;

@@ -9,6 +9,7 @@ import { StockageService } from 'src/app/services/stockage.service';
 import { ArticleStockage } from 'src/app/domain/articlestockage';
 import { Article } from 'src/app/domain/article';
 import { EnumTypeCommande } from 'src/app/common/enum/enumtypecommande';
+import { EnumTypeArticle } from 'src/app/common/enum/enumtypearticle';
 
 @Component({
   selector: 'app-colis',
@@ -17,13 +18,12 @@ import { EnumTypeCommande } from 'src/app/common/enum/enumtypecommande';
 })
 export class ColisComponent implements OnInit {
   public loginuser: any = {};
-  public newColis: Colis = new Colis();
   public statusList: any;
   public colisList: any;
   public statusColisSelect: any;
   public modal: any;
   public stockageList: ArticleStockage[];
-  public newArticleStockage: any;
+  public newArticleStockage: ArticleStockage  = new ArticleStockage();
   public countArticleStockage: number;
   public countForCreateArticleStockageSelected: Array<number>;
 
@@ -44,12 +44,10 @@ export class ColisComponent implements OnInit {
     this.getAllStockage();
   }
   
-  creationColis(colis: Colis){
-    this.colisService.creationColis(colis, this.loginuser.token).subscribe(colis =>{
-      this.newColis = new Colis();
-
-      this.getColisByStatus(1);
-      this.statusColisSelect = 1;
+  creationNewColis(){
+    this.colisService.creationNewColis(this.loginuser.token).subscribe(colis =>{
+      this.getColisByStatus(EnumStatusColis.COLIS_NON_ENVOYE);
+      this.statusColisSelect = EnumStatusColis.COLIS_NON_ENVOYE;
     })
   }
 
@@ -82,14 +80,6 @@ export class ColisComponent implements OnInit {
     })
   }
 
-  showBtnEnvoyer(colis: Colis){
-    let isShow: boolean = false;
-    if(colis.articles.length > 0 && colis.statusColis.index == EnumStatusColis.COLIS_NON_ENVOYE){
-      isShow = true;
-    }
-    return isShow;
-  }
-
   getAllStockage(){
     this.stockageService.getAllStockage(this.loginuser.token).subscribe(stockageList =>{
       this.stockageList = stockageList;
@@ -97,15 +87,19 @@ export class ColisComponent implements OnInit {
   }
 
   putArticleStockageInColis(newArticleStockage, countArticleStockage, idColis){
-    console.log("countArticleStockage : " + countArticleStockage);
     this.colisService.putArticleStockageInColis(newArticleStockage, countArticleStockage, idColis, this.loginuser.token).subscribe(article =>{
       for(let colis of this.colisList) {
         if(colis.idColis == idColis){
+          colis.articles = colis.articles.filter(a => a.nameArticle !== newArticleStockage.nameArticleStockage);
           colis.articles.push(article)
         }
       }
 
-      newArticleStockage = null;
+      newArticleStockage.countStockageFranceAvailable = newArticleStockage.countStockageFranceAvailable - countArticleStockage;
+      newArticleStockage.countStockageFranceColis = newArticleStockage.countStockageFranceColis + countArticleStockage;
+
+      this.newArticleStockage = new ArticleStockage();
+      this.changetCreateArticleStockageSelected(this.newArticleStockage); 
     })
   }
 
@@ -113,7 +107,7 @@ export class ColisComponent implements OnInit {
     this.countForCreateArticleStockageSelected = [];
 
     if(stockage != null){
-      for(let i = 1; i <= stockage.countStockageFrance; i++){
+      for(let i = 1; i <= stockage.countStockageFranceAvailable; i++){
         this.countForCreateArticleStockageSelected.push(i);
       }
     }
@@ -121,7 +115,6 @@ export class ColisComponent implements OnInit {
 
   removeArticleStockage(article: Article, index: number, colis: Colis){
     const modalRef  = this.modal.openModal("common.warning", "message.confirmDelete", "common.delete");
-    console.log(article);
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
       this.colisService.deleteArticleFromColis(article, this.loginuser.token).subscribe(res =>{
         for(let a of colis.articles) {
@@ -133,11 +126,55 @@ export class ColisComponent implements OnInit {
     })
   }
 
+  deleteColis(colis: Colis){
+    this.colisService.deleteColis(colis.idColis, this.loginuser.token).subscribe(res =>{
+      this.colisList = this.colisList.filter(c => c.idColis !== colis.idColis);
+    })
+  }
+
   isAllowAddFromStockage(){
     if(this.newArticleStockage == null){
       return false;
     }else{
       return true;
     }
+  }
+
+  showBtnEnvoyer(colis: Colis){
+    let isShow: boolean = false;
+    if(colis.articles.length > 0 && colis.statusColis.index == EnumStatusColis.COLIS_NON_ENVOYE){
+      isShow = true;
+    }
+    return isShow;
+  }
+
+  showBtnDelete(colis: Colis){
+    let isShow = false;
+    if((colis.articles == null || colis.articles.length == 0) && colis.statusColis.index == EnumStatusColis.COLIS_NON_ENVOYE){
+      isShow = true;
+    }
+    return isShow;
+  }
+
+  isColisNonEnvoyee(colis: Colis){
+    if(colis.statusColis.index == EnumStatusColis.COLIS_NON_ENVOYE){
+      return true;
+    }
+    return false;
+  }
+
+  isShowArticleStockage(colis: Colis){
+    let isShowArticleStockage = false;
+    for(let article of colis.articles){
+      if(article.typeArticle.index == EnumTypeArticle.ARTICLE_STOCKAGE){
+        isShowArticleStockage = true;
+      }
+    }
+
+    if(colis.statusColis.index == EnumStatusColis.COLIS_NON_ENVOYE){
+      isShowArticleStockage = true;
+    }
+
+    return isShowArticleStockage;
   }
 }

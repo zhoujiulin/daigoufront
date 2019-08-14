@@ -24,7 +24,8 @@
         "article": "Article",
         "addArticle": "Ajouter un article",
         "countAchete": "Qté acheté",
-        "countStockageFrance": "Qté de stockage en France",
+        "countStockageFranceAvailable": "Qté de stockage en France dispo",
+        "countStockageFranceColis": "Qté de stockage en France dans colis",
         "countStockageChine": "Qté de stockage en Chine",
         "countStockageRoute": "Qté de stockage en route",
         "statusArticle": "Status d'article",
@@ -49,7 +50,8 @@
       "confirmSend": "Vous êtes sûr que vous allez envoyer ce colis?",
       "confirmArrive": "Vous êtes sûr que ce colis est arrivé?",
       "nameArticleAlreadyExistes": "Nom d'article existé déjà",
-      "addFromStockage": "Ajouter un article à partir de stockage"
+      "addFromStockage": "Ajouter un article à partir de stockage",
+      "createNewColis": "Créer un nouveau colis"
     },
     "common": {
         "inscription": "Inscription",

@@ -24,7 +24,8 @@
         "article": "货物",
         "addArticle": "增加货物",
         "countAchete": "已购数量",
-        "countStockageFrance": "法国库存数量",
+        "countStockageFranceAvailable": "可用的法国库存数量",
+        "countStockageFranceColis": "已被加入包裹中的法国库存数量",
         "countStockageChine": "中国库存数量",
         "countStockageRoute": "路上库存数量",
         "statusArticle": "备货状态",
@@ -49,7 +50,8 @@
       "confirmSend": "确定要发送这个包裹吗？",
       "confirmArrive": "这个包裹确定到达了吗？",
       "nameArticleAlreadyExistes": "包裹名已存在",
-      "addFromStockage": "从囤货中添加货"
+      "addFromStockage": "从囤货中添加货",
+      "createNewColis": "创建一个新包裹"
     },
     "common": {
         "inscription": "注册",

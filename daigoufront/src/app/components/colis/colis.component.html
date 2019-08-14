@@ -1,31 +1,15 @@
 <div class="col-sm-12">
   <div class="container">
-    <div class="col-12">
-      <div class="row">
-          <div class="form-group col-3">
-            <label>
-                {{'colis.nomColis' | translate}}
-            </label>
-            <input class="form-control" [(ngModel)]="newColis.nameColis"/>
-          </div>
-          <div class="form-group col-7">
-            <label>
-                {{'common.commentaire' | translate}}
-            </label>
-            <input class="form-control" [(ngModel)]="newColis.commentaireColis"/>
-          </div>
-          <div class="form-group col-1">
-              <button type="submit" class="btn btn-primary" [disabled]="" (click)="creationColis(newColis)">{{'common.create' | translate}}</button>
-          </div>
-      </div>
-    </div>
-
     <div class="row">
         <select class="form-control width-c40 col-center-block" (change)="getColisByStatus($event.target.value)" [(ngModel)]="statusColisSelect">
             <option value="{{status.index}}" *ngFor="let status of statusList" style="font-weight: bold">
               {{status.value | translate}}
             </option>
         </select>
+
+        <div class="form-group col">
+          <button type="submit" class="btn btn-primary" (click)="creationNewColis()">{{'message.createNewColis' | translate}}</button>
+        </div>
     </div>
   </div>
 
@@ -50,35 +34,33 @@
         </div>
         <div id="{{'colis' + colis.idColis}}" class="collapse">
           <div class="card-body">
-            <div class="col">
-              <div class="row">
-                <span *ngIf="colis.dateEnvoyer != null">
-                  {{'common.dateEnvoyer' | translate}}: 
-                  <strong>
-                    {{colis.dateEnvoyer.toLocaleString() | date:'dd/MM/yyyy HH:mm'}}
-                  </strong>
-                </span>
-                <span *ngIf="colis.dateArriver != null" class="margin-left-30">
-                  {{'common.dateArriver' | translate}}: 
-                  <strong>
-                    {{colis.dateArriver.toLocaleString() | date:'dd/MM/yyyy HH:mm'}}
-                  </strong>
-                </span>
-              </div>
-            </div>
-
             <div class="col margin-bottom-15">
               <div class="row">
-                <button type="button" *ngIf="showBtnEnvoyer(colis)" class="btn btn-danger" (click)="envoyerColis(colis)">{{'common.envoyer' | translate}}</button>
-              </div>
-              <div class="row">
-                <button type="button" *ngIf="colis.statusColis['index']==2" class="btn btn-danger" (click)="arriverColis(colis)">{{'common.arriver' | translate}}</button>
+                <div class="col-2">
+                  <button type="button" *ngIf="showBtnDelete(colis)" class="btn btn-danger" (click)="deleteColis(colis)">{{'common.delete' | translate}}</button>
+                  <button type="button" *ngIf="showBtnEnvoyer(colis)" class="btn btn-danger" (click)="envoyerColis(colis)">{{'common.envoyer' | translate}}</button>
+                  <button type="button" *ngIf="colis.statusColis['index']==2" class="btn btn-danger" (click)="arriverColis(colis)">{{'common.arriver' | translate}}</button>
+                </div>
+                <div class="col">
+                  <span *ngIf="colis.dateEnvoyer != null">
+                    {{'common.dateEnvoyer' | translate}}: 
+                    <strong>
+                      {{colis.dateEnvoyer.toLocaleString() | date:'dd/MM/yyyy HH:mm'}}
+                    </strong>
+                  </span>
+                  <span *ngIf="colis.dateArriver != null" class="margin-left-30">
+                    {{'common.dateArriver' | translate}}: 
+                    <strong>
+                      {{colis.dateArriver.toLocaleString() | date:'dd/MM/yyyy HH:mm'}}
+                    </strong>
+                  </span>
+                </div>
               </div>
             </div>
 
-            <div class="border border-secondary">
+            <div class="border border-secondary" [hidden]="!isShowArticleStockage(colis)">
               <div class="margin-10">
-                <div class="col">
+                <div class="col" [hidden]="!isColisNonEnvoyee(colis)">
                   <div class="row">
                     <div class="col-3">
                       <strong>
@@ -97,7 +79,7 @@
                             {{'article.count' | translate}}: 
                           </div>
                           <div class="col">
-                            <select class="form-control width-c40" [(ngModel)]="countArticleStockage">
+                            <select class="form-control" [(ngModel)]="countArticleStockage">
                               <option *ngFor="let count of countForCreateArticleStockageSelected" [ngValue]="count">{{count}}</option>
                             </select>
                           </div>
@@ -117,9 +99,9 @@
                     <div *ngIf="article.typeArticle.index == 2">
                       <div class="roundedRectangle">
                         <strong class="font-size-18">
-                          {{article.nameArticle}} x {{article.countArticleFromStockageFrance}}
+                          {{article.nameArticle}} x {{article.count}}
                         </strong>
-                        <a class="btn" (click)="removeArticleStockage(article, i, colis)"><i style="font-size:24px" class="fa">&#xf00d;</i></a>
+                        <a class="btn" [hidden]="!isColisNonEnvoyee(colis)" (click)="removeArticleStockage(article, i, colis)"><i style="font-size:24px" class="fa">&#xf00d;</i></a>
                       </div>
                     </div>
                   </div>

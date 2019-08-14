@@ -10,6 +10,8 @@ import { EnumStatusCommande } from '../../common/enum/enumstatuscommande';
 import { EnumStatusArticle } from '../../common/enum/enumstatusarticle';
 import { NgModel } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { EnumTypeArticle } from 'src/app/common/enum/enumtypearticle';
+import { EnumTypeCommande } from 'src/app/common/enum/enumtypecommande';
 
 @Component({
   selector: 'app-commandes',
@@ -102,7 +104,8 @@ export class CommandesComponent implements OnInit {
   addArticle(commande: Commande){
     for(let c of this.commandes) {
       if(c.id == commande.id){
-        c.articles.push(new Article());
+        let article = new Article();
+        c.articles.push(article);
       }
     }
   }
@@ -149,5 +152,19 @@ export class CommandesComponent implements OnInit {
     if(article.colis != null && article.statusArticle != null && article.statusArticle.index == EnumStatusArticle.PREPARE_PARTIE){
       const modalRef  = this.modal.openModal("common.warning", "message.confirmSendForArticlePreparePartie", "common.confirm");
     }
+  }
+
+  isArticleStockage(article: Article){
+    if(article.typeArticle.index == EnumTypeArticle.ARTICLE_STOCKAGE){
+      return true;
+    }
+    return false;
+  }
+
+  isCommandeStockage(commande: Commande){
+    if(commande.typeCommande.index == EnumTypeCommande.COMMANDE_STOCKAGE){
+      return true;
+    }
+    return false;
   }
 }

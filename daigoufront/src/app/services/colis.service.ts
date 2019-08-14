@@ -15,9 +15,9 @@ export class ColisService {
     this.http = http;
   }
 
-  creationColis(colis: Colis, token: any): Observable<any>{
+  creationNewColis(token: any): Observable<any>{
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
-    return this.http.post(environment.baseUrl + "/colis/create", colis, {headers: headers});
+    return this.http.post(environment.baseUrl + "/colis/createcolis", new Colis(), {headers: headers});
   }
 
   getColisStatus(token: any): Observable<any>{
@@ -50,5 +50,11 @@ export class ColisService {
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
     let url = environment.baseUrl + "/colis/deletearticlefromcolis"; 
     return this.http.post(url, article, {headers: headers});
+  }
+
+  deleteColis(idColis: number, token: any){
+    const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
+    let url = environment.baseUrl + "/colis/deletecolis/" + idColis; 
+    return this.http.delete(url, {headers: headers});
   }
 }
