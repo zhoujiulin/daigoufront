@@ -63,32 +63,38 @@
 
         <div formArrayName="articles">
           <div *ngFor="let article of creationCommandeFrom.get('articles')['controls']; let i = index;">
-              <div class="margin-bottom-15"> 
-                <div class="form-group" [formGroupName]="i">
-                  <div class="row">
-                    <div class="col-1">
-                        <span color="light">{{'article.article' | translate}} #{{ i + 1 }}</span>
-                    </div>
-                    <div class="col-5">
-                      <input type="text" class="form-control" formControlName="nameArticle"/>
-                    </div>
-                    <div class="col-2">
-                      <input type="text" class="form-control" formControlName="priceAchat" numberOnly/>
-                    </div>
-                    <div class="col-2">
-                      <input type="text" class="form-control" formControlName="priceVente" numberOnly/>
-                    </div>
-                    <div class="col-1">
-                      <input type="text" class="form-control" formControlName="count" intOnly/>
-                    </div>
-                    <div class="col-1">
-                      <a class="btn" (click)="removeArticle(i)"><i style="font-size:24px" class="fa">&#xf00d;</i></a>
-                    </div>
-                    <input type="hidden" class="form-control" formControlName="statusArticle"/>
-                    <input type="hidden" class="form-control" formControlName="typeArticle"/>
+            <div class="margin-bottom-15"> 
+              <div class="form-group" [formGroupName]="i">
+                <div class="row">
+                  <div class="col-1">
+                      <span color="light">{{'article.article' | translate}} #{{ i + 1 }}</span>
                   </div>
+                  <div class="col-5">
+                    <!--<input type="text" class="form-control" formControlName="nameArticle"/>-->
+                    <input type="text" class="form-control" formControlName="nameArticle" placeholder="" matInput [matAutocomplete]="auto">
+                    <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option.nameArticleStockage}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </div>
+                  <div class="col-2">
+                    <input type="text" class="form-control" formControlName="priceAchat" numberOnly/>
+                  </div>
+                  <div class="col-2">
+                    <input type="text" class="form-control" formControlName="priceVente" numberOnly/>
+                  </div>
+                  <div class="col-1">
+                    <input type="text" class="form-control" formControlName="count" intOnly/>
+                  </div>
+                  <div class="col-1">
+                    <a class="btn" (click)="removeArticle(i)"><i style="font-size:24px" class="fa">&#xf00d;</i></a>
+                  </div>
+                  <input type="hidden" class="form-control" formControlName="statusArticle"/>
+                  <input type="hidden" class="form-control" formControlName="typeArticle"/>
                 </div>
               </div>
+            </div>
           </div>
 
           <div class="margin-bottom-15">

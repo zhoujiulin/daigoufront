@@ -12,6 +12,7 @@ import { NgModel } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { EnumTypeArticle } from 'src/app/common/enum/enumtypearticle';
 import { EnumTypeCommande } from 'src/app/common/enum/enumtypecommande';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-commandes',

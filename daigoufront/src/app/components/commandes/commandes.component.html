@@ -6,14 +6,14 @@
       </div>
       <div class="col-xs-6 col-md-4">
         <select class="form-control" (change)="getCommandesByStatus($event.target.value)">
-            <option value="{{statusGroup.key}}" *ngFor="let statusGroup of statusGroupList | keyvalue" style="font-weight: bold">
-              {{statusGroup.value | translate}}
-            </option>
-            <option value="{{status.key}}" *ngFor="let status of statusList | keyvalue">
-              <span *ngFor="let s of status.value | keyvalue">
-                {{s.key | translate}}
-              </span>
-            </option>
+          <option value="{{statusGroup.key}}" *ngFor="let statusGroup of statusGroupList | keyvalue" style="font-weight: bold">
+            {{statusGroup.value | translate}}
+          </option>
+          <option value="{{status.key}}" *ngFor="let status of statusList | keyvalue">
+            <span *ngFor="let s of status.value | keyvalue">
+              {{s.key | translate}}
+            </span>
+          </option>
         </select>
       </div>
     </div>

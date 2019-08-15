@@ -1,9 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { LoginAuthService } from '../../login-auth.service';
 import { Router } from '@angular/router';
 import { CommandeService } from '../../services/commande.service';
-import { FormBuilder, FormArray, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { Commande } from '../../domain/commande';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { StockageService } from 'src/app/services/stockage.service';
+import { ArticleStockage } from 'src/app/domain/articlestockage';
+import { MatAutocompleteTrigger } from '@angular/material';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-creation-commande',
@@ -11,14 +17,18 @@ import { Commande } from '../../domain/commande';
   styleUrls: ['./creation-commande.component.css']
 })
 export class CreationCommandeComponent implements OnInit {
+  filteredOptions: Observable<ArticleStockage[]>;
 
   public creationCommandeFrom: FormGroup;
   public loginuser: any = {};
   public commande: Commande;
   public typeCommandeList = new Map<number, string>();
   public isCommandePourClient = true;
+  public articleStockageList: ArticleStockage[];
 
-  constructor(private router: Router, private commandeService: CommandeService, private authService: LoginAuthService, private _FB: FormBuilder) { 
+  constructor(private router: Router, private commandeService: CommandeService, private stockageService: StockageService, 
+    private authService: LoginAuthService, private _FB: FormBuilder, @Inject(DOCUMENT) private _document: Document) {  
+
     this.authService.isLoggedIn();
     this.loginuser = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -37,6 +47,7 @@ export class CreationCommandeComponent implements OnInit {
 
   ngOnInit() {
     this.getTypeCommande();
+    this.getAllStockage();
   }
 
   initArticleFields() : FormGroup
@@ -54,6 +65,8 @@ export class CreationCommandeComponent implements OnInit {
   addArticle() {
     const articles = <FormArray>this.creationCommandeFrom.controls.articles;
     articles.push(this.initArticleFields());
+
+    this.initNameArticleFilter();
   }
 
   removeArticle(i: number) {
@@ -85,5 +98,43 @@ export class CreationCommandeComponent implements OnInit {
       nameWechatControl.setValidators([Validators.required]);
       nameWechatControl.updateValueAndValidity();
     }
+  }
+
+  getAllStockage(){
+    this.stockageService.getAllStockage(this.loginuser.token).subscribe((response) => {
+      this.articleStockageList = response;
+
+      let articlesFormArray = <FormArray>this.creationCommandeFrom.controls.articles;
+      let nameArticleFormControl = <FormControl>articlesFormArray.controls[0].get("nameArticle");
+
+      this.initNameArticleFilter();
+    })
+  }
+
+  initNameArticleFilter(){
+    let articlesFormArray = <FormArray>this.creationCommandeFrom.controls.articles;
+    for(let control of articlesFormArray.controls){
+      let nameArticleFormControl = control.get("nameArticle");
+
+      this.filteredOptions = nameArticleFormControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(name => name ? this._filter(name) : this.articleStockageList.slice())
+      );
+    }
+  }
+    
+  displayFn(articleStockage?: ArticleStockage): string | undefined {
+    return articleStockage ? articleStockage.nameArticleStockage: undefined;
+  }
+
+  private _filter(value: string): ArticleStockage[] {
+    const filterValue = this._normalizeValue(value);
+    return this.articleStockageList.filter(a => this._normalizeValue(a.nameArticleStockage).includes(filterValue));
+  }
+
+  private _normalizeValue(value: string): string {
+    return value.toLowerCase().replace(/\s/g, '');
   }
 }

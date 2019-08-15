@@ -1,6 +1,6 @@
 export class ArticleStockage {
     idArticleStockage : number;
-    nameArticleStockage : String;
+    nameArticleStockage : string;
     priceAchatStockage : number;
     countStockageChine : number;
     countStockageFranceColis : number;

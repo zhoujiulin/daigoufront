@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './common/module/material.module';
 
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.route';
@@ -68,7 +70,9 @@ export function createTranslateHttpLoader(http: HttpClient) {
         useFactory: (createTranslateHttpLoader),
         deps: [HttpClient]
       }
-    })
+    }),
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [
     UserService,
