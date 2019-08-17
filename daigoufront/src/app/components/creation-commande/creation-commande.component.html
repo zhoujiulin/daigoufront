@@ -73,7 +73,7 @@
                     <!--<input type="text" class="form-control" formControlName="nameArticle"/>-->
                     <input type="text" class="form-control" formControlName="nameArticle" placeholder="" matInput [matAutocomplete]="auto">
                     <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn">
-                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.nameArticleStockage">
                         {{option.nameArticleStockage}}
                       </mat-option>
                     </mat-autocomplete>

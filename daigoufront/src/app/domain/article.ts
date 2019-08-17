@@ -3,7 +3,7 @@ import { Commande } from './commande';
 
 export class Article {
     idArticle : number;
-    nameArticle : String;
+    nameArticle : string;
     priceAchat : number;
     priceVente : number;
     count : number;
@@ -15,6 +15,9 @@ export class Article {
     colis : Colis;
     commande : Commande;
     typeArticle : any;
+    countArticleFromStockageFranceSelectable : number[] = [];
+    countArticleFromStockageChineSelectable : number[] = [];
+    countArticleFromStockageEnRouteSelectable : number[] = [];
 
     constructor() {
 

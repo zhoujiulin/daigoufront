@@ -32,4 +32,9 @@ export class StockageService {
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
     return this.http.get(environment.baseUrl + "/stockage/getarticlestockage/" + id, {headers: headers});
   }
+
+  getArticleStockageByName(nameArticleStockage: string, token: any) {
+    const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
+    return this.http.get(environment.baseUrl + "/stockage/getarticlestockagebyname/" + nameArticleStockage, {headers: headers});
+  }
 }

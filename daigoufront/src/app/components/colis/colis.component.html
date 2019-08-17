@@ -2,9 +2,9 @@
   <div class="container">
     <div class="row">
         <select class="form-control width-c40 col-center-block" (change)="getColisByStatus($event.target.value)" [(ngModel)]="statusColisSelect">
-            <option value="{{status.index}}" *ngFor="let status of statusList" style="font-weight: bold">
-              {{status.value | translate}}
-            </option>
+          <option value="{{status.index}}" *ngFor="let status of statusList" style="font-weight: bold">
+            {{status.value | translate}}
+          </option>
         </select>
 
         <div class="form-group col">

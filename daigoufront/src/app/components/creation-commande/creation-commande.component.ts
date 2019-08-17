@@ -104,9 +104,6 @@ export class CreationCommandeComponent implements OnInit {
     this.stockageService.getAllStockage(this.loginuser.token).subscribe((response) => {
       this.articleStockageList = response;
 
-      let articlesFormArray = <FormArray>this.creationCommandeFrom.controls.articles;
-      let nameArticleFormControl = <FormControl>articlesFormArray.controls[0].get("nameArticle");
-
       this.initNameArticleFilter();
     })
   }
@@ -125,8 +122,8 @@ export class CreationCommandeComponent implements OnInit {
     }
   }
     
-  displayFn(articleStockage?: ArticleStockage): string | undefined {
-    return articleStockage ? articleStockage.nameArticleStockage: undefined;
+  displayFn(nameArticleStockage?: string): string | undefined {
+    return nameArticleStockage;
   }
 
   private _filter(value: string): ArticleStockage[] {
