@@ -11,10 +11,13 @@ export class Article {
     countArticleFromStockageFrance : number;
     countArticleFromStockageChine : number;
     countArticleFromStockageEnRoute : number;
-    statusArticle : any;
     colis : Colis;
     commande : Commande;
     typeArticle : any;
+    statusArticlePreparation : any;
+    statusArticle: any;
+
+    //dto
     countArticleFromStockageFranceSelectable : number[] = [];
     countArticleFromStockageChineSelectable : number[] = [];
     countArticleFromStockageEnRouteSelectable : number[] = [];

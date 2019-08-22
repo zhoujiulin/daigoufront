@@ -7,7 +7,7 @@ import { ModalComponent } from '../../common/modal/modal/modal.component';
 import { Article } from '../../domain/article';
 import { ColisService } from '../../services/colis.service';
 import { EnumStatusCommande } from '../../common/enum/enumstatuscommande';
-import { EnumStatusArticle } from '../../common/enum/enumstatusarticle';
+import { EnumStatusArticlePreparation } from '../../common/enum/enumstatusarticlepreparation';
 import { NgModel, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { EnumTypeArticle } from 'src/app/common/enum/enumtypearticle';
@@ -29,6 +29,7 @@ export class CommandesComponent implements OnInit {
   public statusGroupList = new Map<number[], string>();
   public commandes: any;
   public modal: any;
+  public statusCommandeSelect: any;
   
   public articleStockageList: ArticleStockage[];
   public filteredOptions: ArticleStockage[];
@@ -58,11 +59,14 @@ export class CommandesComponent implements OnInit {
     this.colisService.getColisByStatus(1, this.loginuser.token).subscribe(colisList =>{
       this.colisList = colisList;
     })  
+
+    this.statusCommandeSelect = [EnumStatusCommande.ERREUR_IN_COMMANDE, EnumStatusCommande.NEW_COMMANDE, EnumStatusCommande.COMMANDE_PARTIE_PRET, 
+      EnumStatusCommande.COMMANDE_PARTIE_PRET_A_ENVOYER, EnumStatusCommande.COMMANDE_PRET_A_ENVOYER];
   }
 
   initCommandesByStatus(){
     EnumStatusCommande.NEW_COMMANDE
-    let commandeNonEnvoyee: number[] = [EnumStatusCommande.NEW_COMMANDE, EnumStatusCommande.COMMANDE_PARTIE_PRET, EnumStatusCommande.COMMANDE_PARTIE_PRET_A_ENVOYER, EnumStatusCommande.COMMANDE_PRET_A_ENVOYER];
+    let commandeNonEnvoyee: number[] = [EnumStatusCommande.ERREUR_IN_COMMANDE, EnumStatusCommande.NEW_COMMANDE, EnumStatusCommande.COMMANDE_PARTIE_PRET, EnumStatusCommande.COMMANDE_PARTIE_PRET_A_ENVOYER, EnumStatusCommande.COMMANDE_PRET_A_ENVOYER];
     this.getCommandesByStatus(commandeNonEnvoyee);
   }
 
@@ -142,7 +146,7 @@ export class CommandesComponent implements OnInit {
 
   disabledSelectColis(article: Article) {
     let isDisabled = false;
-    if(article.statusArticle != null && (article.statusArticle['index']== 2 || article.statusArticle['index'] == 3)){
+    if(article.statusArticlePreparation != null && (article.statusArticlePreparation['index']== 2 || article.statusArticlePreparation['index'] == 3)){
       isDisabled = true;
     }
     return isDisabled;
@@ -160,7 +164,8 @@ export class CommandesComponent implements OnInit {
     if(index == EnumStatusCommande.NEW_COMMANDE 
       || index == EnumStatusCommande.COMMANDE_PARTIE_PRET 
       || index == EnumStatusCommande.COMMANDE_PARTIE_PRET_A_ENVOYER
-      || index == EnumStatusCommande.COMMANDE_PRET_A_ENVOYER){
+      || index == EnumStatusCommande.COMMANDE_PRET_A_ENVOYER
+      || index == EnumStatusCommande.ERREUR_IN_COMMANDE){
         return true;
     }else{
       return false;
@@ -169,7 +174,7 @@ export class CommandesComponent implements OnInit {
 
   changeColis(article: Article, ngModelSelectColis: NgModel){
     ngModelSelectColis.control.markAsTouched();
-    if(article.colis != null && article.statusArticle != null && article.statusArticle.index == EnumStatusArticle.PREPARE_PARTIE){
+    if(article.colis != null && article.statusArticlePreparation != null && article.statusArticlePreparation.index == EnumStatusArticlePreparation.PREPARE_PARTIE){
       this.modal.openModal("common.warning", "message.confirmSendForArticlePreparePartie", "common.confirm");
     }
   }
@@ -261,7 +266,7 @@ export class CommandesComponent implements OnInit {
         article.countArticleFromStockageChineSelectable = [];
       }
 
-      let countDispo = articleStockge['countStockageChine'];
+      let countDispo = articleStockge['countStockageChineAvailable'];
       let countSelected = this.countArticleStockageChineSelectedMap.get(name);
       if(countSelected == null){
         countSelected = 0;
@@ -283,7 +288,7 @@ export class CommandesComponent implements OnInit {
         article.countArticleFromStockageEnRouteSelectable = [];
       }
 
-      let countDispo = articleStockge['countStockageEnRoute'];
+      let countDispo = articleStockge['countStockageEnRouteAvailable'];
       let countSelected = this.countArticleStockageEnRouteSelectedMap.get(name);
       if(countSelected == null){
         countSelected = 0;

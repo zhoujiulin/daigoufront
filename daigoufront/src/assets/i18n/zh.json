@@ -5,7 +5,10 @@
         "confirmPassword": "确认密码",
         "nom": "姓",
         "prenom": "名",
-        "email": "邮箱",
+        "email": "邮箱"
+    },
+    "client": {
+        "client": "客户",
         "telephone": "电话",
         "nomWechat": "微信名",
         "nomLivraison": "收件人",
@@ -24,11 +27,16 @@
         "article": "货物",
         "addArticle": "增加货物",
         "countAchete": "已购数量",
+        "countDemande": "要求数量",
         "countStockageFranceAvailable": "可用的法国库存数量",
-        "countStockageFranceColis": "已被加入包裹中的法国库存数量",
+        "countStockageFranceReserve": "已被订的法国库存数量",
+        "countStockageFranceColis": "已被加入包裹的法国库存数量",
         "countStockageChine": "中国库存数量",
+        "countStockageChineAvailable": "可用的中国库存数量",
         "countStockageRoute": "路上库存数量",
-        "statusArticle": "备货状态",
+        "countStockageRouteAvailable": "可用的路上库存数量",
+        "statusArticlePreparation": "备货状态",
+        "statusArticle": "货物状态",
         "deleteArticle": "删除货品"
     },
     "articlemodele": {
@@ -51,7 +59,14 @@
       "confirmArrive": "这个包裹确定到达了吗？",
       "nameArticleAlreadyExistes": "包裹名已存在",
       "addFromStockage": "从囤货中添加货",
-      "createNewColis": "创建一个新包裹"
+      "createNewColis": "创建一个新包裹",
+      "article": {
+        "articleAchete": "需要买和已买的货",
+        "articleFromStockageEnRoute": "路上库存的货",
+        "articleFromStockageChine": "国内库存的货",
+        "descriptifCountArticleInClient": "*数量 = 已购数量 / 要求数量 ( 从库存添加的数量 )",
+        "confirmSendArticleToClient":"确认要向客户发货?"
+      }
     },
     "common": {
         "inscription": "注册",
@@ -59,6 +74,7 @@
         "deconnecter": "退出",
         "sinscrire": "注册",
         "create": "创建",
+        "add": "添加",
         "save": "保存",
         "delete": "删除",
         "edit": "修改",
@@ -74,7 +90,7 @@
     },
     "enum": {
         "article": {
-            "status": {
+            "statusPreparation": {
                 "nonPrepare": "还没买",
                 "prepareUnePartie": "已买一部分",
                 "toutPrepare": "货已备好",
@@ -84,9 +100,19 @@
             "type": {
                 "articleClient": "客人的货",
                 "articleStockage": "囤货"
-            } 
+            },
+            "status": {
+                "articleNonEnvoye": "未发货",
+                "articleEnvoyeSurLaRoute": "在路上的货",
+                "articleArriveEnChine": {
+                    "manqueInfoClient": "已到达的货(缺少客户地址)",
+                    "pretADistribuer": "已到达的货(可以邮寄)"
+                },
+                "articleTermine": "已结束的货"
+            }
         },
         "commande": {
+            "erreurInCommande": "订单有错误",
             "nouvelleCommande": "新订单",
             "partiePret": "已准备一部分",
             "partiePretAEnvoyer": "已准备了待发的一部分",
@@ -99,13 +125,13 @@
         "commandeGroup": {
             "commandeNonEnvoyee": "未发货订单",
             "commandeEnvoyeeSurLaRoute": "在路上的订单",
-            "commandeArrivee": "已到达的订单",
+            "commandeArrivee": "已到中国的订单",
             "commandeTerminee": "已结束的订单"
         },
         "colis": {
             "colisNonEnvoye": "未发货的包裹",
-            "colisEnvoyeVersChine": "正在发往中国的包裹",
-            "colisArriveEnChine": "已经到达中国的包裹",
+            "colisEnvoyeVersChine": "发往中国的包裹",
+            "colisArriveEnChine": "已到中国的包裹",
             "colisTermine": "已结束的包裹"
         }
     }

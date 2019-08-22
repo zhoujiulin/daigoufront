@@ -10,6 +10,7 @@ import {CommandesComponent} from './components/commandes/commandes.component';
 import { ArticlemodeleComponent } from './components/articlemodele/articlemodele.component';
 import { StockageComponent } from './components/stockage/stockage.component';
 import { ColisComponent } from './components/colis/colis.component';
+import { ClientComponent } from './components/client/client.component';
 
 export const ROUTES: Routes = [
     { path: 'home', component: HomeComponent},
@@ -22,5 +23,6 @@ export const ROUTES: Routes = [
     { path: 'articlemodele', component: ArticlemodeleComponent, canActivate: [AuthGuard]},
     { path: 'stockage', component: StockageComponent, canActivate: [AuthGuard]},
     { path: 'colis', component: ColisComponent, canActivate: [AuthGuard]},
+    { path: 'client', component: ClientComponent, canActivate: [AuthGuard]},
     { path: '*', pathMatch: 'full', redirectTo: 'home'}
 ];

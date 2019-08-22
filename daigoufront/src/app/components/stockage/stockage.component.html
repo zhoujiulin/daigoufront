@@ -40,46 +40,62 @@
         <tr class="row"> 
           <th class="col-3">{{'article.nomArticle' | translate}}</th>
           <th class="col-1">{{'article.prixAchat' | translate}}</th>
-          <th class="col-2">{{'article.countStockageFranceAvailable' | translate}}</th>
-          <th class="col-2">{{'article.countStockageFranceColis' | translate}}</th>
+          <th class="col-1">{{'article.countStockageFranceAvailable' | translate}}</th>
+          <th class="col-1">{{'article.countStockageFranceReserve' | translate}}</th>
+          <th class="col-1">{{'article.countStockageFranceColis' | translate}}</th>
+          <th class="col-1">{{'article.countStockageRouteAvailable' | translate}}</th>
           <th class="col-1">{{'article.countStockageRoute' | translate}}</th>
+          <th class="col-1">{{'article.countStockageChineAvailable' | translate}}</th>
           <th class="col-1">{{'article.countStockageChine' | translate}}</th>
-          <th class="col-2"></th>
+          <th class="col-1"></th>
         </tr>
       </thead>
       <tbody>
         <tr class="row" *ngFor="let stockage of stockages">
           <td class="col-3" [hidden]="stockage.isOnEdit">{{stockage.nameArticleStockage}}</td>
           <td class="col-1" [hidden]="stockage.isOnEdit">{{stockage.priceAchatStockage}}</td>
-          <td class="col-2" [hidden]="stockage.isOnEdit">{{stockage.countStockageFranceAvailable}}</td>
-          <td class="col-2" [hidden]="stockage.isOnEdit">{{stockage.countStockageFranceColis}}</td>
+          <td class="col-1" [hidden]="stockage.isOnEdit">{{stockage.countStockageFranceAvailable}}</td>
+          <td class="col-1" [hidden]="stockage.isOnEdit">{{stockage.countStockageFranceReserve}}</td>
+          <td class="col-1" [hidden]="stockage.isOnEdit">{{stockage.countStockageFranceColis}}</td>
+          <td class="col-1" [hidden]="stockage.isOnEdit">{{stockage.countStockageEnRouteAvailable}}</td>
           <td class="col-1" [hidden]="stockage.isOnEdit">{{stockage.countStockageEnRoute}}</td>
+          <td class="col-1" [hidden]="stockage.isOnEdit">{{stockage.countStockageChineAvailable}}</td>
           <td class="col-1" [hidden]="stockage.isOnEdit">{{stockage.countStockageChine}}</td>
 
          <td class="col-3" [hidden]="!stockage.isOnEdit">
             <input class="form-control" [hidden]="true" [(ngModel)]="stockage.idArticleStockage" value="{{stockage.idArticleStockage}}"/>
-            <!--<input class="form-control" [(ngModel)]="stockage.nameArticleStockage" value="{{stockage.nameArticleStockage}}"/>-->
             {{stockage.nameArticleStockage}}
           </td>
           <td class="col-1" [hidden]="!stockage.isOnEdit">
             <input class="form-control" [(ngModel)]="stockage.priceAchatStockage" value="{{stockage.priceAchatStockage}}"/>
           </td>
-          <td class="col-2" [hidden]="!stockage.isOnEdit">
+          <td class="col-1" [hidden]="!stockage.isOnEdit">
             <input class="form-control" [(ngModel)]="stockage.countStockageFranceAvailable" value="{{stockage.countStockageFranceAvailable}}"/>
           </td>
-          <td class="col-2" [hidden]="!stockage.isOnEdit">
+          <td class="col-1" [hidden]="!stockage.isOnEdit">
+            <input class="form-control" [(ngModel)]="stockage.countStockageFranceReserve" value="{{stockage.countStockageFranceReserve}}"/>
+          </td>
+          <td class="col-1" [hidden]="!stockage.isOnEdit">
             <input class="form-control" [(ngModel)]="stockage.countStockageFranceColis" value="{{stockage.countStockageFranceColis}}"/>
           </td>
           <td class="col-1" [hidden]="!stockage.isOnEdit">
-            <input class="form-control" [(ngModel)]="stockage.countStockageChine" value="{{stockage.countStockageChine}}"/>
+            <input class="form-control" [(ngModel)]="stockage.countStockageEnRouteAvailable" value="{{stockage.countStockageEnRouteAvailable}}"/>
           </td>
           <td class="col-1" [hidden]="!stockage.isOnEdit">
             <input class="form-control" [(ngModel)]="stockage.countStockageEnRoute" value="{{stockage.countStockageEnRoute}}"/>
           </td>
-          <td class="col-2">
-              <button class="btn btn-primary" [hidden]="stockage.isNotToEdit" (click)="editArticleStockage(stockage)">{{'common.edit' | translate}}</button>
-              <button class="btn btn-primary margin-right-10" [hidden]="!stockage.isOnEdit" (click)="saveArticleStockage(stockage)">{{'common.save' | translate}}</button>
-              <button class="btn btn-primary" [hidden]="!stockage.isOnEdit" (click)="cancelEditArticleStockage(stockage)">{{'common.cancel' | translate}}</button>
+          <td class="col-1" [hidden]="!stockage.isOnEdit">
+            <input class="form-control" [(ngModel)]="stockage.countStockageChineAvailable" value="{{stockage.countStockageChineAvailable}}"/>
+          </td>
+          <td class="col-1" [hidden]="!stockage.isOnEdit">
+            <input class="form-control" [(ngModel)]="stockage.countStockageChine" value="{{stockage.countStockageChine}}"/>
+          </td>
+          <td class="col-1">
+              <div class="row">
+                <button class="btn btn-primary float-right" [hidden]="stockage.isNotToEdit" (click)="editArticleStockage(stockage)">{{'common.edit' | translate}}</button>
+                <button class="btn btn-primary float-right margin-right-10" [hidden]="!stockage.isOnEdit" (click)="saveArticleStockage(stockage)">{{'common.save' | translate}}</button>
+                <button class="btn btn-primary float-right" [hidden]="!stockage.isOnEdit" (click)="cancelEditArticleStockage(stockage)">{{'common.cancel' | translate}}</button>
+              </div>
           </td>
         </tr>
       </tbody>

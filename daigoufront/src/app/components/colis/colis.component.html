@@ -20,7 +20,7 @@
           <div class="row">
             <div class="col-3">
               <strong class="font-size-24">{{colis.nameColis}}</strong>
-              <strong *ngIf="colis.articles.length > 0" class="margin-left-10 ">({{colis.articles.length}})</strong>
+              <strong *ngIf="colis.countArticleInColis > 0" class="margin-left-10 ">({{colis.countArticleInColis}})</strong>
             </div>
             <div class="col-6">
               {{colis.commentaireColis}}
@@ -86,8 +86,8 @@
                         </div>
                     </div>
                     <div class="col-1">
-                      <button type="submit" class="btn btn-primary" [disabled]="!isAllowAddFromStockage(newArticleStockage)" (click)="putArticleStockageInColis(newArticleStockage, countArticleStockage, colis.idColis)">
-                        {{'common.create' | translate}}
+                      <button type="submit" class="btn btn-primary" [disabled]="!isAllowAddFromStockage(newArticleStockage)" (click)="putArticleStockageInColis(newArticleStockage, countArticleStockage, colis)">
+                        {{'common.add' | translate}}
                       </button>
                     </div>
                   </div>
@@ -116,10 +116,10 @@
                     <tr class="row"> 
                       <th class="col-3">{{'article.nomArticle' | translate}}</th>
                       <th class="col-1">{{'article.count' | translate}}</th>
-                      <th class="col-2">{{'user.nomWechat' | translate}}</th>
-                      <th class="col-1">{{'user.nomLivraison' | translate}}</th>
-                      <th class="col-1">{{'user.telephone' | translate}}</th>
-                      <th class="col-4">{{'user.adresse' | translate}}</th>
+                      <th class="col-2">{{'client.nomWechat' | translate}}</th>
+                      <th class="col-1">{{'client.nomLivraison' | translate}}</th>
+                      <th class="col-1">{{'client.telephone' | translate}}</th>
+                      <th class="col-4">{{'client.adresse' | translate}}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -129,7 +129,7 @@
                           <span>{{article.nameArticle}}</span>
                         </td>
                         <td class="col-1">
-                          <span>{{article.countArticleAchete}}</span>
+                          <span>{{article.countArticleAchete + article.countArticleFromStockageFrance}}</span>
                         </td>
                         <td class="col-2">
                           <span>{{article.commande.client.nameWechat}}</span> 

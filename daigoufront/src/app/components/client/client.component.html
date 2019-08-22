@@ -1,0 +1,138 @@
+<div *ngFor="let client of clients">
+  <div class="col-12 margin-top-20">
+    <div class="card">
+      <div class="card-header" data-toggle="collapse" [attr.data-target]="'#client' + client.id">
+        <div class="row">
+          <div class="col">
+            <strong class="font-size-24">
+              {{client.nameWechat}} ( {{client.countArticlePrisTotal}} / {{client.countArticleTotal}} ) 
+            </strong>
+          </div>
+        </div>
+      </div>
+      <div id="{{'client' + client.id}}" class="collapse">
+        <div class="card-body">
+          <div class="col margin-bottom-15">
+            <span>
+              <strong>{{'message.article.articleAchete' | translate}}</strong>
+              <div class="row">
+                <strong class="text-color-red">{{'message.article.descriptifCountArticleInClient' | translate}}</strong>
+              </div>
+            </span>
+
+            <div class="row">
+              <table class="table">
+                <thead>
+                  <tr class="row"> 
+                    <th class="col-4">{{'article.nomArticle' | translate}}</th>
+                    <th class="col-1">*{{'article.count' | translate}}</th>
+                    <th class="col-1">{{'colis.colis' | translate}}</th>
+                    <th class="col-2">{{'article.statusArticlePreparation' | translate}}</th>
+                    <th class="col">{{'article.statusArticle' | translate}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="row" *ngFor="let articleAchete of client.articleAchetes"> 
+                    <td class="col-4">
+                      {{articleAchete.nameArticle}}
+                    </td>
+                    <td class="col-1">
+                      {{articleAchete.countArticleAchete}} / {{articleAchete.count}} ({{articleAchete.countArticleFromStockage}})
+                    </td>
+                    <td class="col-1">
+                      <strong *ngIf="articleAchete.colis != null">
+                        {{articleAchete.colis.nameColis}}
+                      </strong>
+                    </td>
+                    <td class="col-2">
+                      <strong [ngStyle]="{'color': articleAchete.statusArticlePreparation.color}">
+                        {{articleAchete.statusArticlePreparation.value | translate}}
+                      </strong>
+                    </td>
+                    <td class="col">
+                      <strong [ngStyle]="{'color': articleAchete.statusArticle.color}">
+                        {{articleAchete.statusArticle.value | translate}}
+                      </strong>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="col margin-bottom-15">
+            <span>
+              <strong>{{'message.article.articleFromStockageEnRoute' | translate}}</strong>
+            </span>
+
+            <div class="row">
+              <table class="table">
+                <thead>
+                  <tr class="row"> 
+                    <th class="col-5">{{'article.nomArticle' | translate}}</th>
+                    <th class="col-2">{{'article.count' | translate}}</th>
+                    <th class="col-1">{{'colis.colis' | translate}}</th>
+                    <th class="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="row" *ngFor="let article of client.articleFromStockageEnRoute"> 
+                    <td class="col-5">
+                      {{article.nameArticle}}
+                    </td>
+                    <td class="col-2">
+                      {{article.countArticleFromStockageEnRoute}}
+                    </td>
+                    <td class="col-1">
+                      <strong *ngIf="article.colis != null">
+                        {{article.colis.nameColis}}
+                      </strong>
+                    </td>
+                    <td class="col">
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="col margin-bottom-15">
+            <span>
+              <strong>{{'message.article.articleFromStockageChine' | translate}}</strong>
+            </span>
+
+            <div class="row">
+              <table class="table">
+                <thead>
+                  <tr class="row"> 
+                    <th class="col-5">{{'article.nomArticle' | translate}}</th>
+                    <th class="col-2">{{'article.count' | translate}}</th>
+                    <th class="col"></th>
+                    <th class="col-1"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="row" *ngFor="let article of client.articleFromStockageChine"> 
+                    <td class="col-5">
+                      {{article.nameArticle}}
+                    </td>
+                    <td class="col-2">
+                      {{article.countArticleFromStockageChine}}
+                    </td>
+                    <td class="col">
+
+                    </td>
+                    <td class="col-1">
+                      <button type="button" (click)="terminerArticle(article)" class="btn btn-primary float-right">{{'common.envoyer' | translate}}</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

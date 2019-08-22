@@ -36,11 +36,10 @@ export class ColisComponent implements OnInit {
   ngOnInit() {
     this.colisService.getColisStatus(this.loginuser.token).subscribe(statusList =>{
       this.statusList = statusList;
-      console.log(statusList);
     })
 
-    this.getColisByStatus(1);
     this.statusColisSelect = EnumStatusColis.COLIS_NON_ENVOYE;
+    this.getColisByStatus(this.statusColisSelect);
     this.getAllStockage();
   }
   
@@ -53,9 +52,26 @@ export class ColisComponent implements OnInit {
 
   getColisByStatus(status: any){
     this.colisService.getColisByStatus(status, this.loginuser.token).subscribe(colisList =>{
-      console.log(colisList);
       this.colisList = colisList;
+
+      for(let colis of this.colisList){
+        this.initCountArticleColis(colis);
+      }
+
+      console.log(this.colisList);
     })
+  }
+
+  initCountArticleColis(colis: Colis){
+    colis.countArticleInColis = 0;
+    for(let article of colis.articles){
+      if(article.typeArticle.index == EnumTypeArticle.ARTICLE_CLIENT){
+        colis.countArticleInColis = Number(colis.countArticleInColis) + Number(article.countArticleAchete) + Number(article.countArticleFromStockageFrance);
+      }
+      if(article.typeArticle.index == EnumTypeArticle.ARTICLE_STOCKAGE){
+        colis.countArticleInColis = Number(colis.countArticleInColis) + Number(article.count);
+      }
+    }
   }
 
   envoyerColis(colis: Colis){
@@ -86,12 +102,12 @@ export class ColisComponent implements OnInit {
     })
   }
 
-  putArticleStockageInColis(newArticleStockage, countArticleStockage, idColis){
-    this.colisService.putArticleStockageInColis(newArticleStockage, countArticleStockage, idColis, this.loginuser.token).subscribe(article =>{
-      for(let colis of this.colisList) {
-        if(colis.idColis == idColis){
-          colis.articles = colis.articles.filter(a => a.nameArticle !== newArticleStockage.nameArticleStockage);
-          colis.articles.push(article)
+  putArticleStockageInColis(newArticleStockage, countArticleStockage, colis){
+    this.colisService.putArticleStockageInColis(newArticleStockage, countArticleStockage, colis.idColis, this.loginuser.token).subscribe(article =>{
+      for(let c of this.colisList) {
+        if(c.idColis == colis.idColis){
+          c.articles = c.articles.filter(a => (a.nameArticle !== newArticleStockage.nameArticleStockage || a.typeArticle.index == EnumTypeArticle.ARTICLE_CLIENT));
+          c.articles.push(article)
         }
       }
 
@@ -100,6 +116,8 @@ export class ColisComponent implements OnInit {
 
       this.newArticleStockage = new ArticleStockage();
       this.changetCreateArticleStockageSelected(this.newArticleStockage); 
+
+      this.initCountArticleColis(colis);
     })
   }
 

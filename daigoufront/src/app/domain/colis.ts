@@ -8,6 +8,7 @@ export class Colis {
     dateEnvoyer: Date;
     dateArriver: Date;
     articles : Article[];
+    countArticleInColis : number;
 
     constructor() {
 

@@ -1,4 +1,4 @@
-export enum EnumStatusArticle {
+export enum EnumStatusArticlePreparation {
     NON_PREPARE = 1, 
     PREPARE_PARTIE = 2,
     PREPARE_TOUT = 3,

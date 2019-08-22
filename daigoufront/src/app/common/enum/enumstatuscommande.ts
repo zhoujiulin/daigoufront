@@ -1,4 +1,5 @@
 export enum EnumStatusCommande {
+    ERREUR_IN_COMMANDE = 0,
     NEW_COMMANDE = 1,
     COMMANDE_PARTIE_PRET = 2,
     COMMANDE_PARTIE_PRET_A_ENVOYER = 3,

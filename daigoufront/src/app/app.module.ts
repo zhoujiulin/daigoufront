@@ -18,10 +18,7 @@ import { UserdashboardComponent } from './components/userdashboard/userdashboard
 import { HomeComponent } from './components/home/home.component';
 import { AdmindashboardComponent } from './components/admindashboard/admindashboard.component';
 
-import { UserService } from './user.service';
-import { LoginAuthService } from './login-auth.service';
 import { CommandesComponent } from './components/commandes/commandes.component';
-import { CommandeService } from './services/commande.service';
 import { CreationCommandeComponent } from './components/creation-commande/creation-commande.component';
 import { IntOnlyDirective } from './common/intonly-directive';
 import { NumberOnlyDirective } from './common/numberonly-directive';
@@ -31,8 +28,15 @@ import { ArticlemodeleComponent } from './components/articlemodele/articlemodele
 import { StockageComponent } from './components/stockage/stockage.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HashLocationStrategy, LocationStrategy, CommonModule } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ColisComponent } from './components/colis/colis.component';
+import { ClientComponent } from './components/client/client.component';
+
+import { UserService } from './user.service';
+import { LoginAuthService } from './login-auth.service';
+import { CommandeService } from './services/commande.service';
+import { ClientService } from './services/client.service';
+import { ArticleService } from './services/article.service';
 
 export function createTranslateHttpLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -54,7 +58,8 @@ export function createTranslateHttpLoader(http: HttpClient) {
     NgbdModalContent,
     ArticlemodeleComponent,
     StockageComponent,
-    ColisComponent
+    ColisComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,
@@ -79,6 +84,8 @@ export function createTranslateHttpLoader(http: HttpClient) {
     AuthGuard,
     LoginAuthService,
     CommandeService,
+    ClientService,
+    ArticleService,
     NgbActiveModal,
     ModalComponent,
     {provide: LocationStrategy, useClass: HashLocationStrategy}

@@ -2,10 +2,13 @@ export class ArticleStockage {
     idArticleStockage : number;
     nameArticleStockage : string;
     priceAchatStockage : number;
-    countStockageChine : number;
+    countStockageFranceReserve : number;
     countStockageFranceColis : number;
     countStockageFranceAvailable: number;
     countStockageEnRoute : number;
+    countStockageEnRouteAvailable: number;
+    countStockageChine : number;
+    countStockageChineAvailable: number;
     count : number;
     isOnEdit : boolean;
     isNotToEdit : boolean;

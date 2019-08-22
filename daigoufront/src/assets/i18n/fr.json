@@ -5,7 +5,10 @@
         "confirmPassword": "Confirmation de mot de passe",
         "nom": "Nom",
         "prenom": "Prenom",
-        "email": "Email",
+        "email": "Email"
+    },
+    "client": {
+        "client": "Client",
         "telephone": "Téléphone",
         "nomWechat": "Nom Wechat",
         "nomLivraison": "Nom de livraison",
@@ -24,10 +27,15 @@
         "article": "Article",
         "addArticle": "Ajouter un article",
         "countAchete": "Qté acheté",
-        "countStockageFranceAvailable": "Qté de stockage en France dispo",
+        "countDemande": "Qté demandé",
+        "countStockageFranceAvailable": "Qté de stockage en France",
+        "countStockageFranceReserve": "Qté de stockage en France réservée",
         "countStockageFranceColis": "Qté de stockage en France dans colis",
         "countStockageChine": "Qté de stockage en Chine",
+        "countStockageChineAvailable": "Qté de stockage en Chine dispo",
         "countStockageRoute": "Qté de stockage en route",
+        "countStockageRouteAvailable": "Qté de stockage en route dispo",
+        "statusArticlePreparation": "Status de prépartion",
         "statusArticle": "Status d'article",
         "deleteArticle": "Supprimer l'article"
     },
@@ -51,7 +59,14 @@
       "confirmArrive": "Vous êtes sûr que ce colis est arrivé?",
       "nameArticleAlreadyExistes": "Nom d'article existé déjà",
       "addFromStockage": "Ajouter un article à partir de stockage",
-      "createNewColis": "Créer un nouveau colis"
+      "createNewColis": "Créer un nouveau colis",
+      "article": {
+        "articleAchete": "Articles achetés ou à acheter",
+        "articleFromStockageEnRoute": "Articles à partir de stockge en route",
+        "articleFromStockageChine": "Articles à partir de stockge en Chine",
+        "descriptifCountArticleInClient": "*Qté = Qté achtée / Qté demandée ( Qté à partir de stockage)",
+        "confirmSendArticleToClient":"Vous voulez vraiment envoyer cet article au client?"
+      }
     },
     "common": {
         "inscription": "Inscription",
@@ -59,6 +74,7 @@
         "deconnecter": "Déconnecter",
         "sinscrire": "S'inscrire",
         "create": "Créer",
+        "add": "Ajouter",
         "save": "Sauvegarder",
         "delete": "Supprimer",
         "edit": "Editer",
@@ -74,7 +90,7 @@
     },
     "enum": {
         "article": {
-            "status": {
+            "statusPreparation": {
                 "nonPrepare": "Non préparé",
                 "prepareUnePartie": "Préparé une partie",
                 "toutPrepare": "Tout préparé",
@@ -84,9 +100,19 @@
             "type": {
                 "articleClient": "Article pour client",
                 "articleStockage": "Article pour stockage"
-            } 
+            },
+            "status": {
+                "articleNonEnvoye": "Article non envoyée",
+                "articleEnvoyeSurLaRoute": "Article envoyée sur la route",
+                "articleArriveEnChine": {
+                    "manqueInfoClient": "Article arrivée(Manque info client)",
+                    "pretADistribuer": "Article arrivée(Prêt à distribuer)"
+                },
+                "articleTermine": "Article terminée"
+            }
         },
         "commande": {
+            "erreurInCommande": "Erreur dans commande",
             "nouvelleCommande": "Nouvelle commande",
             "partiePret": "Partie prêt",
             "partiePretAEnvoyer": "Partie prêt à envoyer",

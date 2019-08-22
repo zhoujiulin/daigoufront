@@ -5,7 +5,7 @@
         <a class="nav-link float-right" href="" [routerLink]="['/creationcommande']" routerLinkActive="router-link-active">{{'commande.createCommande' | translate}}</a>
       </div>
       <div class="col-xs-6 col-md-4">
-        <select class="form-control" (change)="getCommandesByStatus($event.target.value)">
+        <select class="form-control" (change)="getCommandesByStatus($event.target.value)" [(ngModel)]="statusCommandeSelect">
           <option value="{{statusGroup.key}}" *ngFor="let statusGroup of statusGroupList | keyvalue" style="font-weight: bold">
             {{statusGroup.value | translate}}
           </option>
@@ -50,7 +50,7 @@
               <div class="row margin-bottom-15">
                 <div class="col-2">
                   <div class="row">
-                    <div class="col-4 text-right">{{'user.nomWechat' | translate}}: </div>
+                    <div class="col-4 text-right">{{'client.nomWechat' | translate}}: </div>
                     <div class="col">
                       <!--<input class="form-control" [(ngModel)]="commande.client.nameWechat" value="{{commande.client.nameWechat}}"/>-->
                       <strong class="font-size-24">{{commande.client.nameWechat}}</strong>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="col-2">
                   <div class="row">
-                    <div class="col-4 text-right">{{'user.nomLivraison' | translate}}</div>
+                    <div class="col-4 text-right">{{'client.nomLivraison' | translate}}</div>
                     <div class="col">
                       <input class="form-control" [(ngModel)]="commande.client.nameLivraison" value="{{commande.client.nameLivraison}}"/>
                     </div>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-3">
                   <div class="row">
-                    <div class="col-3 text-right">{{'user.telephone' | translate}}</div>
+                    <div class="col-3 text-right">{{'client.telephone' | translate}}</div>
                     <div class="col">
                       <input class="form-control" [(ngModel)]="commande.client.telephone" value="{{commande.client.telephone}}" intOnly/>
                     </div>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="col-5">
                   <div class="row">
-                    <div class="col-2 text-right">{{'user.adresse' | translate}}</div>
+                    <div class="col-2 text-right">{{'client.adresse' | translate}}</div>
                     <div class="col">
                       <input class="form-control" [(ngModel)]="commande.client.adresse" value="{{commande.client.adresse}}"/>
                     </div>
@@ -263,10 +263,10 @@
                     <!--ligne-->
                     <div class="row">
                       <div class="col">
-                        <div *ngIf="article.statusArticle != null">
-                          <span>{{'article.statusArticle' | translate}}: </span>
+                        <div *ngIf="article.statusArticlePreparation != null">
+                          <span>{{'article.statusArticlePreparation' | translate}}: </span>
                           <span class="font-size-18 margin-left-10">
-                            <strong [ngStyle]="{'color': article.statusArticle.color}">{{article.statusArticle.value | translate}}</strong>
+                            <strong [ngStyle]="{'color': article.statusArticlePreparation.color}">{{article.statusArticlePreparation.value | translate}}</strong>
                           </span>
                         </div>
                       </div>
@@ -347,9 +347,9 @@
                       <div class="col-3">
                         <div class="row">
                           <div class="col text-right">
-                            <span>{{'article.statusArticle' | translate}}: </span>
+                            <span>{{'article.statusArticlePreparation' | translate}}: </span>
                             <span class="font-size-18 margin-left-10">
-                              <strong [ngStyle]="{'color': article.statusArticle.color}">{{article.statusArticle.value | translate}}</strong>
+                              <strong [ngStyle]="{'color': article.statusArticlePreparation.color}">{{article.statusArticlePreparation.value | translate}}</strong>
                             </span>
                           </div>
                         </div>
