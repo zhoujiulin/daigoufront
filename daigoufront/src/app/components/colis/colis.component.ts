@@ -3,7 +3,8 @@ import { Colis } from '../../domain/colis';
 import { LoginAuthService } from '../../login-auth.service';
 import { ColisService } from '../../services/colis.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent } from '../../common/modal/modal/modal.component';
+import { ModalComponent } from '../../common/modal/modalcommon/modal.component';
+import { ModalArriverColisComponent } from 'src/app/common/modal/modalarrivercolis/modalarrivercolis.component';
 import { EnumStatusColis } from '../../common/enum/enumstatuscolis';
 import { StockageService } from 'src/app/services/stockage.service';
 import { ArticleStockage } from 'src/app/domain/articlestockage';
@@ -18,19 +19,23 @@ import { EnumTypeArticle } from 'src/app/common/enum/enumtypearticle';
 })
 export class ColisComponent implements OnInit {
   public loginuser: any = {};
+  public modal: any;
+  public modalArriverColis: any;
+
   public statusList: any;
   public colisList: any;
   public statusColisSelect: any;
-  public modal: any;
   public stockageList: ArticleStockage[];
   public newArticleStockage: ArticleStockage  = new ArticleStockage();
   public countArticleStockage: number;
   public countForCreateArticleStockageSelected: Array<number>;
 
-  constructor(private authService: LoginAuthService, private colisService: ColisService, private stockageService: StockageService, private modalService: NgbModal, private modalComponent: ModalComponent) {
+  constructor(private authService: LoginAuthService, private colisService: ColisService, private stockageService: StockageService, private modalService: NgbModal, 
+    private modalComponent: ModalComponent, private modalArriverColisComponent: ModalArriverColisComponent) {
     this.authService.isLoggedIn();
     this.loginuser = JSON.parse(localStorage.getItem('currentUser'));
     this.modal = modalComponent;
+    this.modalArriverColis = modalArriverColisComponent;
   }
 
   ngOnInit() {
@@ -86,14 +91,15 @@ export class ColisComponent implements OnInit {
   }
 
   arriverColis(colis: Colis){
-    const modalRef  = this.modal.openModal("common.warning", "message.confirmArrive", "common.confirm");
-    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
-      this.colisService.arriverColis(colis, this.loginuser.token).subscribe(colis =>{
+    const modalRef  = this.modalArriverColis.openModal("common.warning", "message.confirmArrive", "common.confirm", colis);
+    modalRef.componentInstance.passEntry.subscribe((articleMapEnRoutes) => {
+      this.colisService.arriverColis(articleMapEnRoutes, this.loginuser.token).subscribe(colis =>{
         for(let c of this.colisList) {
           this.colisList = this.colisList.filter(c => c.idColis !== colis.idColis);
         }
       })
     })
+
   }
 
   getAllStockage(){

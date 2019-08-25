@@ -3,7 +3,7 @@ import { LoginAuthService } from '../../login-auth.service';
 import { CommandeService } from '../../services/commande.service';
 import { Commande } from '../../domain/commande';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent } from '../../common/modal/modal/modal.component';
+import { ModalComponent } from '../../common/modal/modalcommon/modal.component';
 import { Article } from '../../domain/article';
 import { ColisService } from '../../services/colis.service';
 import { EnumStatusCommande } from '../../common/enum/enumstatuscommande';
@@ -48,6 +48,7 @@ export class CommandesComponent implements OnInit {
   ngOnInit() {
     this.commandeService.getCommandeStatusGroup(this.loginuser.token).subscribe(statusGroupList =>{
       this.statusGroupList = statusGroupList;
+      console.log(this.statusGroupList);
 
       this.initCommandesByStatus();
     })
@@ -266,7 +267,7 @@ export class CommandesComponent implements OnInit {
         article.countArticleFromStockageChineSelectable = [];
       }
 
-      let countDispo = articleStockge['countStockageChineAvailable'];
+      let countDispo = articleStockge['countStockageChine'];
       let countSelected = this.countArticleStockageChineSelectedMap.get(name);
       if(countSelected == null){
         countSelected = 0;
@@ -288,7 +289,7 @@ export class CommandesComponent implements OnInit {
         article.countArticleFromStockageEnRouteSelectable = [];
       }
 
-      let countDispo = articleStockge['countStockageEnRouteAvailable'];
+      let countDispo = articleStockge['countStockageEnRoute'];
       let countSelected = this.countArticleStockageEnRouteSelectedMap.get(name);
       if(countSelected == null){
         countSelected = 0;

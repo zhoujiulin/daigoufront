@@ -7,7 +7,7 @@ import { ArticleAcheteInClient } from 'src/app/domain/articleAcheteInClient';
 import { ArticleFromStockageEnRouteInClient } from 'src/app/domain/articleFromStockageEnRouteInClient';
 import { ArticleFromStockageChineInClient } from 'src/app/domain/articleFromStockageChineInClient';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent } from 'src/app/common/modal/modal/modal.component';
+import { ModalComponent } from 'src/app/common/modal/modalcommon/modal.component';
 import { ArticleService } from 'src/app/services/article.service';
 
 @Component({

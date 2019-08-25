@@ -112,7 +112,7 @@
                                 <div *ngIf="article.idArticle == null">
                                   <!--id="{{'nameArticle_commande_' + commande.id + '_article' + indexArticle}}" -->
                                   <!--[formControl]="nameArticleFormControl" -->
-                                  <input type="text" id="{{'nameArticle_commande' + commande.id + '_article' + indexArticle}}" (ngModelChange)="changeNameArticle($event, commande.id, indexArticle, article)" class="form-control" [(ngModel)]="article.nameArticle" placeholder="{{'article.article' | translate}}" matInput [matAutocomplete]="auto">
+                                  <input type="text" (ngModelChange)="changeNameArticle($event, commande.id, indexArticle, article)" class="form-control" [(ngModel)]="article.nameArticle" placeholder="666" matInput [matAutocomplete]="auto">
                                   <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn">
                                     <mat-option (onSelectionChange)="onEnterNameArticle($event)" *ngFor="let option of filteredOptions" [value]="option.nameArticleStockage">
                                       {{option.nameArticleStockage}}

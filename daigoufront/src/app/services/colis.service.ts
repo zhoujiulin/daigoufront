@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Colis } from '../domain/colis';
 import { ArticleStockage } from '../domain/articlestockage';
 import { Article } from '../domain/article';
+import { ArticleMapEnRoute } from '../domain/articleMapEnRoute';
+import { ArticleMapEnRoutes } from '../domain/articleMapEnRoutes';
 
 @Injectable({
   providedIn: 'root'
@@ -35,9 +37,9 @@ export class ColisService {
     return this.http.post(environment.baseUrl + "/colis/envoyercolis", colis, {headers: headers});
   }
 
-  arriverColis(colis: Colis, token: any): Observable<any>{
+  arriverColis(articlesMapEnRoutes: ArticleMapEnRoutes, token: any): Observable<any>{
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
-    return this.http.post(environment.baseUrl + "/colis/arrivercolis", colis, {headers: headers});
+    return this.http.post(environment.baseUrl + "/colis/arrivercolis2", articlesMapEnRoutes, {headers: headers});
   }
 
   putArticleStockageInColis(newArticleStockage: ArticleStockage, countArticleStockage: number, idColis: number, token: any): Observable<any>{

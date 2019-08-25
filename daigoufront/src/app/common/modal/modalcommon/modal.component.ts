@@ -46,8 +46,6 @@ export class ModalComponent implements OnInit {
 
   constructor(private modalService: NgbModal, public translateService: TranslateService) { }
 
-  public content = NgbdModalContent;
-
   ngOnInit() {
 
   }

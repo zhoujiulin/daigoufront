@@ -23,7 +23,7 @@ import { CreationCommandeComponent } from './components/creation-commande/creati
 import { IntOnlyDirective } from './common/intonly-directive';
 import { NumberOnlyDirective } from './common/numberonly-directive';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent, NgbdModalContent } from './common/modal/modal/modal.component';
+import { ModalComponent, NgbdModalContent } from './common/modal/modalcommon/modal.component';
 import { ArticlemodeleComponent } from './components/articlemodele/articlemodele.component';
 import { StockageComponent } from './components/stockage/stockage.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -31,6 +31,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ColisComponent } from './components/colis/colis.component';
 import { ClientComponent } from './components/client/client.component';
+import { ModalArriverColisComponent, NgbdModalArriverColisContent } from './common/modal/modalarrivercolis/modalarrivercolis.component';
 
 import { UserService } from './user.service';
 import { LoginAuthService } from './login-auth.service';
@@ -55,7 +56,9 @@ export function createTranslateHttpLoader(http: HttpClient) {
     IntOnlyDirective,
     NumberOnlyDirective,
     ModalComponent,
+    ModalArriverColisComponent,
     NgbdModalContent,
+    NgbdModalArriverColisContent,
     ArticlemodeleComponent,
     StockageComponent,
     ColisComponent,
@@ -88,9 +91,10 @@ export function createTranslateHttpLoader(http: HttpClient) {
     ArticleService,
     NgbActiveModal,
     ModalComponent,
+    ModalArriverColisComponent,
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent],
-  entryComponents: [NgbdModalContent],
+  entryComponents: [NgbdModalContent, NgbdModalArriverColisContent],
 })
 export class AppModule { }

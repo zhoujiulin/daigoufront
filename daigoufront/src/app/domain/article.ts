@@ -22,6 +22,8 @@ export class Article {
     countArticleFromStockageChineSelectable : number[] = [];
     countArticleFromStockageEnRouteSelectable : number[] = [];
 
+    countSelectedEnRouteToChine: number;
+
     constructor() {
 
     }

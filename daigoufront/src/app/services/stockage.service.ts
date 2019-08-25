@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { ArticleStockage } from '../domain/articlestockage';
+import { Colis } from '../domain/colis';
 
 @Injectable({
   providedIn: 'root'
