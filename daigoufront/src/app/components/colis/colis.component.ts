@@ -62,8 +62,6 @@ export class ColisComponent implements OnInit {
       for(let colis of this.colisList){
         this.initCountArticleColis(colis);
       }
-
-      console.log(this.colisList);
     })
   }
 
@@ -94,6 +92,7 @@ export class ColisComponent implements OnInit {
     const modalRef  = this.modalArriverColis.openModal("common.warning", "message.confirmArrive", "common.confirm", colis);
     modalRef.componentInstance.passEntry.subscribe((articleMapEnRoutes) => {
       this.colisService.arriverColis(articleMapEnRoutes, this.loginuser.token).subscribe(colis =>{
+        console.log(colis);
         for(let c of this.colisList) {
           this.colisList = this.colisList.filter(c => c.idColis !== colis.idColis);
         }
@@ -103,7 +102,7 @@ export class ColisComponent implements OnInit {
   }
 
   getAllStockage(){
-    this.stockageService.getAllStockage(this.loginuser.token).subscribe(stockageList =>{
+    this.stockageService.getAllStockageSelectable(this.loginuser.token).subscribe(stockageList =>{
       this.stockageList = stockageList;
     })
   }

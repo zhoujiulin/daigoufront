@@ -9,6 +9,8 @@ import { ArticleFromStockageChineInClient } from 'src/app/domain/articleFromStoc
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from 'src/app/common/modal/modalcommon/modal.component';
 import { ArticleService } from 'src/app/services/article.service';
+import { EnumStatusArticle } from 'src/app/common/enum/enumstatusarticle';
+import { TimeoutError } from 'rxjs';
 
 @Component({
   selector: 'app-client',
@@ -65,11 +67,18 @@ export class ClientComponent implements OnInit {
     }
   }
 
-  terminerArticle(article: Article){
+  isAllowedEnvoyerAuClient(articleAchete: ArticleAcheteInClient){
+    if(articleAchete.statusArticle.index == EnumStatusArticle.ARTICLE_ARRIVE_EN_CHINE_PRET_A_DISTRIBUER){
+      return true;
+    }
+    return false;
+  }
+
+  envoyerArticleAuClient(articleInClient: ArticleAcheteInClient){
     const modalRef  = this.modal.openModal("common.warning", "message.article.confirmSendArticleToClient", "common.confirm");
 
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
-      this.articleService.terminerArticle(article, this.loginuser.token).subscribe(res =>{
+      this.articleService.envoyerArticleAuClient(articleInClient, this.loginuser.token).subscribe(res =>{
       })
     })
   }

@@ -39,7 +39,7 @@ export class ColisService {
 
   arriverColis(articlesMapEnRoutes: ArticleMapEnRoutes, token: any): Observable<any>{
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
-    return this.http.post(environment.baseUrl + "/colis/arrivercolis2", articlesMapEnRoutes, {headers: headers});
+    return this.http.post(environment.baseUrl + "/colis/arrivercolis", articlesMapEnRoutes, {headers: headers});
   }
 
   putArticleStockageInColis(newArticleStockage: ArticleStockage, countArticleStockage: number, idColis: number, token: any): Observable<any>{

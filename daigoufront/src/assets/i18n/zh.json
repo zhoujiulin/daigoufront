@@ -35,6 +35,8 @@
         "countStockageChineAvailable": "可用的中国库存数量",
         "countStockageRoute": "路上库存数量",
         "countStockageRouteAvailable": "可用的路上库存数量",
+        "countAcheteEnvoyeAuClient": "已发送给客户的数量",
+        "countStockageChineEnvoyeAuClient": "已发送给客户的国内库存数量",
         "statusArticlePreparation": "备货状态",
         "statusArticle": "货物状态",
         "deleteArticle": "删除货品"
@@ -87,7 +89,8 @@
         "arrive": "到达",
         "warning": "警告",
         "confirm": "确定",
-        "stockage": "囤货"
+        "stockage": "囤货",
+        "envoyerAuClient": "给客户发货"
     },
     "enum": {
         "article": {
@@ -109,6 +112,7 @@
                     "manqueInfoClient": "已到达的货(缺少客户地址)",
                     "pretADistribuer": "已到达的货(可以邮寄)"
                 },
+                "articleEnvoyeAuClient": "货已发给客户",
                 "articleTermine": "已结束的货"
             }
         },

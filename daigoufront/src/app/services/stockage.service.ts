@@ -19,6 +19,11 @@ export class StockageService {
     return this.http.get(environment.baseUrl + "/stockage/all", {headers: headers});
   }
 
+  getAllStockageSelectable(token: any): Observable<any>{
+    const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
+    return this.http.get(environment.baseUrl + "/stockage/allstockageselectable", {headers: headers});
+  }
+
   createArticleStockage(articleStockage: ArticleStockage, token: any): Observable<any>{
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
     return this.http.post(environment.baseUrl + "/stockage/create", articleStockage, {headers: headers});

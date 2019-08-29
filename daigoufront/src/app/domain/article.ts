@@ -11,6 +11,8 @@ export class Article {
     countArticleFromStockageFrance : number;
     countArticleFromStockageChine : number;
     countArticleFromStockageEnRoute : number;
+    countArticleAcheteDistribue : number;
+    countArticleFromStockageChineDistribue : number;
     colis : Colis;
     commande : Commande;
     typeArticle : any;

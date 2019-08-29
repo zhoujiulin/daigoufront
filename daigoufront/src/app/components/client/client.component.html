@@ -28,7 +28,8 @@
                     <th class="col-1">*{{'article.count' | translate}}</th>
                     <th class="col-1">{{'colis.colis' | translate}}</th>
                     <th class="col-2">{{'article.statusArticlePreparation' | translate}}</th>
-                    <th class="col">{{'article.statusArticle' | translate}}</th>
+                    <th class="col-2">{{'article.statusArticle' | translate}}</th>
+                    <th class="col"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -37,7 +38,8 @@
                       {{articleAchete.nameArticle}}
                     </td>
                     <td class="col-1">
-                      {{articleAchete.countArticleAchete}} / {{articleAchete.count}} ({{articleAchete.countArticleFromStockage}})
+                      {{articleAchete.countArticleAchete}} / {{articleAchete.count}} 
+                      <span *ngIf="articleAchete.countArticleFromStockage > 0">({{articleAchete.countArticleFromStockage}})</span>
                     </td>
                     <td class="col-1">
                       <strong *ngIf="articleAchete.colis != null">
@@ -49,10 +51,13 @@
                         {{articleAchete.statusArticlePreparation.value | translate}}
                       </strong>
                     </td>
-                    <td class="col">
+                    <td class="col-2">
                       <strong [ngStyle]="{'color': articleAchete.statusArticle.color}">
                         {{articleAchete.statusArticle.value | translate}}
                       </strong>
+                    </td>
+                    <td class="col">
+                      <button type="button" *ngIf="isAllowedEnvoyerAuClient(articleAchete)" (click)="envoyerArticleAuClient(articleAchete)" class="btn btn-primary float-right">{{'common.envoyerAuClient' | translate}}</button>
                     </td>
                   </tr>
                 </tbody>
@@ -60,7 +65,7 @@
             </div>
           </div>
 
-          <div class="col margin-bottom-15">
+          <div class="col margin-bottom-15" *ngIf="client.articleFromStockageEnRoute.length > 0"> 
             <span>
               <strong>{{'message.article.articleFromStockageEnRoute' | translate}}</strong>
             </span>
@@ -97,7 +102,7 @@
             </div>
           </div>
 
-          <div class="col margin-bottom-15">
+          <div class="col margin-bottom-15" *ngIf="client.articleFromStockageChine.length > 0">
             <span>
               <strong>{{'message.article.articleFromStockageChine' | translate}}</strong>
             </span>
@@ -124,7 +129,7 @@
 
                     </td>
                     <td class="col-1">
-                      <button type="button" (click)="terminerArticle(article)" class="btn btn-primary float-right">{{'common.envoyer' | translate}}</button>
+                      <button type="button" (click)="envoyerArticleAuClient(article)" class="btn btn-primary float-right">{{'common.envoyer' | translate}}</button>
                     </td>
                   </tr>
                 </tbody>

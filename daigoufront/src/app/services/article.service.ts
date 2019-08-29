@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Colis } from '../domain/colis';
+import { ArticleAcheteInClient } from '../domain/articleAcheteInClient';
 
 @Injectable()
 export class ArticleService {
@@ -11,9 +12,9 @@ export class ArticleService {
     this.http = http;
   }
 
-  terminerArticle(article: any, token: any): Observable<any>{
+  envoyerArticleAuClient(articleInClient: ArticleAcheteInClient, token: any): Observable<any>{
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
-    return this.http.post(environment.baseUrl + "/articles/terminerarticle", article, {headers: headers});
+    return this.http.post(environment.baseUrl + "/articles/envoyerarticleauclient", articleInClient, {headers: headers});
   }
 
   computeArticleStockageFromColisArriver(colis: Colis, token: any){

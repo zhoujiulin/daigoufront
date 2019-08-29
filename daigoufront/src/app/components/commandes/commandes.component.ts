@@ -14,6 +14,7 @@ import { EnumTypeArticle } from 'src/app/common/enum/enumtypearticle';
 import { EnumTypeCommande } from 'src/app/common/enum/enumtypecommande';
 import { ArticleStockage } from 'src/app/domain/articlestockage';
 import { StockageService } from 'src/app/services/stockage.service';
+import { EnumStatusArticle } from 'src/app/common/enum/enumstatusarticle';
 
 @Component({
   selector: 'app-commandes',
@@ -48,7 +49,6 @@ export class CommandesComponent implements OnInit {
   ngOnInit() {
     this.commandeService.getCommandeStatusGroup(this.loginuser.token).subscribe(statusGroupList =>{
       this.statusGroupList = statusGroupList;
-      console.log(this.statusGroupList);
 
       this.initCommandesByStatus();
     })
@@ -77,6 +77,7 @@ export class CommandesComponent implements OnInit {
 
       this.getAllStockage();
       this.initCountSelectStockage();
+      console.log(this.commandes);
     })
   }
 
@@ -126,6 +127,11 @@ export class CommandesComponent implements OnInit {
     for(let c of this.commandes) {
       if(c.id == commande.id){
         let article = new Article();
+        article.count = 0;
+        article.countArticleAchete = 0;
+        article.countArticleFromStockageFrance = 0;
+        article.countArticleFromStockageEnRoute = 0;
+        article.countArticleFromStockageChine = 0;
         c.articles.push(article);
       }
     }
@@ -173,6 +179,17 @@ export class CommandesComponent implements OnInit {
     }
   }
 
+  isArticleArrive(article: Article){
+    if(article.statusArticle == null) {
+      return false;
+    }
+    if(article.statusArticle.index == EnumStatusArticle.ARTICLE_NON_ENVOYE || article.statusArticle.index == EnumStatusArticle.ARTICLE_ENVOYE_SUR_LA_ROUTE){
+      console.log(article.statusArticle);
+      return false;
+    }
+    return true;
+  }
+
   changeColis(article: Article, ngModelSelectColis: NgModel){
     ngModelSelectColis.control.markAsTouched();
     if(article.colis != null && article.statusArticlePreparation != null && article.statusArticlePreparation.index == EnumStatusArticlePreparation.PREPARE_PARTIE){
@@ -217,7 +234,7 @@ export class CommandesComponent implements OnInit {
   onEnterNameArticle(evt: any){
   }
 
-  changeNameArticle(event: any, idCommande: number, indexArticle: number, article: Article){
+  changeNameArticle(event: any, article: Article){
     this.filteredOptions = this._filter(event);
 
     if(event !== null && event !== ""){

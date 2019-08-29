@@ -112,7 +112,7 @@
                                 <div *ngIf="article.idArticle == null">
                                   <!--id="{{'nameArticle_commande_' + commande.id + '_article' + indexArticle}}" -->
                                   <!--[formControl]="nameArticleFormControl" -->
-                                  <input type="text" (ngModelChange)="changeNameArticle($event, commande.id, indexArticle, article)" class="form-control" [(ngModel)]="article.nameArticle" placeholder="666" matInput [matAutocomplete]="auto">
+                                  <input type="text" (ngModelChange)="changeNameArticle($event, article)" class="form-control" [(ngModel)]="article.nameArticle" placeholder="666" matInput [matAutocomplete]="auto">
                                   <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn">
                                     <mat-option (onSelectionChange)="onEnterNameArticle($event)" *ngFor="let option of filteredOptions" [value]="option.nameArticleStockage">
                                       {{option.nameArticleStockage}}
@@ -263,11 +263,23 @@
                     <!--ligne-->
                     <div class="row">
                       <div class="col">
-                        <div *ngIf="article.statusArticlePreparation != null">
-                          <span>{{'article.statusArticlePreparation' | translate}}: </span>
-                          <span class="font-size-18 margin-left-10">
-                            <strong [ngStyle]="{'color': article.statusArticlePreparation.color}">{{article.statusArticlePreparation.value | translate}}</strong>
-                          </span>
+                        <div *ngIf="!isArticleArrive(article)">
+                          <div *ngIf="article.statusArticlePreparation != null">
+                            <span>{{'article.statusArticlePreparation' | translate}}: </span>
+                            <span class="font-size-18 margin-left-10">
+                              <strong [ngStyle]="{'color': article.statusArticlePreparation.color}">{{article.statusArticlePreparation.value | translate}}</strong>
+                            </span>
+                          </div>
+                        </div>
+                        <div *ngIf="isArticleArrive(article) && article.countArticleAcheteDistribue > 0">
+                          <div class="row">
+                            <div class="col text-right">
+                              <strong>{{'article.countAcheteEnvoyeAuClient' | translate}} : </strong>
+                            </div>
+                            <div class="col">
+                              <strong>{{article.countArticleAcheteDistribue}}</strong>
+                            </div>
+                          </div>
                         </div>
                       </div>
 
@@ -284,7 +296,7 @@
                                     </option>
                                 </select>
                               </div>
-                              <div *ngIf="commande.status['index'] === 5">
+                              <div *ngIf="!onlyShowPourCommandeNonEnvoyee(commande.status.index)">
                                 <strong>
                                   <span>{{article.colis.nameColis}}</span>
                                 </strong>
@@ -295,6 +307,16 @@
                       </div>
                       <div class="col">
                         <button type="button" *ngIf="onlyShowPourCommandeNonEnvoyee(commande.status.index)" class="btn btn-sm float-right" (click)="supprimerArticleConfirm(article, commande)">{{'article.deleteArticle' | translate}}</button>
+                        <div *ngIf="isArticleArrive(article) && article.countArticleFromStockageChineDistribue > 0">
+                          <div class="row">
+                            <div class="col text-right">
+                              <strong>{{'article.countStockageChineEnvoyeAuClient' | translate}} : </strong>
+                            </div>
+                            <div class="col">
+                              <strong>{{article.countArticleFromStockageChineDistribue}}</strong>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

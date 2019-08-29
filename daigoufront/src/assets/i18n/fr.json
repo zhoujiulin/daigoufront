@@ -35,6 +35,8 @@
         "countStockageChineAvailable": "Qté de stockage en Chine dispo",
         "countStockageRoute": "Qté de stockage en route",
         "countStockageRouteAvailable": "Qté de stockage en route dispo",
+        "countAcheteEnvoyeAuClient": "Qté envoyé au client",
+        "countStockageChineEnvoyeAuClient": "Qté stockage en Chine envoyé au client",
         "statusArticlePreparation": "Status de prépartion",
         "statusArticle": "Status d'article",
         "deleteArticle": "Supprimer l'article"
@@ -87,7 +89,8 @@
         "arrive": "Arrivé",
         "warning": "Avertissement",
         "confirm": "Confirmer",
-        "stockage": "Stockage"
+        "stockage": "Stockage",
+        "envoyerAuClient": "Envoyer au client"
     },
     "enum": {
         "article": {
@@ -109,6 +112,7 @@
                     "manqueInfoClient": "Article arrivée(Manque info client)",
                     "pretADistribuer": "Article arrivée(Prêt à distribuer)"
                 },
+                "articleEnvoyeAuClient": "Article envoyé au client",
                 "articleTermine": "Article terminée"
             }
         },
