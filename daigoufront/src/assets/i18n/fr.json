@@ -114,6 +114,11 @@
                 },
                 "articleEnvoyeAuClient": "Article envoyé au client",
                 "articleTermine": "Article terminée"
+            },
+            "statusDistribue": {
+                "articleAcheteDistribue": "Article envoyé au client",
+                "articleFromStockageChineDistribue": "Article de stockage envoyé au client"
+
             }
         },
         "commande": {

@@ -27,7 +27,7 @@
                     <th class="col-4">{{'article.nomArticle' | translate}}</th>
                     <th class="col-1">*{{'article.count' | translate}}</th>
                     <th class="col-1">{{'colis.colis' | translate}}</th>
-                    <th class="col-2">{{'article.statusArticlePreparation' | translate}}</th>
+                    <th class="col-1">{{'article.statusArticlePreparation' | translate}}</th>
                     <th class="col-2">{{'article.statusArticle' | translate}}</th>
                     <th class="col"></th>
                   </tr>
@@ -46,18 +46,21 @@
                         {{articleAchete.colis.nameColis}}
                       </strong>
                     </td>
-                    <td class="col-2">
+                    <td class="col-1">
                       <strong [ngStyle]="{'color': articleAchete.statusArticlePreparation.color}">
                         {{articleAchete.statusArticlePreparation.value | translate}}
                       </strong>
                     </td>
                     <td class="col-2">
-                      <strong [ngStyle]="{'color': articleAchete.statusArticle.color}">
+                      <strong *ngIf="articleAchete.statusArticleDistribue == null" [ngStyle]="{'color': articleAchete.statusArticle.color}">
                         {{articleAchete.statusArticle.value | translate}}
+                      </strong>
+                      <strong *ngIf="articleAchete.statusArticleDistribue != null" [ngStyle]="{'color': articleAchete.statusArticleDistribue.color}">
+                        {{articleAchete.statusArticleDistribue.value | translate}}
                       </strong>
                     </td>
                     <td class="col">
-                      <button type="button" *ngIf="isAllowedEnvoyerAuClient(articleAchete)" (click)="envoyerArticleAuClient(articleAchete)" class="btn btn-primary float-right">{{'common.envoyerAuClient' | translate}}</button>
+                      <button type="button" *ngIf="isAllowedEnvoyerAuClient(articleAchete)" (click)="envoyerArticleAuClient(articleAchete)" class="btn btn-primary float-right">{{'common.envoyer' | translate}}</button>
                     </td>
                   </tr>
                 </tbody>

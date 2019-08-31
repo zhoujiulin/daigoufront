@@ -11,11 +11,18 @@ export class ArticleInClient {
     countArticleFromStockageFrance: number;
     countArticleFromStockageChine: number;
     countArticleFromStockageEnRoute: number;
+
     statusArticlePreparation: any;
     statusArticle: any;
+    statusArticleDistribue: any;
 
-    colis : Colis;
-    commande : Commande;
+    colis: Colis;
+    commande: Commande;
+
+    dateCreation: Date;
+    dateEnvoie: Date;
+    dateArrive: Date;
+    dateDistribution: Date;
 
     constructor() {
 

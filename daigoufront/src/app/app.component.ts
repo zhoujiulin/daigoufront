@@ -13,12 +13,18 @@ export class AppComponent {
   public currentstatus: any;
   public languageBtn = 'français';
   public language = 'fr';
+  public loginuser: any = {};
 
   constructor(private authService: LoginAuthService, private router: Router, public translateService: TranslateService) {
+    this.loginuser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {
-    this.router.navigate(['login']);
+    if(this.loginuser != null){
+      this.router.navigate(['commandes']);
+    }else{
+      this.router.navigate(['login']);
+    }
 
     this.currentstatus = this.authService.getStatus().subscribe(currentstatus => {
       this.currentstatus = currentstatus;
@@ -30,7 +36,6 @@ export class AppComponent {
     this.translateService.use(browserLang.match(/zh|fr/) ? browserLang : 'fr');
 
     this.settingBtn(browserLang);
-    console.log("browserLang : " + browserLang);
   }
 
   logout() {

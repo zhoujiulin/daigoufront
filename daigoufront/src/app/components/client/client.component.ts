@@ -6,11 +6,9 @@ import { Article } from 'src/app/domain/article';
 import { ArticleAcheteInClient } from 'src/app/domain/articleAcheteInClient';
 import { ArticleFromStockageEnRouteInClient } from 'src/app/domain/articleFromStockageEnRouteInClient';
 import { ArticleFromStockageChineInClient } from 'src/app/domain/articleFromStockageChineInClient';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from 'src/app/common/modal/modalcommon/modal.component';
 import { ArticleService } from 'src/app/services/article.service';
 import { EnumStatusArticle } from 'src/app/common/enum/enumstatusarticle';
-import { TimeoutError } from 'rxjs';
 
 @Component({
   selector: 'app-client',
@@ -31,7 +29,6 @@ export class ClientComponent implements OnInit {
   ngOnInit() {
     this.clientService.getClientHasCommandeEnCours(this.loginuser.token).subscribe(clients =>{
       this.clients = clients;
-      console.log(this.clients);
       this.initArticleMaps();
     })
   }
@@ -58,18 +55,18 @@ export class ClientComponent implements OnInit {
             let articleFromStockageChineInClient = this.valoriserArticleFromStockageChineInClientFromArticle(article);
             client.articleFromStockageChine.push(articleFromStockageChineInClient);
             client.countArticlePrisTotal = client.countArticlePrisTotal + articleFromStockageChineInClient.countArticleFromStockageChine;
-
           }
           client.countArticleTotal = client.countArticleTotal + article.count;
         }
       }
-      
     }
   }
 
   isAllowedEnvoyerAuClient(articleAchete: ArticleAcheteInClient){
     if(articleAchete.statusArticle.index == EnumStatusArticle.ARTICLE_ARRIVE_EN_CHINE_PRET_A_DISTRIBUER){
-      return true;
+      if(articleAchete.statusArticleDistribue == null){
+        return true;
+      }
     }
     return false;
   }
@@ -78,7 +75,8 @@ export class ClientComponent implements OnInit {
     const modalRef  = this.modal.openModal("common.warning", "message.article.confirmSendArticleToClient", "common.confirm");
 
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
-      this.articleService.envoyerArticleAuClient(articleInClient, this.loginuser.token).subscribe(res =>{
+      this.articleService.envoyerArticleAuClient(articleInClient, this.loginuser.token).subscribe(article =>{
+        articleInClient.statusArticleDistribue = article.statusArticleDistribue;
       })
     })
   }
@@ -114,6 +112,10 @@ export class ClientComponent implements OnInit {
 
     articleStockageInClient.countArticleAchete = article.countArticleAchete + article.countArticleFromStockageFrance;
     articleStockageInClient.countArticleFromStockage = article.countArticleFromStockageEnRoute + article.countArticleFromStockageChine;
+    articleStockageInClient.countArticleAcheteDistribue = article.countArticleAcheteDistribue;
+    if(articleStockageInClient.countArticleAchete == articleStockageInClient.countArticleAcheteDistribue){
+
+    }
     return articleStockageInClient;
   }
 
@@ -126,6 +128,7 @@ export class ClientComponent implements OnInit {
     articleInClient.countArticleFromStockageChine = article.countArticleFromStockageChine;
     articleInClient.statusArticlePreparation = article.statusArticlePreparation;
     articleInClient.statusArticle = article.statusArticle;
+    articleInClient.statusArticleDistribue = article.statusArticleDistribue;
 
     //articleInClient.commande = article.commande;
     articleInClient.colis = article.colis;

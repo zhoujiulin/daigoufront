@@ -184,7 +184,6 @@ export class CommandesComponent implements OnInit {
       return false;
     }
     if(article.statusArticle.index == EnumStatusArticle.ARTICLE_NON_ENVOYE || article.statusArticle.index == EnumStatusArticle.ARTICLE_ENVOYE_SUR_LA_ROUTE){
-      console.log(article.statusArticle);
       return false;
     }
     return true;

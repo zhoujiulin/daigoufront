@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Colis } from '../domain/colis';
 import { ArticleAcheteInClient } from '../domain/articleAcheteInClient';
+import { TestBed } from '@angular/core/testing';
 
 @Injectable()
 export class ArticleService {

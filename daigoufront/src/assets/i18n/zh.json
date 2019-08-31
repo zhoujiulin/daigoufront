@@ -114,6 +114,11 @@
                 },
                 "articleEnvoyeAuClient": "货已发给客户",
                 "articleTermine": "已结束的货"
+            },
+            "statusDistribue": {
+                "articleAcheteDistribue": "货已发送给客户",
+                "articleFromStockageChineDistribue": "囤货已发送给客户"
+
             }
         },
         "commande": {
