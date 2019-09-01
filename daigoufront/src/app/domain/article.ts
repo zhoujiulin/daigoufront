@@ -19,7 +19,8 @@ export class Article {
     typeArticle: any;
     statusArticlePreparation: any;
     statusArticle: any;
-    statusArticleDistribue: any;
+    statusArticleAcheteDistribue: any;
+    statusArticleStockageChineDistribue: any;
 
     dateCreation: Date;
     dateEnvoie: Date;

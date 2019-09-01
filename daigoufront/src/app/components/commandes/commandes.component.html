@@ -166,7 +166,7 @@
                       </div>
                     </div>
                     <!--ligne-->
-                    <div class="row">
+                    <div class="row margin-bottom-10">
                       <div class="col">
                         <div class="row">
                           <div class="col text-right">
@@ -213,35 +213,10 @@
                       <div class="col">
                         <div class="row">
                           <div class="col text-right">
-                              {{'article.countStockageChine' | translate}}:
-                          </div>
-                          <div class="col">
-                            <div *ngIf="onlyShowPourCommandeNonEnvoyee(commande.status.index)">
-                              <select class="form-control" (ngModelChange)="changeSelectCountArticleFromStockageChine(article, $event)" [(ngModel)]="article.countArticleFromStockageChine" [compareWith]="compareCount">
-                                <option value="0">0</option>
-                                <option *ngFor="let ac of article.countArticleFromStockageChineSelectable" value="{{ac}}">
-                                  {{ac}}
-                                </option>
-                              </select>
-                            </div>
-                            <div *ngIf="!onlyShowPourCommandeNonEnvoyee(commande.status.index)">
-                              <strong>
-                                <span>
-                                  {{article.countArticleFromStockageChine}}
-                                </span>
-                              </strong>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col margin-bottom-10">
-                        <div class="row">
-                          <div class="col text-right">
                             {{'article.countStockageRoute' | translate}}:
                           </div>
                           <div class="col">
                             <div *ngIf="onlyShowPourCommandeNonEnvoyee(commande.status.index)">
-                              <!--<input class="form-control" [(ngModel)]="article.countArticleFromStockageEnRoute" value="{{article.countArticleFromStockageEnRoute}}"/>-->
                               <select class="form-control" (ngModelChange)="changeSelectCountArticleFromStockageEnRoute(article, $event)" [(ngModel)]="article.countArticleFromStockageEnRoute" [compareWith]="compareCount">
                                 <option value="0">0</option>
                                 <option *ngFor="let ac of article.countArticleFromStockageEnRouteSelectable" value="{{ac}}">
@@ -255,6 +230,42 @@
                                   {{article.countArticleFromStockageEnRoute}}
                                 </span>
                               </strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div *ngIf="article.countArticleFromStockageChineDistribue == null || article.countArticleFromStockageChineDistribue == 0">
+                          <div class="row">
+                            <div class="col text-right">
+                                {{'article.countStockageChine' | translate}}:
+                            </div>
+                            <div class="col">
+                              <div *ngIf="onlyShowPourCommandeNonEnvoyee(commande.status.index)">
+                                <select class="form-control width-auto" (ngModelChange)="changeSelectCountArticleFromStockageChine(article, $event)" [(ngModel)]="article.countArticleFromStockageChine" [compareWith]="compareCount">
+                                  <option value="0">0</option>
+                                  <option *ngFor="let ac of article.countArticleFromStockageChineSelectable" value="{{ac}}">
+                                    {{ac}}
+                                  </option>
+                                </select>
+                              </div>
+                              <div *ngIf="!onlyShowPourCommandeNonEnvoyee(commande.status.index)">
+                                <strong>
+                                  <span>
+                                    {{article.countArticleFromStockageChine}}
+                                  </span>
+                                </strong>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div *ngIf="article.countArticleFromStockageChineDistribue > 0">
+                          <div class="row">
+                            <div class="col text-right">
+                              <strong>{{'article.countStockageChineEnvoyeAuClient' | translate}}:</strong>
+                            </div>
+                            <div class="col-1">
+                              <span><strong>{{article.countArticleFromStockageChineDistribue}}</strong></span>
                             </div>
                           </div>
                         </div>

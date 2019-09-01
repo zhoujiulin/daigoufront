@@ -9,6 +9,8 @@ import { ArticleFromStockageChineInClient } from 'src/app/domain/articleFromStoc
 import { ModalComponent } from 'src/app/common/modal/modalcommon/modal.component';
 import { ArticleService } from 'src/app/services/article.service';
 import { EnumStatusArticle } from 'src/app/common/enum/enumstatusarticle';
+import { EnumStatusArticleAcheteDistribue } from 'src/app/common/enum/enumstatusarticleachetedistribue';
+import { EnumStatusArticleStockageChineDistribue } from 'src/app/common/enum/enumstatusarticlestockagechinedistribue';
 
 @Component({
   selector: 'app-client',
@@ -30,6 +32,7 @@ export class ClientComponent implements OnInit {
     this.clientService.getClientHasCommandeEnCours(this.loginuser.token).subscribe(clients =>{
       this.clients = clients;
       this.initArticleMaps();
+      console.log(this.clients);
     })
   }
 
@@ -62,21 +65,32 @@ export class ClientComponent implements OnInit {
     }
   }
 
-  isAllowedEnvoyerAuClient(articleAchete: ArticleAcheteInClient){
-    if(articleAchete.statusArticle.index == EnumStatusArticle.ARTICLE_ARRIVE_EN_CHINE_PRET_A_DISTRIBUER){
-      if(articleAchete.statusArticleDistribue == null){
+  isAllowedEnvoyerAuClient(articleInClient: any){
+    if(articleInClient['countArticleAchete'] > 0 || articleInClient['countArticleFromStockage'] > 0){
+      if(articleInClient.statusArticle.index == EnumStatusArticle.ARTICLE_ARRIVE_EN_CHINE_PRET_A_DISTRIBUER){
+        if(articleInClient.statusArticleAcheteDistribue == null || articleInClient.statusArticleAcheteDistribue.index == EnumStatusArticleAcheteDistribue.ARTICLE_ACHETE_NON_DISTRIBUE ){
+          return true;
+        }
+        return false;
+      } 
+    }
+
+    if(articleInClient['countArticleFromStockageChine'] > 0){
+      if(articleInClient.statusArticleStockageChineDistribue == null || articleInClient.statusArticleStockageChineDistribue.index == EnumStatusArticleStockageChineDistribue.ARTICLE_FROM_STOCKAG_CHINE_NON_DISTRIBUE){
         return true;
       }
     }
+
     return false;
   }
 
-  envoyerArticleAuClient(articleInClient: ArticleAcheteInClient){
+  envoyerArticleAuClient(articleInClient: any){
     const modalRef  = this.modal.openModal("common.warning", "message.article.confirmSendArticleToClient", "common.confirm");
 
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
       this.articleService.envoyerArticleAuClient(articleInClient, this.loginuser.token).subscribe(article =>{
-        articleInClient.statusArticleDistribue = article.statusArticleDistribue;
+        articleInClient.statusArticleAcheteDistribue = article.statusArticleAcheteDistribue;
+        articleInClient.statusArticleStockageChineDistribue = article.statusArticleStockageChineDistribue;
       })
     })
   }
@@ -102,8 +116,9 @@ export class ClientComponent implements OnInit {
 
   valoriserArticleFromStockageChineInClientFromArticle(article: Article){
     let articleFromStockageChineInClient: ArticleFromStockageChineInClient = this.valoriserArticleInClientFromArticle(article);
-
     articleFromStockageChineInClient.countArticleFromStockageChine = article.countArticleFromStockageChine;
+    articleFromStockageChineInClient.countArticleFromStockageChineDistribue = article.countArticleFromStockageChineDistribue;
+
     return articleFromStockageChineInClient;
   }
 
@@ -113,9 +128,7 @@ export class ClientComponent implements OnInit {
     articleStockageInClient.countArticleAchete = article.countArticleAchete + article.countArticleFromStockageFrance;
     articleStockageInClient.countArticleFromStockage = article.countArticleFromStockageEnRoute + article.countArticleFromStockageChine;
     articleStockageInClient.countArticleAcheteDistribue = article.countArticleAcheteDistribue;
-    if(articleStockageInClient.countArticleAchete == articleStockageInClient.countArticleAcheteDistribue){
 
-    }
     return articleStockageInClient;
   }
 
@@ -126,9 +139,12 @@ export class ClientComponent implements OnInit {
     articleInClient.count = article.count;
     articleInClient.countArticleFromStockageEnRoute = article.countArticleFromStockageEnRoute;
     articleInClient.countArticleFromStockageChine = article.countArticleFromStockageChine;
+
+    articleInClient.typeArticle = article.typeArticle;
     articleInClient.statusArticlePreparation = article.statusArticlePreparation;
     articleInClient.statusArticle = article.statusArticle;
-    articleInClient.statusArticleDistribue = article.statusArticleDistribue;
+    articleInClient.statusArticleAcheteDistribue = article.statusArticleAcheteDistribue;
+    articleInClient.statusArticleStockageChineDistribue = article.statusArticleStockageChineDistribue;
 
     //articleInClient.commande = article.commande;
     articleInClient.colis = article.colis;

@@ -6,15 +6,17 @@ export class ArticleInClient {
     nameArticle: string;
     priceAchat: number;
     priceVente: number;
+
     count: number;
-    statusArticlePrepartion: any;
     countArticleFromStockageFrance: number;
     countArticleFromStockageChine: number;
     countArticleFromStockageEnRoute: number;
 
+    typeArticle: any;
     statusArticlePreparation: any;
     statusArticle: any;
-    statusArticleDistribue: any;
+    statusArticleAcheteDistribue: any;
+    statusArticleStockageChineDistribue: any;
 
     colis: Colis;
     commande: Commande;

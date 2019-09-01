@@ -52,11 +52,11 @@
                       </strong>
                     </td>
                     <td class="col-2">
-                      <strong *ngIf="articleAchete.statusArticleDistribue == null" [ngStyle]="{'color': articleAchete.statusArticle.color}">
+                      <strong *ngIf="articleAchete.statusArticleAcheteDistribue == null" [ngStyle]="{'color': articleAchete.statusArticle.color}">
                         {{articleAchete.statusArticle.value | translate}}
                       </strong>
-                      <strong *ngIf="articleAchete.statusArticleDistribue != null" [ngStyle]="{'color': articleAchete.statusArticleDistribue.color}">
-                        {{articleAchete.statusArticleDistribue.value | translate}}
+                      <strong *ngIf="articleAchete.statusArticleAcheteDistribue != null" [ngStyle]="{'color': articleAchete.statusArticleAcheteDistribue.color}">
+                        {{articleAchete.statusArticleAcheteDistribue.value | translate}}
                       </strong>
                     </td>
                     <td class="col">
@@ -116,7 +116,7 @@
                   <tr class="row"> 
                     <th class="col-5">{{'article.nomArticle' | translate}}</th>
                     <th class="col-2">{{'article.count' | translate}}</th>
-                    <th class="col"></th>
+                    <th class="col">{{'article.statusArticle' | translate}}</th>
                     <th class="col-1"></th>
                   </tr>
                 </thead>
@@ -129,10 +129,12 @@
                       {{article.countArticleFromStockageChine}}
                     </td>
                     <td class="col">
-
+                      <strong *ngIf="article.statusArticleStockageChineDistribue != null" [ngStyle]="{'color': article.statusArticleStockageChineDistribue.color}">
+                        {{article.statusArticleStockageChineDistribue.value | translate}}
+                      </strong>
                     </td>
                     <td class="col-1">
-                      <button type="button" (click)="envoyerArticleAuClient(article)" class="btn btn-primary float-right">{{'common.envoyer' | translate}}</button>
+                      <button type="button" *ngIf="isAllowedEnvoyerAuClient(article)" (click)="envoyerArticleAuClient(article)" class="btn btn-primary float-right">{{'common.envoyer' | translate}}</button>
                     </td>
                   </tr>
                 </tbody>
