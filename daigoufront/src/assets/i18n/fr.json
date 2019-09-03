@@ -47,7 +47,8 @@
     "stockage": {
         "stockage": "Stockage",
         "createStockage": "Création d'un article dans stockage",
-        "listStockage": "Liste de stockage"
+        "listStockage": "Liste de stockage",
+        "reinitStockage": "Réinitialiser le stockage"
     },
     "colis": {
         "colis": "Colis",
@@ -68,7 +69,8 @@
         "articleFromStockageChine": "Articles à partir de stockge en Chine",
         "descriptifCountArticleInClient": "*Qté = Qté achtée / Qté demandée ( Qté à partir de stockage)",
         "confirmSendArticleToClient":"Vous voulez vraiment envoyer cet article au client?"
-      }
+      },
+      "comfirmOnReinitStockage": "Vous voulez vraiment réinitialiser votre stockage?"
     },
     "common": {
         "inscription": "Inscription",

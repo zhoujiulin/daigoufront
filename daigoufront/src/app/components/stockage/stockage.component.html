@@ -24,7 +24,7 @@
         </div>
         <input type="hidden" class="form-control" [(ngModel)]="createArticleStockage.countStockageFranceColis"/>
         <input type="hidden" class="form-control" [(ngModel)]="createArticleStockage.countStockageEnRoute"/>
-        <input type="hidden" class="form-control" [(ngModel)]="createArticleStockage.countStockageChine"/>
+        <input type="hidden" class="form-control" [(ngModel)]="createArticleStockage.countStockageChine"/> 
         <div class="form-group col">
             <button type="submit" class="btn btn-primary" [disabled]="!validatorBtnCreate(createArticleStockage)" (click)="creationArticleStockage(createArticleStockage)">{{'common.create' | translate}}</button>
         </div>
@@ -32,7 +32,22 @@
 
   </div>
   <div class="col-sm-12">
-    <h2>{{'stockage.listStockage' | translate}}</h2>
+    <div class="row">
+      <div class="col">
+        <h2>{{'stockage.listStockage' | translate}}</h2>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-link float-right" [hidden]="isOnReinitStockage" (click)="onReinitStockage()">
+          {{'stockage.reinitStockage' | translate}}
+        </button>
+        <button type="button" class="btn btn-primary float-right" [hidden]="!isOnReinitStockage" (click)="cancelReinitStockage()">
+            {{'common.cancel' | translate}}
+          </button>
+        <button type="button" class="btn btn-danger float-right margin-right-10" [hidden]="!isOnReinitStockage" (click)="saveReinitStockage()">
+          {{'common.save' | translate}}
+        </button>
+      </div>
+    </div>
   </div>
   <div class="col-12">
     <table class="table">
@@ -92,9 +107,9 @@
           </td>
           <td class="col-1">
               <div class="row">
-                <button class="btn btn-primary float-right" [hidden]="stockage.isNotToEdit" (click)="editArticleStockage(stockage)">{{'common.edit' | translate}}</button>
-                <button class="btn btn-primary float-right margin-right-10" [hidden]="!stockage.isOnEdit" (click)="saveArticleStockage(stockage)">{{'common.save' | translate}}</button>
-                <button class="btn btn-primary float-right" [hidden]="!stockage.isOnEdit" (click)="cancelEditArticleStockage(stockage)">{{'common.cancel' | translate}}</button>
+                <button class="btn btn-primary float-right" [hidden]="stockage.isNotToEdit || isOnReinitStockage" (click)="editArticleStockage(stockage)">{{'common.edit' | translate}}</button>
+                <button class="btn btn-primary float-right margin-right-10" [hidden]="!stockage.isOnEdit || isOnReinitStockage" (click)="saveArticleStockage(stockage)">{{'common.save' | translate}}</button>
+                <button class="btn btn-primary float-right" [hidden]="!stockage.isOnEdit || isOnReinitStockage" (click)="cancelEditArticleStockage(stockage)">{{'common.cancel' | translate}}</button>
               </div>
           </td>
         </tr>

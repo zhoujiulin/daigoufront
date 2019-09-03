@@ -62,6 +62,8 @@ export class ColisComponent implements OnInit {
       for(let colis of this.colisList){
         this.initCountArticleColis(colis);
       }
+
+      console.log(this.colisList);
     })
   }
 

@@ -16,6 +16,7 @@ export class StockageComponent implements OnInit {
   public loginuser: any = {};
   public stockages: any;
   public createArticleStockage: ArticleStockage = new ArticleStockage();
+  public isOnReinitStockage: boolean = false;
 
   constructor(private authService: LoginAuthService, private stockageService: StockageService, private modalService: NgbModal, private modalComponent: ModalComponent) { 
     this.authService.isLoggedIn();
@@ -24,6 +25,10 @@ export class StockageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAllStockage();
+  }
+
+  getAllStockage(){
     this.stockageService.getAllStockage(this.loginuser.token).subscribe(stockages =>{
       this.stockages = stockages;
     });
@@ -31,12 +36,41 @@ export class StockageComponent implements OnInit {
 
   creationArticleStockage(articleStockage: ArticleStockage) {
     this.stockageService.createArticleStockage(articleStockage, this.loginuser.token).subscribe(stockage =>{
-      this.stockageService.getAllStockage(this.loginuser.token).subscribe(stockages =>{
-        this.stockages = stockages;
-      });
+      this.getAllStockage();
 
       this.createArticleStockage = new ArticleStockage();
     })
+  }
+
+  onReinitStockage(){
+    const modalRef  = this.modal.openModal("common.warning", "message.comfirmOnReinitStockage", "common.confirm");
+    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+      for(let articleStockage of this.stockages){
+        articleStockage.isOnEdit = true;
+      }
+      this.isOnReinitStockage = true;
+    })
+  }
+
+  saveReinitStockage(){
+    for(let articleStockage of this.stockages){
+      articleStockage.isOnEdit = false;
+    }
+
+    this.stockageService.saveReinitStockage(this.stockages, this.loginuser.token).subscribe(stockages =>{
+      this.stockages = stockages;
+    });
+
+    this.isOnReinitStockage = false;
+  }
+
+  cancelReinitStockage(){
+    this.getAllStockage();
+    for(let articleStockage of this.stockages){
+      articleStockage.isOnEdit = false;
+    }
+
+    this.isOnReinitStockage = false;
   }
 
   editArticleStockage(articleStockage: ArticleStockage){

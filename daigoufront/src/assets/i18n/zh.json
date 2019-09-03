@@ -47,7 +47,8 @@
     "stockage": {
         "stockage": "库存",
         "createStockage": "创建库存",
-        "listStockage": "库存列表"
+        "listStockage": "库存列表",
+        "reinitStockage": "初始化库存"
     },
     "colis": {
         "colis": "包裹",
@@ -68,7 +69,8 @@
         "articleFromStockageChine": "国内库存的货",
         "descriptifCountArticleInClient": "*数量 = 已购数量 / 要求数量 ( 从库存添加的数量 )",
         "confirmSendArticleToClient":"确认要向客户发货?"
-      }
+      },
+      "comfirmOnReinitStockage": "你确定要初始化你的库存吗？"
     },
     "common": {
         "inscription": "注册",

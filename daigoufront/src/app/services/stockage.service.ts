@@ -43,4 +43,9 @@ export class StockageService {
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
     return this.http.get(environment.baseUrl + "/stockage/getarticlestockagebyname/" + nameArticleStockage, {headers: headers});
   }
+
+  saveReinitStockage(stockages: any, token: any){
+    const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
+    return this.http.post(environment.baseUrl + "/stockage/savereinitstockage", stockages, {headers: headers});
+  }
 }
