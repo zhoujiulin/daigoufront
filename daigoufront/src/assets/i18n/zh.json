@@ -92,7 +92,8 @@
         "warning": "警告",
         "confirm": "确定",
         "stockage": "囤货",
-        "envoyerAuClient": "给客户发货"
+        "envoyerAuClient": "给客户发货",
+        "findBy": "查找"
     },
     "enum": {
         "article": {

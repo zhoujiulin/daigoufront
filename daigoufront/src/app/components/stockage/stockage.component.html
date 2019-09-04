@@ -8,7 +8,14 @@
           <label>
               {{'article.nomArticle' | translate}}
           </label>
-          <input type="text" class="form-control" [(ngModel)]="createArticleStockage.nameArticleStockage" />
+          <!--<input type="text" class="form-control" [(ngModel)]="createArticleStockage.nameArticleStockage" />-->
+          <input type="text" (ngModelChange)="changeNameArticle($event)" class="form-control" [(ngModel)]="createArticleStockage.nameArticleStockage" matInput [matAutocomplete]="auto" placeholder="666" >
+          <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredOptions" [value]="option.nameArticleStockage">
+              {{option.nameArticleStockage}}
+            </mat-option>
+          </mat-autocomplete>
+
         </div>
         <div class="form-group col-1">
           <label>
@@ -26,10 +33,20 @@
         <input type="hidden" class="form-control" [(ngModel)]="createArticleStockage.countStockageEnRoute"/>
         <input type="hidden" class="form-control" [(ngModel)]="createArticleStockage.countStockageChine"/> 
         <div class="form-group col">
-            <button type="submit" class="btn btn-primary" [disabled]="!validatorBtnCreate(createArticleStockage)" (click)="creationArticleStockage(createArticleStockage)">{{'common.create' | translate}}</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!validatorBtnCreate(createArticleStockage)" (click)="creationArticleStockage(createArticleStockage)">{{'common.add' | translate}}</button>
         </div>
       </div>
-
+  </div>
+  <div class="col-12">
+    <div class="col-center-block width-c30">
+      <label for="keyRecherche"><strong>{{'common.findBy' | translate}} : </strong></label>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" [(ngModel)]="keyRecherche" (ngModelChange)="getStockagesByKey($event)">
+        <div class="input-group-append">
+            <a class="btn" (click)="deleteRecherche()"><i style="font-size:24px" class="fa">&#xf00d;</i></a>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="col-sm-12">
     <div class="row">
@@ -108,8 +125,8 @@
           <td class="col-1">
               <div class="row">
                 <button class="btn btn-primary float-right" [hidden]="stockage.isNotToEdit || isOnReinitStockage" (click)="editArticleStockage(stockage)">{{'common.edit' | translate}}</button>
-                <button class="btn btn-primary float-right margin-right-10" [hidden]="!stockage.isOnEdit || isOnReinitStockage" (click)="saveArticleStockage(stockage)">{{'common.save' | translate}}</button>
-                <button class="btn btn-primary float-right" [hidden]="!stockage.isOnEdit || isOnReinitStockage" (click)="cancelEditArticleStockage(stockage)">{{'common.cancel' | translate}}</button>
+                <button class="btn btn-primary btn-sm float-right margin-right-10" [hidden]="!stockage.isOnEdit || isOnReinitStockage" (click)="saveArticleStockage(stockage)">{{'common.save' | translate}}</button>
+                <button class="btn btn-primary btn-sm float-right" [hidden]="!stockage.isOnEdit || isOnReinitStockage" (click)="cancelEditArticleStockage(stockage)">{{'common.cancel' | translate}}</button>
               </div>
           </td>
         </tr>

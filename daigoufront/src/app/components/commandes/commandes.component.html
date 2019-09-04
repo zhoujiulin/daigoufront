@@ -114,7 +114,7 @@
                                   <!--[formControl]="nameArticleFormControl" -->
                                   <input type="text" (ngModelChange)="changeNameArticle($event, article)" class="form-control" [(ngModel)]="article.nameArticle" placeholder="666" matInput [matAutocomplete]="auto">
                                   <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn">
-                                    <mat-option (onSelectionChange)="onEnterNameArticle($event)" *ngFor="let option of filteredOptions" [value]="option.nameArticleStockage">
+                                    <mat-option *ngFor="let option of filteredOptions" [value]="option.nameArticleStockage">
                                       {{option.nameArticleStockage}}
                                     </mat-option>
                                   </mat-autocomplete>

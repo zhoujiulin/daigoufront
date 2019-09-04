@@ -92,7 +92,8 @@
         "warning": "Avertissement",
         "confirm": "Confirmer",
         "stockage": "Stockage",
-        "envoyerAuClient": "Envoyer au client"
+        "envoyerAuClient": "Envoyer au client",
+        "findBy": "Recherche par"
     },
     "enum": {
         "article": {

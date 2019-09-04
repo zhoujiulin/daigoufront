@@ -17,6 +17,9 @@ export class StockageComponent implements OnInit {
   public stockages: any;
   public createArticleStockage: ArticleStockage = new ArticleStockage();
   public isOnReinitStockage: boolean = false;
+  public keyRecherche: string;
+
+  public filteredOptions: ArticleStockage[];
 
   constructor(private authService: LoginAuthService, private stockageService: StockageService, private modalService: NgbModal, private modalComponent: ModalComponent) { 
     this.authService.isLoggedIn();
@@ -28,9 +31,21 @@ export class StockageComponent implements OnInit {
     this.getAllStockage();
   }
 
+  getStockagesByKey(key: string){
+    this.stockageService.getStockagesByKey(key, this.loginuser.token).subscribe(articleStockages =>{
+      this.stockages = articleStockages;
+    })
+  }
+
+  deleteRecherche(){
+    this.keyRecherche = "";
+    this.getAllStockage();
+  }
+
   getAllStockage(){
     this.stockageService.getAllStockage(this.loginuser.token).subscribe(stockages =>{
       this.stockages = stockages;
+      this.filteredOptions = this.stockages;
     });
   }
 
@@ -59,6 +74,7 @@ export class StockageComponent implements OnInit {
 
     this.stockageService.saveReinitStockage(this.stockages, this.loginuser.token).subscribe(stockages =>{
       this.stockages = stockages;
+      this.filteredOptions = this.stockages;
     });
 
     this.isOnReinitStockage = false;
@@ -132,5 +148,22 @@ export class StockageComponent implements OnInit {
       isEnabled = false;
     }
     return isEnabled;
+  }
+
+  displayFn(nameArticleStockage?: string): string | undefined {
+    return nameArticleStockage;
+  }
+
+  private _filter(value: string): ArticleStockage[] {
+    const filterValue = this._normalizeValue(value);
+    return this.stockages.filter(a => this._normalizeValue(a.nameArticleStockage).includes(filterValue));
+  }
+
+  private _normalizeValue(value: string): string {
+    return value.toLowerCase().replace(/\s/g, '');
+  }
+
+  changeNameArticle(event: any){
+    this.filteredOptions = this._filter(event);
   }
 }

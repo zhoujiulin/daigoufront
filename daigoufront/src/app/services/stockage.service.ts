@@ -3,7 +3,6 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { ArticleStockage } from '../domain/articlestockage';
-import { Colis } from '../domain/colis';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +13,14 @@ export class StockageService {
     this.http = http;
   }
 
-  getAllStockage(token: any): Observable<any>{
+  getStockagesByKey(key: string, token: any): Observable<any>{
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
-    return this.http.get(environment.baseUrl + "/stockage/all", {headers: headers});
+    let params = new HttpParams().set("key", key);
+    return this.http.get(environment.baseUrl + "/stockage/getstockages", {headers: headers, params: params});
+  }
+
+  getAllStockage(token: any): Observable<any>{
+    return this.getStockagesByKey("", token);
   }
 
   getAllStockageSelectable(token: any): Observable<any>{
