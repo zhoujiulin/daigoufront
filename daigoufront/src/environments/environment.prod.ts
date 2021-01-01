@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   envName: "prod",
-  baseUrl: ""
+  baseUrl: "http://www.google.fr"
 };

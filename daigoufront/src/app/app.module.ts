@@ -28,7 +28,7 @@ import { ArticlemodeleComponent } from './components/articlemodele/articlemodele
 import { StockageComponent } from './components/stockage/stockage.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ColisComponent } from './components/colis/colis.component';
 import { ClientComponent } from './components/client/client.component';
 import { ModalArriverColisComponent, NgbdModalArriverColisContent } from './common/modal/modalarrivercolis/modalarrivercolis.component';
@@ -92,7 +92,7 @@ export function createTranslateHttpLoader(http: HttpClient) {
     NgbActiveModal,
     ModalComponent,
     ModalArriverColisComponent,
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    {provide: LocationStrategy, useClass: PathLocationStrategy}
   ],
   bootstrap: [AppComponent],
   entryComponents: [NgbdModalContent, NgbdModalArriverColisContent],
